@@ -10,7 +10,7 @@ License: Creative Commons Attribution-ShareAlike 4.0 International.(CC BY-SA 4.0
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
     xmlns:mf="http://myfunctions" 
-    xpath-default-namespace="http://www.w3.org/1999/xhtml" 
+    xpath-default-namespace="" 
     exclude-result-prefixes="mf">
 
   <xsl:output method="xml" encoding="utf-8" indent="no" />
