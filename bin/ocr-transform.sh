@@ -61,7 +61,7 @@ if [[ "$to" != 'alto2.0' && "$to" != 'alto2.1' && "$to" != 'hocr' ]];then
     show_output_formats
     exit 1
 fi
-SAXON_ARGS+=("-xsl:$SHAREDIR/xslt/${from}2${to}.xsl")
+SAXON_ARGS+=("-xsl:$SHAREDIR/${from}2${to}.xsl")
 shift 2
 
 # input
