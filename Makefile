@@ -29,9 +29,9 @@ $(SAXON_HE_JAR): $(SAXON_HE_ZIP)
 $(SAXON_HE_ZIP):
 	wget -O '$@' '$(SAXON_HE_URL)'
 
-install:
+install: $(SAXON_HE_JAR)
 	$(MKDIR) $(SHAREDIR)
-	$(CP) -t $(SHAREDIR) xslt
+	$(CP) -t $(SHAREDIR) *.xsl
 	$(CP) -t $(SHAREDIR) $(SAXON_HE_JAR)
 	$(MKDIR) $(BINDIR)
 	sed 's,SHAREDIR=".",SHAREDIR="$(SHAREDIR)",' bin/$(PACKAGE_NAME).sh > $(BINDIR)/$(PACKAGE_NAME)
