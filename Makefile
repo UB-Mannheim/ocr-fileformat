@@ -31,7 +31,7 @@ $(SAXON_HE_ZIP):
 
 install: $(SAXON_HE_JAR)
 	$(MKDIR) $(SHAREDIR)
-	$(CP) -t $(SHAREDIR) xslt
+	$(CP) -t $(SHAREDIR) *.xsl
 	$(CP) -t $(SHAREDIR) $(SAXON_HE_JAR)
 	$(MKDIR) $(BINDIR)
 	sed 's,SHAREDIR=".",SHAREDIR="$(SHAREDIR)",' bin/$(PACKAGE_NAME).sh > $(BINDIR)/$(PACKAGE_NAME)
