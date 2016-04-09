@@ -10,7 +10,6 @@ License: Creative Commons Attribution-ShareAlike 4.0 International.(CC BY-SA 4.0
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
     xmlns:mf="http://myfunctions" 
-    xpath-default-namespace="" 
     exclude-result-prefixes="mf">
 
   <xsl:output method="xml" encoding="utf-8" indent="no" />
@@ -23,18 +22,18 @@ License: Creative Commons Attribution-ShareAlike 4.0 International.(CC BY-SA 4.0
         </alto>
   </xsl:template>
  
-  <xsl:template match="head">
+  <xsl:template match="*:head">
         <Description>
             <MeasurementUnit>pixel</MeasurementUnit>
             <sourceImageInformation>
-                  <xsl:variable name="title" select="//body/div[@class='ocr_page']/@title"/>
+                  <xsl:variable name="title" select="//body/*:div[@class='ocr_page']/@title"/>
                   <fileName><xsl:value-of select="mf:getFname($title)"/></fileName>
             </sourceImageInformation>
             <OCRProcessing ID="IdOcr">
             <ocrProcessingStep>
                 <processingSoftware>
-                    <softwareName><xsl:value-of select="meta[@name='ocr-system']/@content"/></softwareName>
-                    <softwareVersion><xsl:value-of select="meta[@name='ocr-system']/@content"/></softwareVersion>
+                    <softwareName><xsl:value-of select="*:meta[@name='ocr-system']/@content"/></softwareName>
+                    <softwareVersion><xsl:value-of select="*:meta[@name='ocr-system']/@content"/></softwareVersion>
                 </processingSoftware>
             </ocrProcessingStep>
             </OCRProcessing>
@@ -42,14 +41,14 @@ License: Creative Commons Attribution-ShareAlike 4.0 International.(CC BY-SA 4.0
   </xsl:template>
   
 
-  <xsl:template match="body/div[@class='ocr_page']">
+  <xsl:template match="*:body/*:div[@class='ocr_page']">
         <Layout>
         <!--  bbox 552 999 1724 1141 x1-L2-T3-R4-B5 -->
         <xsl:variable name="box" select="tokenize(mf:getBoxPage(@title), ' ')"/>
             <Page ID="{@id}" PHYSICAL_IMG_NR="1" HEIGHT="{$box[5]}" WIDTH="{$box[4]}">
                 <PrintSpace HEIGHT="{$box[5]}" WIDTH="{$box[4]}" VPOS="0" HPOS="0">
 
-                    <xsl:apply-templates select="div[@class='ocr_carea']"/>
+                    <xsl:apply-templates select="*:div[@class='ocr_carea']"/>
 
                 </PrintSpace>
             </Page>
@@ -57,37 +56,37 @@ License: Creative Commons Attribution-ShareAlike 4.0 International.(CC BY-SA 4.0
   </xsl:template>
   
   
-  <xsl:template match="div[@class='ocr_carea']">
+  <xsl:template match="*:div[@class='ocr_carea']">
       <xsl:variable name="box" select="tokenize(mf:getBox(@title), ' ')"/>
       <ComposedBlock ID="{@id}" HEIGHT="{number($box[5]) - number($box[3])}" WIDTH="{number($box[4]) - number($box[2])}" VPOS="{$box[3]}" HPOS="{$box[2]}">
       
-          <xsl:apply-templates select="p[@class='ocr_par']"/>
+          <xsl:apply-templates select="*:p[@class='ocr_par']"/>
 
       </ComposedBlock>
   </xsl:template>
  
  
-  <xsl:template match="p[@class='ocr_par']">
+  <xsl:template match="*:p[@class='ocr_par']">
       <xsl:variable name="box" select="tokenize(mf:getBox(@title), ' ')"/>
       <TextBlock ID="{@id}" HEIGHT="{number($box[5]) - number($box[3])}" WIDTH="{number($box[4]) - number($box[2])}" VPOS="{$box[3]}" HPOS="{$box[2]}" language="{$language}">
       
-          <xsl:apply-templates select="span[@class='ocr_line']"/>
+          <xsl:apply-templates select="*:span[@class='ocr_line']"/>
       
       </TextBlock>
   </xsl:template>
  
  
-  <xsl:template match="span[@class='ocr_line']">
+  <xsl:template match="*:span[@class='ocr_line']">
       <xsl:variable name="box" select="tokenize(mf:getBox(@title), ' ')"/>
       <TextLine ID="{@id}" HEIGHT="{number($box[5]) - number($box[3])}" WIDTH="{number($box[4]) - number($box[2])}" VPOS="{$box[3]}" HPOS="{$box[2]}">
       
-          <xsl:apply-templates select="span[@class='ocrx_word']"/>
+          <xsl:apply-templates select="*:span[@class='ocrx_word']"/>
       
       </TextLine>
   </xsl:template>
 
 
-  <xsl:template match="span[@class='ocrx_word']">
+  <xsl:template match="*:span[@class='ocrx_word']">
       <xsl:variable name="box" select="tokenize(mf:getBox(@title), ' ')"/>
         <xsl:choose>
           <xsl:when test="strong">
