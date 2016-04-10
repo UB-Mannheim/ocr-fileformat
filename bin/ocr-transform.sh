@@ -1,6 +1,7 @@
 #!/bin/bash
 
-SHAREDIR="."
+# Default to the parent dir of this script. Overwritten by `make install`
+SHAREDIR="$(readlink -f "$(dirname "$(readlink -f "$0")")/..")"
 JAR="$SHAREDIR/saxon9he.jar"
 SAXON="java -jar $JAR"
 SAXON_ARGS=()
