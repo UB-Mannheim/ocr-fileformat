@@ -7,7 +7,7 @@ BINDIR = $(PREFIX)/bin
 CP = cp -rv
 MKDIR = mkdir -p
 RM = rm -rfv
-UNZIP = unzip -f
+UNZIP = unzip -o
 
 SAXON_HE_VERSION = 9-7-0-4J
 SAXON_HE_ZIP = SaxonHE$(SAXON_HE_VERSION).zip
