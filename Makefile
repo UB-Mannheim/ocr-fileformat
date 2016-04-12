@@ -1,53 +1,49 @@
-PKG_NAME = ocr-transform
-
-CP = cp -rv
-LN = ln -sf
-MV = mv -f
+PACKAGE_NAME = ocr-transform
 
 PREFIX = $(DESTDIR)/usr/local
-SHAREDIR = $(PREFIX)/share/$(PKG_NAME)
+SHAREDIR = $(PREFIX)/share/$(PACKAGE_NAME)
 BINDIR = $(PREFIX)/bin
 
-.PHONY: check \
-	install uninstall \
-	clean realclean \
-	vendor
+CP = cp -rv
+MKDIR = mkdir -p
+RM = rm -rfv
+UNZIP = unzip -o
 
-check:
-	$(MAKE) -C $($@) check
-	@which \
-		wget \
-		unzip \
-		git \
-	>/dev/null
+SAXON_HE_VERSION = 9-7-0-4J
+SAXON_HE_ZIP = SaxonHE$(SAXON_HE_VERSION).zip
+SAXON_HE_JAR = saxon9he.jar
+SAXON_HE_URL = https://sourceforge.net/projects/saxon/files/Saxon-HE/9.7/$(SAXON_HE_ZIP)/download
 
-vendor:
-	# download the dependencies
-	$(MAKE) -C vendor all
-	# copy Alto XSD
-	cd xsd && $(LN) ../vendor/alto-schema/*/*.xsd . && \
-		for xsd in *.xsd;do \
-			target_xsd=`echo $$xsd|sed 's/.//g'|sed 's/-/./'`; \
-			if [ ! -e $$target_xsd ];then \
-				$(MV) $$xsd $$target_xsd; \
-			fi; done
-	# copy PAGE XSD
-	@cd xsd && $(LN) ../vendor/page-schema/*.xsd .
+# SAXON_BROWSER_VERSION = 1.1
+# SAXON_BROWSER_ZIP = Saxon-CE_$(SAXON_BROWSER_VERSION).zip
+# SAXON_BROWSER_JS =  TODO
+# SAXON_BROWSER_URL = http://www.saxonica.com/ce/download/$(SAXON_BROWSER_ZIP)
 
-install: check $(VENDOR_DIRNAME)
+# $(SAXON_BROWSER_JS): $(SAXON_BROWSER_ZIP)
+
+# $(SAXON_BROWSER_ZIP):
+#     wget -O '$@' '$(SAXON_BROWSER_URL)'
+
+$(SAXON_HE_JAR): $(SAXON_HE_ZIP)
+	$(UNZIP) $< $@
+
+$(SAXON_HE_ZIP):
+	wget -O '$@' '$(SAXON_HE_URL)'
+
+install: $(SAXON_HE_JAR)
 	$(MKDIR) $(SHAREDIR)
-	$(CP) -t $(SHAREDIR) xsd xslt vendor
+	$(CP) -t $(SHAREDIR) *.xsl
+	$(CP) -t $(SHAREDIR) $(SAXON_HE_JAR)
 	$(MKDIR) $(BINDIR)
-	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-transform.sh > $(BINDIR)/ocr-transform
-	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-validate.sh > $(BINDIR)/ocr-validate
-	chmod a+x $(BINDIR)/$(PKG_NAME)
+	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/$(PACKAGE_NAME).sh > $(BINDIR)/$(PACKAGE_NAME)
+	chmod a+x $(BINDIR)/$(PACKAGE_NAME)
 
 uninstall:
-	$(RM) $(BINDIR)/$(PKG_NAME)
+	$(RM) $(BINDIR)/$(PACKAGE_NAME)
 	$(RM) $(SHAREDIR)
 
 clean:
-	$(RM) xsd/*
+	$(RM) $(SAXON_HE_JAR)
 
 realclean: clean
-	$(MAKE) -C vendor clean
+	$(RM) $(SAXON_HE_ZIP)

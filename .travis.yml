@@ -1,4 +1,6 @@
 language: cpp
+dist: trusty
+sudo: true
 script:
   - make
-  - cd test; make test
+  - cd test; make deps ; make roundtrip

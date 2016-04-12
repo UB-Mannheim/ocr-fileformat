@@ -9,6 +9,8 @@ Validate and transform between OCR file formats (hOCR, ALTO, PAGE)
 	* [Command line interface](#command-line-interface)
 * [License](#license)
 
+[![Build Status](https://travis-ci.org/UB-Mannheim/ocr-transform.svg?branch=master)](https://travis-ci.org/UB-Mannheim/ocr-transform)
+
 Convert between Tesseract hOCR and ALTO XML 2.0/2.1 using XSL stylesheets
 
 This project provides an installation path and command line interface for
