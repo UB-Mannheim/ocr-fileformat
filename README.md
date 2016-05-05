@@ -42,7 +42,12 @@ export PATH="$HOME/.local/bin $PATH"
 
 ### Command line interface
 
-For now, try `ocr-transform -h` to get an overview.
+For example, you can transform an ALTO XML to a hOCR file with:
+```bash
+ocr-transform alto hocr sample.xml > sample.hocr
+```
+
+Try `ocr-transform -h` to get an overview.
 
 ### With an XSLT 2.0 processor
 
