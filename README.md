@@ -5,8 +5,12 @@ Validate and transform between OCR file formats (hOCR, ALTO, PAGE)
 <!-- vim :GenToc GFM -->
 * [Installation](#installation)
 * [Usage](#usage)
-	* [With an XSLT 2.0 processor](#with-an-xslt-20-processor)
-	* [Command line interface](#command-line-interface)
+* [Transformation](#transformation)
+	* [Transformation CLI](#transformation-cli)
+	* [Transformation API](#transformation-api)
+* [Validation](#validation)
+	* [Validation CLI](#validation-cli)
+	* [Validation API](#validation-api)
 * [License](#license)
 
 [![Build Status](https://travis-ci.org/UB-Mannheim/ocr-transform.svg?branch=master)](https://travis-ci.org/UB-Mannheim/ocr-transform)
@@ -38,9 +42,18 @@ export PATH="$HOME/.local/bin $PATH"
 
 ## Usage
 
+The project offers two functionalities, provided by two scripts
+
+* [`ocr-transform`](./blob/master/bin/ocr-transform.sh): Transformation of OCR output between OCR formats
+* [`ocr-validate`](./blob/master/bin/ocr-validate.sh): Validation of OCR output against OCR format schemas
+
 ## Transformation
 
-### Command line interface
+### Transformation CLI
+
+```
+Usage: ocr-transform [-dl] <input-fmt> <output-fmt> [<input> [<output>]] [-- <saxon_opts>]
+```
 
 For example, you can transform an ALTO XML to a hOCR file with:
 
@@ -85,15 +98,39 @@ param=value           Set stylesheet string parameter
 !param=value          Set serialization parameter
 ```
 
-### With an XSLT 2.0 processor
+### Transformation API
 
-The stylesheets are installed in `$PREFIX/share/ocr-transform/xslt` and can be
+The stylesheets are installed in `$PREFIX/share/ocr-schemas/xslt` and can be
 used directly in your scripts and software. You will need to use an XSLT 2.0
 capable stylesheet transformer.
 
+## Validation
+
+```
+Usage: ocr-validate [-dh] <schema> <file>
+
+```
+
+### Validation CLI
+
+For example, to validate an XML file againt the ALTO 3.1 schema:
+
+```
+ocr-validate alto-3-1 myFile.alto
+```
+
+### Validation API
+
+The XSD files are installed under `$PREFIX/share/ocr-schemas/xsd`
+
 ## License
 
-The XSL stylesheets are licensed [Creative Commons Attribution-ShareAlike 4.0 International.(CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/legalcode).
+The XSL stylesheets for hOCR-ALTO and ALTO-hOCR transformation are licensed
+[Creative Commons Attribution-ShareAlike 4.0 International.(CC BY-SA
+4.0)](https://creativecommons.org/licenses/by-sa/4.0/legalcode).
 
-The XSL transformation is powered by [Saxon HE 9.7](http://saxon.sourceforge.net/#F9.7HE), downloaded
-as part of the installation process, licensed under terms of [MPL](https://www.mozilla.org/MPL/).
+Projects included during the installation process (in [`./vendor`](./blob/master/vendor)):
+* [Saxon HE 9.7](http://saxon.sourceforge.net/#F9.7HE), [`MPL`](https://www.mozilla.org/MPL/).
+* [ALTOXML schema](/altoxml/schema), `?`
+* [PAGE schemas](http://www.primaresearch.org/schema/PAGE/gts/pagecontent/), `?`
+* [xsd-validator](/amouat/xsd-validator), `Apache 2.0`
