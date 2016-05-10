@@ -1,49 +1,52 @@
-PACKAGE_NAME = ocr-transform
-
-PREFIX = $(DESTDIR)/usr/local
-SHAREDIR = $(PREFIX)/share/$(PACKAGE_NAME)
-BINDIR = $(PREFIX)/bin
+PKG_NAME = ocr-transform
 
 CP = cp -rv
+LN = ln -sf
+MV = mv -f
 MKDIR = mkdir -p
 RM = rm -rfv
-UNZIP = unzip -o
 
-SAXON_HE_VERSION = 9-7-0-4J
-SAXON_HE_ZIP = SaxonHE$(SAXON_HE_VERSION).zip
-SAXON_HE_JAR = saxon9he.jar
-SAXON_HE_URL = https://sourceforge.net/projects/saxon/files/Saxon-HE/9.7/$(SAXON_HE_ZIP)/download
+PREFIX = $(DESTDIR)/usr/local
+SHAREDIR = $(PREFIX)/share/$(PKG_NAME)
+BINDIR = $(PREFIX)/bin
 
-# SAXON_BROWSER_VERSION = 1.1
-# SAXON_BROWSER_ZIP = Saxon-CE_$(SAXON_BROWSER_VERSION).zip
-# SAXON_BROWSER_JS =  TODO
-# SAXON_BROWSER_URL = http://www.saxonica.com/ce/download/$(SAXON_BROWSER_ZIP)
+.PHONY: check \
+	install uninstall \
+	clean realclean \
+	vendor
 
-# $(SAXON_BROWSER_JS): $(SAXON_BROWSER_ZIP)
+check:
+	$(MAKE) -C vendor check
 
-# $(SAXON_BROWSER_ZIP):
-#     wget -O '$@' '$(SAXON_BROWSER_URL)'
+vendor: check
+	# download the dependencies
+	$(MAKE) -C vendor all
+	# copy Alto XSD
+	cd xsd && $(LN) ../vendor/alto-schema/*/*.xsd . && \
+		for xsd in *.xsd;do \
+			target_xsd=`echo $$xsd|sed 's/.//g'|sed 's/-/./'`; \
+			if [ ! -e $$target_xsd ];then \
+				$(MV) $$xsd $$target_xsd; \
+			fi; done
+	# copy PAGE XSD
+	@cd xsd && $(LN) ../vendor/page-schema/*.xsd .
 
-$(SAXON_HE_JAR): $(SAXON_HE_ZIP)
-	$(UNZIP) $< $@
-
-$(SAXON_HE_ZIP):
-	wget -O '$@' '$(SAXON_HE_URL)'
-
-install: $(SAXON_HE_JAR)
+install: vendor $(VENDOR_DIRNAME)
 	$(MKDIR) $(SHAREDIR)
-	$(CP) -t $(SHAREDIR) *.xsl
-	$(CP) -t $(SHAREDIR) $(SAXON_HE_JAR)
+	$(CP) -t $(SHAREDIR) xsd xslt vendor lib.sh
 	$(MKDIR) $(BINDIR)
-	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/$(PACKAGE_NAME).sh > $(BINDIR)/$(PACKAGE_NAME)
-	chmod a+x $(BINDIR)/$(PACKAGE_NAME)
+	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-transform.sh > $(BINDIR)/ocr-transform
+	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-validate.sh > $(BINDIR)/ocr-validate
+	chmod a+x $(BINDIR)/ocr-transform $(BINDIR)/ocr-validate
+	find $(SHAREDIR) -exec chmod u+w {} \;
 
 uninstall:
-	$(RM) $(BINDIR)/$(PACKAGE_NAME)
+	$(RM) $(BINDIR)/ocr-transform
+	$(RM) $(BINDIR)/ocr-validate
 	$(RM) $(SHAREDIR)
 
 clean:
-	$(RM) $(SAXON_HE_JAR)
+	$(RM) xsd/*
 
 realclean: clean
-	$(RM) $(SAXON_HE_ZIP)
+	$(MAKE) -C vendor clean

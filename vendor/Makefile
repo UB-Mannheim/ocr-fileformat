@@ -54,7 +54,6 @@ $(PAGE_SCHEMA_REPO):
 		done;
 
 check:
-	$(MAKE) -C $($@) check
 	@which \
 		wget \
 		unzip \

@@ -17,7 +17,7 @@ while getopts ":dh" opt; do
             show_usage
             show_input_formats
             show_output_formats
-            exec_saxon -t
+            exec_saxon -t |grep -v 'No source file'|grep -v 'Format:'
             exit 0
             ;;
         *)
