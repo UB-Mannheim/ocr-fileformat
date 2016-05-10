@@ -2,26 +2,10 @@
 
 # Default to the parent dir of this script. Overwritten by `make install`
 SHAREDIR="$(readlink -f "$(dirname "$(readlink -f "$0")")/..")"
-JAR="$SHAREDIR/saxon9he.jar"
-SAXON="java -jar $JAR"
-SAXON_ARGS=()
-DEBUG=0
+source "$SHAREDIR/lib.sh"
 
 show_usage() {
-    echo "Usage: $0 [-dl] <input-fmt> <output-fmt> [<input> [<output>]] [-- <saxon_opts>]"
-}
-
-show_input_formats() {
-    echo "Input formats:"
-    echo "  - 'alto'"
-    echo "  - 'hocr'"
-}
-
-show_output_formats() {
-    echo "Output formats:"
-    echo "  - 'alto2.0'"
-    echo "  - 'alto2.1'"
-    echo "  - 'hocr'"
+    echo "Usage: $0 [-dh] <input-fmt> <output-fmt> [<input> [<output>]] [-- <saxon_opts>]"
 }
 
 while getopts ":dh" opt; do
@@ -33,7 +17,7 @@ while getopts ":dh" opt; do
             show_usage
             show_input_formats
             show_output_formats
-            $SAXON -t
+            exec_saxon -t
             exit 0
             ;;
         *)
@@ -50,19 +34,19 @@ if [[ -z "$from" || -z "$to" ]];then
     echo "!! Not enough arguments !!"
     exit 1
 fi
-if [[ "$from" != 'alto' && "$from" != 'hocr' ]];then
+if ! containsElement "$from" "${XSLT_IN[@]}";then
     show_usage
     echo "!! Bad input format '$from' !!"
     show_input_formats
     exit 1
 fi
-if [[ "$to" != 'alto2.0' && "$to" != 'alto2.1' && "$to" != 'hocr' ]];then
+if ! containsElement "$to" "${XSLT_OUT[@]}";then
     show_usage
     echo "!! Bad output format '$to' !!"
     show_output_formats
     exit 1
 fi
-SAXON_ARGS+=("-xsl:$SHAREDIR/${from}2${to}.xsl")
+SAXON_ARGS+=("-xsl:$SHAREDIR/${from}__${to}.xsl")
 shift 2
 
 # input
@@ -94,15 +78,5 @@ if [[ "$1" == '--' ]];then
     SAXON_ARGS+=($@)
 fi
 
-# -d
-if [[ "$DEBUG" -gt 0 ]];then
-    echo Executing "$SAXON" "${SAXON_ARGS[@]}"
-fi
-
-# -dd
-if [[ "$DEBUG" -gt 1 ]];then
-    SAXON_ARGS+=('-t')
-fi
-
 # Run it
-$SAXON "${SAXON_ARGS[@]}"
+exec_saxon "${SAXON_ARGS[@]}"
