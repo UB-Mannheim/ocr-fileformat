@@ -11,9 +11,9 @@ WGET = wget
 RM = rm -f
 DWDIFF = dwdiff -p -l -c
 PAGER = less -R
-APT_GET = sudo apt-get
+APT_GET = sudo apt-get -y
 
-.PHONY: roundtrip diff deps
+.PHONY: deps roundtrip diff idiff
 
 roundtrip: $(BASENAME).roundtrip.hocr
 
@@ -21,6 +21,9 @@ deps:
 	$(APT_GET) install $(DEBIAN_PACKAGES)
 
 diff: $(BASENAME).roundtrip.hocr $(BASENAME).hocr
+	$(DWDIFF) $^ || exit 0
+
+idiff: $(BASENAME).roundtrip.hocr $(BASENAME).hocr
 	$(DWDIFF) $^ | $(PAGER)
 
 $(BASENAME)_800px.jpg:

@@ -3,6 +3,8 @@ PKG_NAME = ocr-transform
 CP = cp -rv
 LN = ln -sf
 MV = mv -f
+MKDIR = mkdir -p
+RM = rm -rfv
 
 PREFIX = $(DESTDIR)/usr/local
 SHAREDIR = $(PREFIX)/share/$(PKG_NAME)
