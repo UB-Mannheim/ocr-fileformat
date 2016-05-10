@@ -1,2 +1,6 @@
 /Saxon*
 *.jar
+/*.alto
+vendor/*
+!vendor/Makefile
+xsd/

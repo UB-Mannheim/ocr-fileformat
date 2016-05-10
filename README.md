@@ -1,4 +1,13 @@
-# ocr-transform
+# ocr-schemas
+
+Validate and transform between OCR file formats (hOCR, ALTO, PAGE)
+
+<!-- vim :GenToc GFM -->
+* [Installation](#installation)
+* [Usage](#usage)
+	* [With an XSLT 2.0 processor](#with-an-xslt-20-processor)
+	* [Command line interface](#command-line-interface)
+* [License](#license)
 
 Convert between Tesseract hOCR and ALTO XML 2.0/2.1 using XSL stylesheets
 
@@ -27,13 +36,17 @@ export PATH="$HOME/.local/bin $PATH"
 
 ## Usage
 
-### With an XSLT 2.0 processor
-
-The stylesheets are installed in `$PREFIX/share/ocr-transform/xslt`.
+## Transformation
 
 ### Command line interface
 
 For now, try `ocr-transform -h` to get an overview.
+
+### With an XSLT 2.0 processor
+
+The stylesheets are installed in `$PREFIX/share/ocr-transform/xslt` and can be
+used directly in your scripts and software. You will need to use an XSLT 2.0
+capable stylesheet transformer.
 
 ## License
 
