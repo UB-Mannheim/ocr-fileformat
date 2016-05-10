@@ -16,14 +16,9 @@ BINDIR = $(PREFIX)/bin
 	vendor
 
 check:
-	$(MAKE) -C $($@) check
-	@which \
-		wget \
-		unzip \
-		git \
-	>/dev/null
+	$(MAKE) -C vendor check
 
-vendor:
+vendor: check
 	# download the dependencies
 	$(MAKE) -C vendor all
 	# copy Alto XSD
@@ -36,16 +31,18 @@ vendor:
 	# copy PAGE XSD
 	@cd xsd && $(LN) ../vendor/page-schema/*.xsd .
 
-install: check $(VENDOR_DIRNAME)
+install: vendor $(VENDOR_DIRNAME)
 	$(MKDIR) $(SHAREDIR)
-	$(CP) -t $(SHAREDIR) xsd xslt vendor
+	$(CP) -t $(SHAREDIR) xsd xslt vendor lib.sh
 	$(MKDIR) $(BINDIR)
 	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-transform.sh > $(BINDIR)/ocr-transform
 	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-validate.sh > $(BINDIR)/ocr-validate
-	chmod a+x $(BINDIR)/$(PKG_NAME)
+	chmod a+x $(BINDIR)/ocr-transform $(BINDIR)/ocr-validate
+	find $(SHAREDIR) -exec chmod u+w {} \;
 
 uninstall:
-	$(RM) $(BINDIR)/$(PKG_NAME)
+	$(RM) $(BINDIR)/ocr-transform
+	$(RM) $(BINDIR)/ocr-validate
 	$(RM) $(SHAREDIR)
 
 clean:
