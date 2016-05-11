@@ -11,6 +11,7 @@ Validate and transform between OCR file formats (hOCR, ALTO, PAGE)
 * [Validation](#validation)
 	* [Validation CLI](#validation-cli)
 	* [Validation API](#validation-api)
+* [Supported Formats](#supported-formats)
 * [License](#license)
 
 [![Build Status](https://travis-ci.org/UB-Mannheim/ocr-transform.svg?branch=master)](https://travis-ci.org/UB-Mannheim/ocr-transform)
@@ -122,6 +123,15 @@ ocr-validate alto-3-1 myFile.alto
 ### Validation API
 
 The XSD files are installed under `$PREFIX/share/ocr-schemas/xsd`
+
+## Supported Formats
+
+|    From ╲ To |        Validation        | hOCR                     | ALTO                     | PAGEXML                  | FineReader               |
+|-------------:|:------------------------:|--------------------------|--------------------------|--------------------------|--------------------------|
+|         hOCR | :heavy_multiplication_x: | -                        | :white_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: |
+|         ALTO |    :white_check_mark:    | :white_check_mark:       | -                        | :heavy_multiplication_x: | :heavy_multiplication_x: |
+|         PAGE |    :white_check_mark:    | :heavy_multiplication_x: | :heavy_multiplication_x: | -                        | :heavy_multiplication_x: |
+|   FineReader | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: | -                        |
 
 ## License
 
