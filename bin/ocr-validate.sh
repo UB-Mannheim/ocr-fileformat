@@ -5,13 +5,17 @@ SHAREDIR="$(readlink -f "$(dirname "$(readlink -f "$0")")/..")"
 source "$SHAREDIR/lib.sh"
 
 show_usage() {
-    echo "Usage: $0 [-dh] <schema> <file> [<resultsFile>]"
+    echo "Usage: $0 [-dhL] <schema> <file> [<resultsFile>]"
 }
 
-while getopts ":dh" opt; do
+while getopts ":dhL" opt; do
     case "$opt" in
         d)
             let DEBUG+=1
+            ;;
+        L)
+            echo "${XSD_SCHEMAS[@]}"
+            exit 0
             ;;
         h)
             show_usage
@@ -34,11 +38,15 @@ if [[ -z "$schema" || -z "$file" ]];then
     exit 100
 fi
 
-file=$(readlink -f "$file")
-if [[ ! -e "$file" ]];then
-    show_usage
-    echo "!! No such file !!"
-    exit 101
+if [[ "$file" == "-" ]];then
+    echo_err "Reading from STDIN"
+else 
+    file=$(readlink -f "$file")
+    if [[ ! -e "$file" ]];then
+        show_usage
+        echo "!! No such file !!"
+        exit 101
+    fi
 fi
 
 if ! containsElement "$schema" "${XSD_SCHEMAS[@]}";then
