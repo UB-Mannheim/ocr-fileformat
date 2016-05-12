@@ -30,6 +30,8 @@ vendor: check
 			fi; done
 	# copy PAGE XSD
 	@cd xsd && $(LN) ../vendor/page-schema/*.xsd .
+	# copy ABBYY XSD
+	cd xsd && $(LN) ../vendor/abbyy-schema/*.xsd .
 
 install: vendor $(VENDOR_DIRNAME)
 	$(MKDIR) $(SHAREDIR)
