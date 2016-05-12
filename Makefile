@@ -1,6 +1,6 @@
 PKG_NAME = ocr-transform
 
-CP = cp -rv
+CP = cp -r
 LN = ln -sf
 MV = mv -f
 MKDIR = mkdir -p
