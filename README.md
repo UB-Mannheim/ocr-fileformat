@@ -1,20 +1,27 @@
 # ocr-schemas
 
+[![Build Status](https://travis-ci.org/UB-Mannheim/ocr-transform.svg?branch=master)](https://travis-ci.org/UB-Mannheim/ocr-transform)
+
 Validate and transform between OCR file formats (hOCR, ALTO, PAGE)
 
-<!-- vim :GenToc GFM -->
+![Screenshot GUI](./screenshot.png)
+
+<!-- vim :GenTocGFM -->
 * [Installation](#installation)
 * [Usage](#usage)
+	* [CLI](#cli)
+	* [API](#api)
 * [Transformation](#transformation)
 	* [Transformation CLI](#transformation-cli)
+	* [Transformation GUI](#transformation-gui)
 	* [Transformation API](#transformation-api)
+	* [Supported Transformations](#supported-transformations)
 * [Validation](#validation)
 	* [Validation CLI](#validation-cli)
+	* [Validation GUI](#validation-gui)
 	* [Validation API](#validation-api)
-* [Supported Formats](#supported-formats)
+	* [Supported Validation Formats](#supported-validation-formats)
 * [License](#license)
-
-[![Build Status](https://travis-ci.org/UB-Mannheim/ocr-transform.svg?branch=master)](https://travis-ci.org/UB-Mannheim/ocr-transform)
 
 Convert between Tesseract hOCR and ALTO XML 2.0/2.1 using XSL stylesheets
 
@@ -41,12 +48,30 @@ If `$HOME/.local/bin` is not in your `PATH`, add this to your shell startup file
 export PATH="$HOME/.local/bin $PATH"
 ```
 
+The web application has a PHP backed. You can deploy it on any PHP-capable
+server by copying the [`web`](./web) folder somewhere below the document root
+of your server, e.g. `/var/www/html` for Apache on Debian/Ubuntu:
+
+```
+sudo -u www-data cp -r web /var/www/html/ocr-schema
+```
+
+In this example the GUI would be available under [http://localhost/ocr-schema/](http://localhost/ocr-schema/).
+
 ## Usage
 
-The project offers two functionalities, provided by two scripts
+The project offers two functionalities, which can be accessd via a command line
+script (CLI), using a web interface (GUI) or in you own tools (API)
+
+### CLI
 
 * [`ocr-transform`](./blob/master/bin/ocr-transform.sh): Transformation of OCR output between OCR formats
 * [`ocr-validate`](./blob/master/bin/ocr-validate.sh): Validation of OCR output against OCR format schemas
+
+### API
+
+* [`$PREFIX/share/ocr-schemas/xslt`](./xslt) - XSLT stylesheets
+* [`$PREFIX/share/ocr-schemas/xsd`](./xsd) - XSD schemas
 
 ## Transformation
 
@@ -87,9 +112,7 @@ Output formats:
 - 'hocr'
 Saxon-HE 9.7.0.4J from Saxonica
 Java version 1.7.0_95
-No source file name
 Usage: see http://www.saxonica.com/html/documentation/using-xsl/commandline.html
-Format: net.sf.saxon.Transform options params
 Options available: -? -a -catalog -config -cr -diag -dtd -ea -expand -explain -export -ext -im -init -it -l -license -m -nogo -now -o -opt -or -outval -p -pack -quit -r -repeat -s -sa -scmin -strip -t -T -threads -TJ -TP -traceout -tree -u -val -versionmsg -warnings -x -xi -xmlversion -xsd -xsdversion -xsiloc -xsl -xsltversion -y
 Use -XYZ:? for details of option XYZ
 Params: 
@@ -99,11 +122,25 @@ param=value           Set stylesheet string parameter
 !param=value          Set serialization parameter
 ```
 
+### Transformation GUI
+
+Select the `Transform` menu option. Choose a URL, an input and an output
+format. Click `Transform`.
+
 ### Transformation API
 
 The stylesheets are installed in `$PREFIX/share/ocr-schemas/xslt` and can be
 used directly in your scripts and software. You will need to use an XSLT 2.0
 capable stylesheet transformer.
+
+### Supported Transformations
+
+|  From ╲ To | hOCR                     | ALTO                     | PAGEXML                  | FineReader               |
+|-----------:|--------------------------|--------------------------|--------------------------|--------------------------|
+|       hOCR | -                        | :white_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: |
+|       ALTO | :white_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: |
+|       PAGE | :heavy_multiplication_x: | :heavy_multiplication_x: | -                        | :heavy_multiplication_x: |
+| FineReader | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: | -                        |
 
 ## Validation
 
@@ -120,18 +157,20 @@ For example, to validate an XML file againt the ALTO 3.1 schema:
 ocr-validate alto-3-1 myFile.alto
 ```
 
+### Validation GUI
+
+Select the `Validate` menu option. Choose a URL and an schema. Click `Validate`.
+
 ### Validation API
 
 The XSD files are installed under `$PREFIX/share/ocr-schemas/xsd`
 
-## Supported Formats
+### Supported Validation Formats
 
-|    From ╲ To |        Validation        | hOCR                     | ALTO                     | PAGEXML                  | FineReader               |
-|-------------:|:------------------------:|--------------------------|--------------------------|--------------------------|--------------------------|
-|         hOCR | :heavy_multiplication_x: | -                        | :white_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: |
-|         ALTO |    :white_check_mark:    | :white_check_mark:       | -                        | :heavy_multiplication_x: | :heavy_multiplication_x: |
-|         PAGE |    :white_check_mark:    | :heavy_multiplication_x: | :heavy_multiplication_x: | -                        | :heavy_multiplication_x: |
-|   FineReader | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: | -                        |
+|            | hOCR                     | ALTO               | PAGEXML                  | FineReader               |
+|-----------:|--------------------------|--------------------|--------------------------|--------------------------|
+| Validation | :heavy_multiplication_x: | :white_check_mark: | :white_check_mark:       | :heavy_multiplication_x: |
+
 
 ## License
 
