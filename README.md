@@ -180,6 +180,6 @@ The XSL stylesheets for hOCR-ALTO and ALTO-hOCR transformation are licensed
 
 Projects included during the installation process (in [`./vendor`](./blob/master/vendor)):
 * [Saxon HE 9.7](http://saxon.sourceforge.net/#F9.7HE), [`MPL`](https://www.mozilla.org/MPL/).
-* [ALTOXML schema](/altoxml/schema), `?`
+* [ALTOXML schema](/altoxml/schema), [`Open Source`](https://github.com/altoxml/schema/issues/37#issuecomment-218730230)
 * [PAGE schemas](http://www.primaresearch.org/schema/PAGE/gts/pagecontent/), `?`
 * [xsd-validator](/amouat/xsd-validator), `Apache 2.0`
