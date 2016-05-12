@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [[ -z "$SHAREDIR" || ! -d "$SHAREDIR" ]];then
+    echo_err "!! Set \$SHAREDIR before sourcing $0 !!"
+    exit 1
+fi
+
 DEBUG=0
 
 XSLT_SCRIPTS=($(cd "$SHAREDIR/xslt";  find -name '*.xsl' |sed 's,^./,,'|sed 's/\.xsl$//'|sort))
@@ -7,7 +12,6 @@ XSLT_IN=()
 XSLT_OUT=()
 
 SAXON_JAR="$SHAREDIR/vendor/saxon9he.jar"
-SAXON_ARGS=()
 
 XSD_VALIDATOR_DIR="$SHAREDIR/vendor/xsd-validator"
 XSD_SCHEMAS=($(cd "$SHAREDIR/xsd"; find -name '*.xsd'|sort|sed 's/\.xsd//'|sed 's,./, ,'))
@@ -32,8 +36,8 @@ setupFormats() {
     for fmt in "${XSLT_SCRIPTS[@]}";do
         in_fmt="${fmt//__*/}"
         out_fmt="${fmt//*__/}"
-        if ! containsElement "$in_fmt", "${XSLT_IN[@]}";then XSLT_IN+=($in_fmt);fi
-        if ! containsElement "$out_fmt", "${XSLT_OUT[@]}";then XSLT_OUT+=($out_fmt);fi
+        if ! containsElement "$in_fmt" "${XSLT_IN[@]}";then XSLT_IN+=($in_fmt);fi
+        if ! containsElement "$out_fmt" "${XSLT_OUT[@]}";then XSLT_OUT+=($out_fmt);fi
     done
 }
 setupFormats
@@ -49,25 +53,30 @@ show_output_formats() {
 }
 
 exec_saxon() {
+    SAXON_ARGS=("$@")
     if [[ "$DEBUG" -gt 0 ]];then
-        echo Executing "$SAXON" "${SAXON_ARGS[@]}"
+        echo_err Executing "java -jar $SAXON_JAR" "${SAXON_ARGS[@]}"
     fi
 
     if [[ "$DEBUG" -gt 1 ]];then
         SAXON_ARGS+=('-t')
     fi
 
-    java -jar "$SAXON_JAR" "$@"
+    java -jar "$SAXON_JAR" "${SAXON_ARGS[@]}"
 }
 
 
 exec_xsdv() {
     schema="$1"
-    file="$1"
+    file="$2"
     cd "$XSD_VALIDATOR_DIR"
     if ((DEBUG > 0));then
-        echo "PWD: '$PWD'"
-        echo "./xsdv.sh '$SHAREDIR/xsd/${schema}.xsd' '$file'"
+        echo_err "PWD: '$PWD'"
+        echo_err "./xsdv.sh '$SHAREDIR/xsd/${schema}.xsd' '$file'"
     fi
-    exec ./xsdv.sh "$SHAREDIR/xsd/${schema}.xsd" "$file" "${XSD_ARGS[@]}"
+    ./xsdv.sh "$SHAREDIR/xsd/${schema}.xsd" "$file"
+}
+
+echo_err() {
+    echo "$@" >&2;
 }
