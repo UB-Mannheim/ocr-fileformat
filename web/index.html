@@ -1,0 +1,130 @@
+<!doctype HTML>
+<html>
+  <head>
+    <link rel="stylesheet" href="ocr-schema.css"/>
+
+    <script src="https://code.jquery.com/jquery-2.2.3.js"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notie/3.2.0/notie.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/themes/prism.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/themes/prism-coy.css">
+  </head>
+  <body>
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">OCR Schema</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a data-toggle="tab" href="#transform">Transform</a></li>
+            <li class=""><a data-toggle="tab" href="#validate">Validate</a></li>
+            <li><a data-toggle="tab" href="#help">Help</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div><!--/.container-fluid -->
+    </nav>
+
+    <div class="container">
+
+    <section class="tab-content">
+
+      <article class="tab-pane active" id="transform">
+
+        <div class="row">
+        <div class="col-xs-12">
+        <div role="form" class="form-inline">
+          <input  id="transform-url" class="form-control" type="url" placeholder="http://example.org/xml" style="width:60%" />
+          <select id="transform-from" class="form-control"></select>
+          <select id="transform-to" class="form-control"></select>
+          <button id="transform-submit" class="btn btn-success">
+            Transform
+            <span class="hidden glyphicon glyphicon-refresh spinning"></span>
+          </button>
+        </div>
+        </div>
+        </div>
+
+        <div class="row">
+        <div class="col-xs-12">
+        <div id="transform-result" class="result hidden">
+          <pre>
+          <code class="language-markup">
+          <code></code>
+          </code>
+          </pre>
+        </div>
+        </div>
+        </div>
+
+      </article>
+
+      <article class="tab-pane" id="validate">
+
+        <div class="row">
+        <div class="col-xs-12">
+        <div class="form-inline" role="form">
+          <input  id="validate-url"    class="form-control" type="url" placeholder="http://example.org/xml" style="width:60%"/>
+          <select id="validate-schema" class="form-control"></select>
+          <button id="validate-submit" class="btn btn-success">
+            Validate
+            <span class="hidden glyphicon glyphicon-refresh spinning"></span>
+          </button>
+        </div>
+        <div class="result hidden" id="validate-result">
+          <pre></pre>
+        </div>
+
+        </div>
+        </div>
+
+      </article>
+
+      <article class="tab-pane" id="help">
+        <h3>Examples
+
+        <h4>ABBYY FineReader</h4>
+
+        <ul>
+          <li><a href="http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/abbyy/417576986_0031.xml">http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/abbyy/417576986_0031.xml</a></li>
+        </ul>
+
+        <h4>hOCR</h4>
+        <ul>
+          <li><a href="https://cdn.rawgit.com/kba/ocr-schemas/master/example/wetzel_reisebegleiter_1901_0021.hocr">https://cdn.rawgit.com/kba/ocr-schemas/master/example/wetzel_reisebegleiter_1901_0021.hocr</a></li>
+          <li><a href="http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/0001-tesseract.hocr">http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/0001-tesseract.hocr</a>
+        </ul>
+
+        <h4>ALTO</h4>
+        <ul>
+
+        <li><a href="http://chroniclingamerica.loc.gov/lccn/sn86069133/1910-10-31/ed-1/seq-1/ocr.xml">http://chroniclingamerica.loc.gov/lccn/sn86069133/1910-10-31/ed-1/seq-1/ocr.xml</a></li>
+        <li><a href="http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/">http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/</a></li>
+        <li><a href="http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/alto/417576986_0031.xml">http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/alto/417576986_0031.xml</a></li>
+        <li><a href="https://rawgit.com/kba/ocr-schemas/master/example/wetzel_reisebegleiter_1901_0021.alto">https://rawgit.com/kba/ocr-schemas/master/example/wetzel_reisebegleiter_1901_0021.alto</a></li>
+
+        </ul>
+      </article>
+
+    </section>
+    </div>
+    </div>
+    </div>
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdn.rawgit.com/rndme/download/master/download.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/notie/3.2.0/notie.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/prism.min.js"></script>
+    <script src="ocr-schema.js"></script>
+    </body>
+</html>
