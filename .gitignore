@@ -3,4 +3,3 @@
 /*.alto
 vendor/*
 !vendor/Makefile
-xsd/
