@@ -167,9 +167,9 @@ The XSD files are installed under `$PREFIX/share/ocr-schemas/xsd`
 
 ### Supported Validation Formats
 
-|            | hOCR                     | ALTO               | PAGEXML                  | FineReader               |
-|-----------:|--------------------------|--------------------|--------------------------|--------------------------|
-| Validation | :heavy_multiplication_x: | :white_check_mark: | :white_check_mark:       | :heavy_multiplication_x: |
+|            | hOCR                     | ALTO               | PAGEXML                  | FineReader         |
+|-----------:|--------------------------|--------------------|--------------------------|--------------------|
+| Validation | :heavy_multiplication_x: | :white_check_mark: | :white_check_mark:       | :white_check_mark: |
 
 
 ## License

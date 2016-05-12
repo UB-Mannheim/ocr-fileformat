@@ -14,7 +14,6 @@ SAXON_HE_JAR = saxon9he.jar
 
 PAGE_SCHEMA_REPO = page-schema
 PAGE_SCHEMA_VERSIONS = 2009-03-16 2010-01-12 2010-03-19 2013-07-15
-
 PAGE_SCHEMA_BASE_URL = http://www.primaresearch.org/schema/PAGE/gts/pagecontent/
 
 ALTO_SCHEMA_REPO = alto-schema
@@ -22,6 +21,10 @@ ALTO_SCHEMA_URL = https://github.com/altoxml/schema
 
 XSD_VALIDATOR_REPO = xsd-validator
 XSD_VALIDATOR_URL = https://github.com/kba/xsd-validator
+
+ABBYY_SCHEMA_REPO = abbyy-schema
+ABBYY_SCHEMA_BASE_URL = http://www.abbyy.com/FineReader_xml/FineReader
+ABBYY_SCHEMA_VERSIONS = 8-schema-v2 9-schema-v1 10-schema-v1
 
 # {{{
 # SAXON_BROWSER_VERSION = 1.1
@@ -35,15 +38,28 @@ XSD_VALIDATOR_URL = https://github.com/kba/xsd-validator
 #     wget -O '$@' '$(SAXON_BROWSER_URL)'
 #}}}
 
-.PHONY: all check $(PAGE_SCHEMA_REPO)
+.PHONY: all check $(PAGE_SCHEMA_REPO) $(ABBYY_SCHEMA_REPO)
 
-all: $(PAGE_SCHEMA_REPO) $(ALTO_SCHEMA_REPO) $(XSD_VALIDATOR_REPO) $(SAXON_HE_JAR)
+all:\
+	$(PAGE_SCHEMA_REPO)\
+	$(ALTO_SCHEMA_REPO)\
+	$(ABBYY_SCHEMA_REPO)\
+	$(XSD_VALIDATOR_REPO)\
+	$(SAXON_HE_JAR)
 
 clean:
 	$(RM) $(ALTO_SCHEMA_REPO)
 	$(RM) $(SAXON_HE_JAR)
 	$(RM) $(SAXON_HE_ZIP)
 	$(RM) $(PAGE_SCHEMA_REPO)
+
+$(ABBYY_SCHEMA_REPO):
+	@$(MKDIR) "$@" && cd "$@" && \
+		for version in $(ABBYY_SCHEMA_VERSIONS);do \
+			xsd=abbyy-$$version.xsd; if [ ! -e $$xsd ];then \
+				wget -O $$xsd $(ABBYY_SCHEMA_BASE_URL)$$version.xml; \
+			fi; \
+		done;
 
 $(PAGE_SCHEMA_REPO):
 	@$(MKDIR) "$@" && cd "$@" && \
