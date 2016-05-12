@@ -1,5 +1,11 @@
 function escapeHTML(str) {
-    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return str.
+        replace(/&/g, '&amp;').
+        replace(/</g, '&lt;').
+        replace(/"/g, '&quot;').
+        replace(/'/g, '&#39;').
+        replace(/\//g, '&#x2F').
+        replace(/>/g, '&gt;');
 }
 function updateOptions() {
     $.ajax({
@@ -34,7 +40,6 @@ function handleClick(tabName, params) {
         type: 'GET',
         url: 'ocr-schema.php?do=' + tabName + '&' + params + "&url=" + url,
         success: function(data) {
-            console.log(data);
             $("#" + tabName + "-result pre code").html(escapeHTML(data));
             $("#" + tabName + "-submit .spinning").addClass('hidden');
             $("#" + tabName + "-result").removeClass('hidden');
