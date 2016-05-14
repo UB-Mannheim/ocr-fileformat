@@ -24,7 +24,7 @@ XSD_VALIDATOR_URL = https://github.com/kba/xsd-validator
 
 ABBYY_SCHEMA_REPO = abbyy-schema
 ABBYY_SCHEMA_BASE_URL = http://www.abbyy.com/FineReader_xml/FineReader
-ABBYY_SCHEMA_VERSIONS = 8-schema-v2 9-schema-v1 10-schema-v1
+ABBYY_SCHEMA_VERSIONS = 6-schema-v1 8-schema-v2 9-schema-v1 10-schema-v1
 
 # {{{
 # SAXON_BROWSER_VERSION = 1.1
