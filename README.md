@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/UB-Mannheim/ocr-transform.svg?branch=master)](https://travis-ci.org/UB-Mannheim/ocr-transform)
 
-Validate and transform between OCR file formats (hOCR, ALTO, PAGE)
+Validate and transform between OCR file formats (hOCR, ALTO, PAGE, FineReader)
 
 ![Screenshot GUI](./screenshot.png)
 
