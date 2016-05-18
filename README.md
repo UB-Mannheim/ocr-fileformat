@@ -1,4 +1,4 @@
-# ocr-schemas
+# ocr-fileformat
 
 [![Build Status](https://travis-ci.org/UB-Mannheim/ocr-transform.svg?branch=master)](https://travis-ci.org/UB-Mannheim/ocr-transform)
 
@@ -22,8 +22,6 @@ Validate and transform between OCR file formats (hOCR, ALTO, PAGE, FineReader)
 	* [Validation API](#validation-api)
 	* [Supported Validation Formats](#supported-validation-formats)
 * [License](#license)
-
-Convert between Tesseract hOCR and ALTO XML 2.0/2.1 using XSL stylesheets
 
 ## Installation
 
@@ -50,10 +48,10 @@ server by copying the [`web`](./web) folder somewhere below the document root
 of your server, e.g. `/var/www/html` for Apache on Debian/Ubuntu:
 
 ```
-sudo -u www-data cp -r web /var/www/html/ocr-schema
+sudo -u www-data cp -r web /var/www/html/ocr-fileformat
 ```
 
-In this example the GUI would be available under [http://localhost/ocr-schema/](http://localhost/ocr-schema/).
+In this example the GUI would be available under [http://localhost/ocr-fileformat/](http://localhost/ocr-fileformat/).
 
 ## Usage
 
@@ -67,8 +65,8 @@ script (CLI), using a web interface (GUI) or in you own tools (API)
 
 ### API
 
-* [`$PREFIX/share/ocr-schemas/xslt`](./xslt) - XSLT stylesheets
-* [`$PREFIX/share/ocr-schemas/xsd`](./xsd) - XSD schemas
+* [`$PREFIX/share/ocr-fileformat/xslt`](./xslt) - XSLT stylesheets
+* [`$PREFIX/share/ocr-fileformat/xsd`](./xsd) - XSD schemas
 
 ## Transformation
 
@@ -126,7 +124,7 @@ format. Click `Transform`.
 
 ### Transformation API
 
-The stylesheets are installed in `$PREFIX/share/ocr-schemas/xslt` and can be
+The stylesheets are installed in `$PREFIX/share/ocr-fileformat/xslt` and can be
 used directly in your scripts and software. You will need to use an XSLT 2.0
 capable stylesheet transformer.
 
@@ -160,7 +158,7 @@ Select the `Validate` menu option. Choose a URL and an schema. Click `Validate`.
 
 ### Validation API
 
-The XSD files are installed under `$PREFIX/share/ocr-schemas/xsd`
+The XSD files are installed under `$PREFIX/share/ocr-fileformat/xsd`
 
 ### Supported Validation Formats
 
