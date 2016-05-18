@@ -1,6 +1,6 @@
 # ocr-fileformat
 
-[![Build Status](https://travis-ci.org/UB-Mannheim/ocr-transform.svg?branch=master)](https://travis-ci.org/UB-Mannheim/ocr-transform)
+[![Build Status](https://travis-ci.org/UB-Mannheim/ocr-fileformat.svg?branch=master)](https://travis-ci.org/UB-Mannheim/ocr-fileformat)
 
 Validate and transform between OCR file formats (hOCR, ALTO, PAGE, FineReader)
 
