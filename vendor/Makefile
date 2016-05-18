@@ -26,6 +26,9 @@ ABBYY_SCHEMA_REPO = abbyy-schema
 ABBYY_SCHEMA_BASE_URL = http://www.abbyy.com/FineReader_xml/FineReader
 ABBYY_SCHEMA_VERSIONS = 6-schema-v1 8-schema-v2 9-schema-v1 10-schema-v1
 
+HOCR2ALTO_REPO = hOCR-to-ALTO
+HOCR2ALTO_URL = https://github.com/kba/$(HOCR2ALTO_REPO)
+
 # {{{
 # SAXON_BROWSER_VERSION = 1.1
 # SAXON_BROWSER_ZIP = Saxon-CE_$(SAXON_BROWSER_VERSION).zip
@@ -45,6 +48,7 @@ all:\
 	$(ALTO_SCHEMA_REPO)\
 	$(ABBYY_SCHEMA_REPO)\
 	$(XSD_VALIDATOR_REPO)\
+	$(HOCR2ALTO_REPO)\
 	$(SAXON_HE_JAR)
 
 clean:
@@ -81,6 +85,9 @@ $(XSD_VALIDATOR_REPO):
 
 $(ALTO_SCHEMA_REPO):
 	$(GIT_CLONE) "$(ALTO_SCHEMA_URL)" "$@"
+
+$(HOCR2ALTO_REPO):
+	$(GIT_CLONE) "$(HOCR2ALTO_URL)" "$@"
 
 $(SAXON_HE_JAR):
 	$(MAKE) $(SAXON_HE_ZIP)

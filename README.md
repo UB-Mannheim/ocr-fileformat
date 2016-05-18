@@ -25,9 +25,6 @@ Validate and transform between OCR file formats (hOCR, ALTO, PAGE, FineReader)
 
 Convert between Tesseract hOCR and ALTO XML 2.0/2.1 using XSL stylesheets
 
-This project provides an installation path and command line interface for
-the stylesheets [developed by @filak](https://github.com/filak/hOCR-to-ALTO).
-
 ## Installation
 
 To install system-wide to `/usr/local`:
@@ -183,3 +180,5 @@ Projects included during the installation process (in [`./vendor`](./blob/master
 * [ALTOXML schema](/altoxml/schema), [`Open Source`](https://github.com/altoxml/schema/issues/37#issuecomment-218730230)
 * [PAGE schemas](http://www.primaresearch.org/schema/PAGE/gts/pagecontent/), `?`
 * [xsd-validator](/amouat/xsd-validator), `Apache 2.0`
+* ABBYY FineReader XSD, `?`
+* [hOCR-to-ALTO](https://github.com/kba/hOCR-to-ALTO) by Filip Kriz, `CC BY-SA 4.0`

@@ -18,6 +18,10 @@ BINDIR = $(PREFIX)/bin
 check:
 	$(MAKE) -C vendor check
 
+# TODO
+# xslt/hocr__alto2.0.xsl: vendor/hOCR-to-ALTO/hocr2alto2.0.xsl
+#     $(LN) ../$< $@
+
 vendor: check
 	# download the dependencies
 	$(MAKE) -C vendor all
@@ -32,6 +36,10 @@ vendor: check
 	@cd xsd && $(LN) ../vendor/page-schema/*.xsd .
 	# copy ABBYY XSD
 	cd xsd && $(LN) ../vendor/abbyy-schema/*.xsd .
+	# symlink hocr<->alto
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr2alto2.0.xsl hocr__alto2.0.xsl
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr2alto2.1.xsl hocr__alto2.1.xsl
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/alto2hocr.xsl alto__hocr.xsl
 
 install: vendor $(VENDOR_DIRNAME)
 	$(MKDIR) $(SHAREDIR)
