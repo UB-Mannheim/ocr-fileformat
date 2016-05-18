@@ -1,0 +1,8 @@
+.git
+.travis.yml
+.zipignore
+.gitignore
+example
+ocr-fileformat_*
+*.pdf
+*.zip

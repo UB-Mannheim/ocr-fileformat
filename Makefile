@@ -1,10 +1,12 @@
-PKG_NAME = ocr-transform
+PKG_NAME = ocr-fileformat
+PKG_VERSION = 0.0.2
 
 CP = cp -r
 LN = ln -sf
 MV = mv -f
 MKDIR = mkdir -p
 RM = rm -rfv
+ZIP = zip
 
 PREFIX = $(DESTDIR)/usr/local
 SHAREDIR = $(PREFIX)/share/$(PKG_NAME)
@@ -13,6 +15,7 @@ BINDIR = $(PREFIX)/bin
 .PHONY: check \
 	install uninstall \
 	clean realclean \
+	releas \
 	vendor
 
 check:
@@ -60,3 +63,11 @@ clean:
 
 realclean: clean
 	$(MAKE) -C vendor clean
+
+release:
+	$(RM) $(PKG_NAME)_$(PKG_VERSION)
+	$(MKDIR) $(PKG_NAME)_$(PKG_VERSION)
+	tar -X .zipignore -cf - . | tar -xf - -C $(PKG_NAME)_$(PKG_VERSION)
+	# $(CP) LICENSE Makefile README.md bin/ lib.sh vendor/
+	tar czf $(PKG_NAME)_$(PKG_VERSION).tar.gz $(PKG_NAME)_$(PKG_VERSION)
+	zip --symlinks -r $(PKG_NAME)_$(PKG_VERSION).zip $(PKG_NAME)_$(PKG_VERSION)
