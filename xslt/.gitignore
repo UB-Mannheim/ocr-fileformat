@@ -1,3 +1,2 @@
-alto__hocr.xsl
-hocr__alto2.0.xsl
-hocr__alto2.1.xsl
+*.xsl
+!alto2__alto3.xsl
