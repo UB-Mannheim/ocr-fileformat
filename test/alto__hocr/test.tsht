@@ -1,0 +1,15 @@
+#!/usr/bin/env tsht
+
+use colordiff
+
+ALTO='../samples/samples/alto/2.0/417576986_0012.alto'
+HOCR_EXPECTED='../samples/samples/hocr/1.1/417576986_0012.hocr'
+HOCR_PRODUCED='./out.hocr'
+
+after () {
+    rm "$HOCR_PRODUCED"
+}
+
+../../bin/ocr-transform.sh -d alto hocr "$ALTO" "$HOCR_PRODUCED"
+
+equals_file_file "$HOCR_EXPECTED" "$HOCR_PRODUCED" "Correct ALTO hOCR transformation"

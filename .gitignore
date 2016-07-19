@@ -4,3 +4,6 @@
 vendor/*
 !vendor/Makefile
 ocr-fileformat_*
+test/samples
+test/tsht
+test/.tsht

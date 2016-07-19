@@ -12,10 +12,14 @@ PREFIX = $(DESTDIR)/usr/local
 SHAREDIR = $(PREFIX)/share/$(PKG_NAME)
 BINDIR = $(PREFIX)/bin
 
+TSHT = ./test/tsht
+TSHT_URL = https://cdn.rawgit.com/kba/tsht/master/tsht
+
 .PHONY: check \
 	install uninstall \
 	clean realclean \
-	releas \
+	test \
+	release \
 	vendor
 
 check:
@@ -63,6 +67,18 @@ clean:
 
 realclean: clean
 	$(MAKE) -C vendor clean
+
+test: test/samples $(TSHT)
+	$(TSHT)
+
+$(TSHT):
+	$(MKDIR) $(dir $(TSHT))
+	wget -O$(TSHT) $(TSHT_URL)
+	chmod a+x $(TSHT)
+
+test/samples:
+	$(MKDIR) test
+	git clone https://github.com/kba/ocr-fileformat-samples test/samples
 
 release:
 	$(RM) $(PKG_NAME)_$(PKG_VERSION)
