@@ -100,7 +100,13 @@ function validateURL($url, $schema)
 if ($_GET["do"] === "list") {
   sendJSON($config['formats']);
 } else if ($_GET["do"] === "transform") {
-  transformURL($_GET["url"], $_GET["from"], $_GET["to"]);
+  if (array_key_exists('url', $_GET)) {
+    transformURL($_GET["url"], $_GET["from"], $_GET["to"]);
+  } elseif (array_key_exists('file', $_FILES)) {
+    transformURL($_FILES["file"]['tmp_name'], $_GET["from"], $_GET["to"]);
+  } else {
+    send400("Must be either POST with file field 'file' or GET with param 'url'.");
+  }
 } else if ($_GET["do"] === "validate") {
   validateURL($_GET["url"], $_GET["format"]);
 } else {
