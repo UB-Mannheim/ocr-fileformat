@@ -29,6 +29,9 @@ ABBYY_SCHEMA_VERSIONS = 6-schema-v1 8-schema-v2 9-schema-v1 10-schema-v1
 HOCR2ALTO_REPO = hOCR-to-ALTO
 HOCR2ALTO_URL = https://github.com/kba/$(HOCR2ALTO_REPO)
 
+HOCR_CHECK = hocr-check
+HOCR_CHECK_URL = https://rawgit.com/tmbdev/hocr-tools/master/$(HOCR_CHECK)
+
 # {{{
 # SAXON_BROWSER_VERSION = 1.1
 # SAXON_BROWSER_ZIP = Saxon-CE_$(SAXON_BROWSER_VERSION).zip
@@ -49,6 +52,7 @@ all:\
 	$(ABBYY_SCHEMA_REPO)\
 	$(XSD_VALIDATOR_REPO)\
 	$(HOCR2ALTO_REPO)\
+	$(HOCR_CHECK)\
 	$(SAXON_HE_JAR)
 
 clean:
@@ -56,6 +60,13 @@ clean:
 	$(RM) $(SAXON_HE_JAR)
 	$(RM) $(SAXON_HE_ZIP)
 	$(RM) $(PAGE_SCHEMA_REPO)
+
+check:
+	@which \
+		wget \
+		unzip \
+		git \
+	>/dev/null
 
 $(ABBYY_SCHEMA_REPO):
 	@$(MKDIR) "$@" && cd "$@" && \
@@ -73,13 +84,6 @@ $(PAGE_SCHEMA_REPO):
 			fi; \
 		done;
 
-check:
-	@which \
-		wget \
-		unzip \
-		git \
-	>/dev/null
-
 $(XSD_VALIDATOR_REPO):
 	$(GIT_CLONE) "$(XSD_VALIDATOR_URL)" "$@"
 
@@ -95,3 +99,6 @@ $(SAXON_HE_JAR):
 
 $(SAXON_HE_ZIP):
 	$(WGET) -O "$@" "$(SAXON_HE_URL)"
+
+$(HOCR_CHECK):
+	$(WGET) -O "$@" "$(HOCR_CHECK_URL)"

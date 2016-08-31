@@ -1,0 +1,8 @@
+#!/bin/bash
+SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+if [[ "$1" != '-' ]];then
+    python2 "$SCRIPTDIR/../../vendor/hocr-check" "$1"
+else
+    python2 "$SCRIPTDIR/../../vendor/hocr-check"
+fi
