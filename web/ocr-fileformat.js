@@ -7,6 +7,7 @@ function escapeHTML(str) {
         replace(/\//g, '&#x2F').
         replace(/>/g, '&gt;');
 }
+
 function updateOptions() {
     $.ajax({
         url: 'ocr-schema.php?do=list',
@@ -14,21 +15,18 @@ function updateOptions() {
         dataType: 'json',
         contentType: 'application/json',
         success: function(data) {
-            var source = {};
             var target = {};
-            data.transform.forEach(function(t) {
-                t.replace(/(.*)__(.*)/, function(_, from, to) {
-                    if (!source[from])
-                        $("#transform-from").append($("<option>").append(from));
-                    source[from] = true;
+            Object.keys(data.transform).forEach(function(from) {
+                $("#transform-from").append($("<option>").append(from));
+                data.transform[from].forEach(function(to) {
                     if (!target[to])
                         $("#transform-to").append($("<option>").append(to));
                     target[to] = true;
                 });
             });
-            for (var i = 0 ;i < data.validate.length; i++) {
-                $("#validate-schema").append($("<option>").append(data.validate[i]));
-            }
+            data.validate.forEach(function(format) {
+                $("#validate-format").append($("<option>").append(format));
+            })
         },
     });
 }
@@ -56,7 +54,7 @@ $(function() {
     updateOptions();
     $("#validate-submit").on('click', function() {
         handleClick('validate',
-                    'schema=' + $("#validate-schema").val());
+                    'format=' + $("#validate-format").val());
     });
     $("#transform-submit").on('click', function() {
         handleClick('transform',
