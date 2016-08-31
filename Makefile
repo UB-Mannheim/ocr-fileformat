@@ -12,22 +12,26 @@ PREFIX = $(DESTDIR)/usr/local
 SHAREDIR = $(PREFIX)/share/$(PKG_NAME)
 BINDIR = $(PREFIX)/bin
 
-.PHONY: check \
+TSHT = ./test/tsht
+TSHT_URL = https://cdn.rawgit.com/kba/tsht/master/tsht
+
+.PHONY: \
 	install uninstall \
 	clean realclean \
 	releas \
 	vendor
 
+.PHONY: check
 check:
 	$(MAKE) -C vendor check
 
-# TODO
-# xslt/hocr__alto2.0.xsl: vendor/hOCR-to-ALTO/hocr2alto2.0.xsl
-#     $(LN) ../$< $@
-
+.PHONY: vendor
 vendor: check
 	# download the dependencies
 	$(MAKE) -C vendor all
+
+.PHONY: xsd
+xsd: vendor
 	# copy Alto XSD
 	cd xsd && $(LN) ../vendor/alto-schema/*/*.xsd . && \
 		for xsd in *.xsd;do \
@@ -39,12 +43,19 @@ vendor: check
 	@cd xsd && $(LN) ../vendor/page-schema/*.xsd .
 	# copy ABBYY XSD
 	cd xsd && $(LN) ../vendor/abbyy-schema/*.xsd .
+
+.PHONY: xslt
+xslt: vendor
 	# symlink hocr<->alto
 	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr2alto2.0.xsl hocr__alto2.0.xsl
 	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr2alto2.1.xsl hocr__alto2.1.xsl
-	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/alto2hocr.xsl alto__hocr.xsl
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/alto2hocr.xsl alto2.0__hocr.xsl
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/alto2hocr.xsl alto2.1__hocr.xsl
+	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.0__alto3.1.xsl
+	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.1__alto3.0.xsl
+	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.1__alto3.1.xsl
 
-install: vendor $(VENDOR_DIRNAME)
+install: vendor xsd xslt script
 	$(MKDIR) $(SHAREDIR)
 	$(CP) -t $(SHAREDIR) xsd xslt vendor lib.sh
 	$(MKDIR) $(BINDIR)
@@ -60,6 +71,7 @@ uninstall:
 
 clean:
 	$(RM) xsd/*
+	find xslt -type l -delete
 
 realclean: clean
 	$(MAKE) -C vendor clean
