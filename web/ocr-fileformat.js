@@ -1,3 +1,5 @@
+var ENDPOINT = 'ocr-fileformat.php';
+
 function escapeHTML(str) {
     return str.
         replace(/&/g, '&amp;').
@@ -10,7 +12,7 @@ function escapeHTML(str) {
 
 function updateOptions() {
     $.ajax({
-        url: 'ocr-schema.php?do=list',
+        url: ENDPOINT + '?do=list',
         type: 'GET',
         dataType: 'json',
         contentType: 'application/json',
@@ -30,14 +32,16 @@ function updateOptions() {
         },
     });
 }
+
 function handleClick(tabName, params) {
     var url = $("#" + tabName + "-url").val().trim();
     if (!url) { return; }
     $("#" + tabName + "-submit .spinning").removeClass('hidden');
     $.ajax({
         type: 'GET',
-        url: 'ocr-schema.php?do=' + tabName + '&' + params + "&url=" + url,
+        url: ENDPOINT + '?do=' + tabName + '&' + params + "&url=" + url,
         success: function(data) {
+            $("#" + tabName + "-result a.download").attr('href', url);
             $("#" + tabName + "-result pre code").html(escapeHTML(data));
             $("#" + tabName + "-submit .spinning").addClass('hidden');
             $("#" + tabName + "-result").removeClass('hidden');
