@@ -32,6 +32,7 @@ vendor: check
 
 .PHONY: xsd
 xsd: vendor
+	$(MKDIR) xsd
 	# copy Alto XSD
 	cd xsd && $(LN) ../vendor/alto-schema/*/*.xsd . && \
 		for xsd in *.xsd;do \
@@ -46,6 +47,7 @@ xsd: vendor
 
 .PHONY: xslt
 xslt: vendor
+	$(MKDIR) xslt
 	# symlink hocr<->alto
 	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr2alto2.0.xsl hocr__alto2.0.xsl
 	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr2alto2.1.xsl hocr__alto2.1.xsl
@@ -57,7 +59,7 @@ xslt: vendor
 
 install: vendor xsd xslt script
 	$(MKDIR) $(SHAREDIR)
-	$(CP) -t $(SHAREDIR) xsd xslt vendor lib.sh
+	$(CP) xsd xslt vendor lib.sh $(SHAREDIR)
 	$(MKDIR) $(BINDIR)
 	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-transform.sh > $(BINDIR)/ocr-transform
 	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-validate.sh > $(BINDIR)/ocr-validate

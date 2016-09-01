@@ -2,7 +2,7 @@ CP = cp -rv
 MKDIR = mkdir -p
 RM = rm -rfv
 UNZIP = unzip -u
-WGET = wget
+WGET = wget --progress=bar:force --no-verbose --show-progress
 GIT_CLONE = git clone --depth 1
 
 SAXON_HE_VERSION_MAJOR = 9
@@ -61,7 +61,7 @@ $(ABBYY_SCHEMA_REPO):
 	@$(MKDIR) "$@" && cd "$@" && \
 		for version in $(ABBYY_SCHEMA_VERSIONS);do \
 			xsd=abbyy-$$version.xsd; if [ ! -e $$xsd ];then \
-				wget -O $$xsd $(ABBYY_SCHEMA_BASE_URL)$$version.xml; \
+				$(WGET) -O $$xsd $(ABBYY_SCHEMA_BASE_URL)$$version.xml; \
 			fi; \
 		done;
 
@@ -69,7 +69,7 @@ $(PAGE_SCHEMA_REPO):
 	@$(MKDIR) "$@" && cd "$@" && \
 		for version in $(PAGE_SCHEMA_VERSIONS);do \
 			xsd=page-$$version.xsd; if [ ! -e $$xsd ];then \
-				wget -O $$xsd $(PAGE_SCHEMA_BASE_URL)/$$version/pagecontent.xsd; \
+				$(WGET) -O $$xsd $(PAGE_SCHEMA_BASE_URL)/$$version/pagecontent.xsd; \
 			fi; \
 		done;
 
