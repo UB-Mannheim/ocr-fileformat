@@ -2,7 +2,7 @@ CP = cp -rv
 MKDIR = mkdir -p
 RM = rm -rfv
 UNZIP = unzip -u
-WGET = wget --progress=bar:force --no-verbose --show-progress
+WGET = wget --progress=bar:force --no-verbose
 GIT_CLONE = git clone --depth 1
 
 SAXON_HE_VERSION_MAJOR = 9
