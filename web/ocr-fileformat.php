@@ -54,7 +54,7 @@ function pipeToCommand($cmd, $xml)
 /**
  * Transform from one format to another, fetching the data by URL
  */
-function transformURL($url, $from, $to)
+function transform($url, $from, $to)
 {
   global $config;
   if (!array_key_exists($from, $config['formats']['transform'])
@@ -75,21 +75,19 @@ function transformURL($url, $from, $to)
 /**
  * Validate against a schema, data retrieved via HTTP GET.
  */
-function validateURL($url, $schema)
+function validate($url, $format)
 {
   global $config;
-  if (!in_array($schema, $config['formats']['validate'])) {
-    send400("No such schema '$schema'");
-    return;
+  if (!in_array($format, $config['formats']['validate'])) {
+    return send400("No validator for '$format'");
   }
   header("Content-Type: text/plain");
   $xml = file_get_contents($url);
   if (!$xml) {
-    send400("Could not retrieve URL '$url'");
-    return;
+    return send400("Could not retrieve URL '$url'");
   }
   header("Content-Type: text/plain");
-  $res = pipeToCommand($config['ocr-validate'] . " $schema -", $xml);
+  $res = pipeToCommand($config['ocr-validate'] . " " . $format . " -", $xml);
   echo $res['stdout'];
   echo $res['stderr'];
 }
@@ -97,18 +95,27 @@ function validateURL($url, $schema)
 /**
  * Handle request
  */
-if ($_GET["do"] === "list") {
-  sendJSON($config['formats']);
-} else if ($_GET["do"] === "transform") {
-  if (array_key_exists('url', $_GET)) {
-    transformURL($_GET["url"], $_GET["from"], $_GET["to"]);
-  } elseif (array_key_exists('file', $_FILES)) {
-    transformURL($_FILES["file"]['tmp_name'], $_GET["from"], $_GET["to"]);
-  } else {
-    send400("Must be either POST with file field 'file' or GET with param 'url'.");
-  }
-} else if ($_GET["do"] === "validate") {
-  validateURL($_GET["url"], $_GET["format"]);
-} else {
-  send400("Unknown/missing action, set 'do' parameter to either 'validate' or 'transform'");
+if (array_key_exists('file', $_FILES)) {
+    $_GET['url'] = $_FILES["file"]['tmp_name'];
+}
+
+switch ($_GET['do']) {
+  case 'list':
+    sendJSON($config['formats']);
+    break;
+  case 'transform':
+    if (!array_key_exists('url', $_GET)) {
+      return send400("Must be either POST with file field 'file' or GET with param 'url'.");
+    }
+    transform($_GET["url"], $_GET["from"], $_GET["to"]);
+    break;
+  case 'validate':
+    if (!array_key_exists('url', $_GET)) {
+      return send400("Must be either POST with file field 'file' or GET with param 'url'.");
+    }
+    validate($_GET["url"], $_GET["format"]);
+    break;
+  default:
+    send400("Unknown/missing action, set 'do' parameter to either 'validate' or 'transform'");
+    break;
 }
