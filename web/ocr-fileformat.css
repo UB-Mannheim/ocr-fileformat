@@ -16,3 +16,10 @@
 .result {
     max-height: 75vh;
 }
+
+.github-fork-ribbon {
+  position: fixed;
+}
+.github-fork-ribbon.left-bottom:before {
+    background-color: #080;
+}
