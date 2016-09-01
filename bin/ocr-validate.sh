@@ -36,7 +36,7 @@ main () {
     fi
 
     if [[ "$file" == "-" ]];then
-        loginfo "Reading from STDIN"
+        ((DEBUG > 1)) && loginfo "Reading from STDIN"
     else 
         file=$(readlink -f "$file")
         if [[ ! -e "$file" ]];then
