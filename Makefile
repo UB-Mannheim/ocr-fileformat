@@ -15,13 +15,8 @@ BINDIR = $(PREFIX)/bin
 TSHT = ./test/tsht
 TSHT_URL = https://cdn.rawgit.com/kba/tsht/master/tsht
 
-.PHONY: \
-	install uninstall \
-	clean realclean \
-	releas \
-	vendor
+all: vendor xsd xslt
 
-.PHONY: check
 check:
 	$(MAKE) -C vendor check
 
@@ -57,7 +52,7 @@ xslt: vendor
 	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.1__alto3.0.xsl
 	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.1__alto3.1.xsl
 
-install: vendor xsd xslt script
+install: all
 	$(MKDIR) $(SHAREDIR)
 	$(CP) xsd xslt vendor lib.sh $(SHAREDIR)
 	$(MKDIR) $(BINDIR)
