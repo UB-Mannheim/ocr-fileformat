@@ -88,8 +88,8 @@ main () {
 while [[ "$1" = -* ]]; do
     case "$1" in
         -d|--debug) let DEBUG+=1 ;;
-        -L|--list) show_transformations && exit 0 ;;
-        -h|--help) show_usage && exit 0 ;;
+        -L|--list) show_transformations ; exit 0 ;;
+        -h|--help) show_usage ; exit 0 ;;
         *) logerr "Unknown option '$1'" && show_usage && exit 1 ;;
     esac
     shift

@@ -55,8 +55,8 @@ main () {
 while [[ "$1" = -* ]]; do
     case "$1" in
         --debug|-d) let DEBUG+=1 ;;
-        --list|-L) show_schemas|sed -e 's/\s*$//' -e 's/ \+/\n/g' && exit 0 ;;
-        --help|-h) show_usage && exit 0 ;;
+        --list|-L) show_schemas|sed -e 's/\s*$//' -e 's/ \+/\n/g' ; exit 0 ;;
+        --help|-h) show_usage ; exit 0 ;;
         *) logerr "Unknown option '$1'" && show_usage && exit 1 ;;
     esac
     shift
