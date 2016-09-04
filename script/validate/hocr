@@ -1,8 +1,5 @@
 #!/bin/bash
 SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+HOCR_SPEC="$SCRIPTDIR/../../vendor/hocr-spec-python/hocr-spec"
 
-if [[ "$1" != '-' ]];then
-    python2 "$SCRIPTDIR/../../vendor/hocr-check" "$1"
-else
-    python2 "$SCRIPTDIR/../../vendor/hocr-check"
-fi
+python2 "$HOCR_SPEC" -f xml -p relaxed --filename "STDIN" "$1"

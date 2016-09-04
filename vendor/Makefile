@@ -29,8 +29,8 @@ ABBYY_SCHEMA_VERSIONS = 6-schema-v1 8-schema-v2 9-schema-v1 10-schema-v1
 HOCR2ALTO_REPO = hOCR-to-ALTO
 HOCR2ALTO_URL = https://github.com/kba/$(HOCR2ALTO_REPO)
 
-HOCR_CHECK = hocr-check
-HOCR_CHECK_URL = https://rawgit.com/tmbdev/hocr-tools/master/$(HOCR_CHECK)
+HOCR_SPEC_REPO = hocr-spec-python
+HOCR_SPEC_URL = https://github.com/kba/$(HOCR_SPEC_REPO)
 
 # {{{
 # SAXON_BROWSER_VERSION = 1.1
@@ -52,7 +52,7 @@ all:\
 	$(ABBYY_SCHEMA_REPO)\
 	$(XSD_VALIDATOR_REPO)\
 	$(HOCR2ALTO_REPO)\
-	$(HOCR_CHECK)\
+	$(HOCR_SPEC_REPO)\
 	$(SAXON_HE_JAR)
 
 clean:
@@ -100,5 +100,5 @@ $(SAXON_HE_JAR):
 $(SAXON_HE_ZIP):
 	$(WGET) -O "$@" "$(SAXON_HE_URL)"
 
-$(HOCR_CHECK):
-	$(WGET) -O "$@" "$(HOCR_CHECK_URL)"
+$(HOCR_SPEC_REPO):
+	$(GIT_CLONE) "$(HOCR_SPEC_URL)" "$@"
