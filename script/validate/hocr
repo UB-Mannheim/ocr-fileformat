@@ -1,0 +1,5 @@
+#!/bin/bash
+SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+HOCR_SPEC="$SCRIPTDIR/../../vendor/hocr-spec-python/hocr-spec"
+
+python2 "$HOCR_SPEC" -f xml -p relaxed --filename "STDIN" "$1"

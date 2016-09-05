@@ -54,7 +54,7 @@ xslt: vendor
 
 install: all
 	$(MKDIR) $(SHAREDIR)
-	$(CP) xsd xslt vendor lib.sh $(SHAREDIR)
+	$(CP) script xsd xslt vendor lib.sh $(SHAREDIR)
 	$(MKDIR) $(BINDIR)
 	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-transform.sh > $(BINDIR)/ocr-transform
 	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-validate.sh > $(BINDIR)/ocr-validate
