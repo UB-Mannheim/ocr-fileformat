@@ -16,6 +16,7 @@ show_usage () {
         --list   -L      List available schemas"
     echo >&2 -e "\n${INDENT}Schemas:"
     show_schemas|sed "s/^/${INDENT}${INDENT}/"
+    echo
 
     [[ "$#" -gt 0 ]] && exit 1
 }
