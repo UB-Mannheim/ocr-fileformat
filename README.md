@@ -130,12 +130,12 @@ capable stylesheet transformer.
 
 ### Supported Transformations
 
-|  From ╲ To | hOCR                     | ALTO                     | PAGEXML                  | FineReader               |
-|-----------:|--------------------------|--------------------------|--------------------------|--------------------------|
-|       hOCR | -                        | :white_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: |
-|       ALTO | :white_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: |
-|       PAGE | :heavy_multiplication_x: | :heavy_multiplication_x: | -                        | :heavy_multiplication_x: |
-| FineReader | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: | -                        |
+| From ╲ To  | hOCR               | ALTO               | PAGEXML | FineReader | Plain Text         |
+| ---:       | ---                | ---                | ---     | ---        | ---                |
+| hOCR       | -                  | :white_check_mark: | -       | -          | :white_check_mark: |
+| ALTO       | :white_check_mark: | -                  | -       | -          | :white_check_mark: |
+| PAGE       | -                  | -                  | -       | -          | -                  |
+| FineReader | -                  | -                  | -       | -          | -                  |
 
 ## Validation
 
