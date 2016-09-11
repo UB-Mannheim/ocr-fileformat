@@ -32,6 +32,9 @@ HOCR2ALTO_URL = https://github.com/filak/$(HOCR2ALTO_REPO)
 HOCR_SPEC_REPO = hocr-spec-python
 HOCR_SPEC_URL = https://github.com/kba/$(HOCR_SPEC_REPO)
 
+GCV2HOCR_REPO = gcv2hocr
+GCV2HOCR_URL = https://github.com/kba/$(GCV2HOCR_REPO)
+
 # {{{
 # SAXON_BROWSER_VERSION = 1.1
 # SAXON_BROWSER_ZIP = Saxon-CE_$(SAXON_BROWSER_VERSION).zip
@@ -52,6 +55,7 @@ all:\
 	$(ABBYY_SCHEMA_REPO)\
 	$(XSD_VALIDATOR_REPO)\
 	$(HOCR2ALTO_REPO)\
+	$(GCV2HOCR_REPO)\
 	$(HOCR_SPEC_REPO)\
 	$(SAXON_HE_JAR)
 
@@ -102,3 +106,7 @@ $(SAXON_HE_ZIP):
 
 $(HOCR_SPEC_REPO):
 	$(GIT_CLONE) "$(HOCR_SPEC_URL)" "$@"
+
+$(GCV2HOCR_REPO):
+	$(GIT_CLONE) "$(GCV2HOCR_URL)" "$@"
+	$(MAKE) -C $(GCV2HOCR_REPO)

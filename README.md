@@ -100,6 +100,8 @@ a file or select an input file by URL.
 
 * [`$PREFIX/share/ocr-fileformat/xslt`](./xslt) - XSLT stylesheets
 * [`$PREFIX/share/ocr-fileformat/xsd`](./xsd) - XSD schemas
+* [`$PREFIX/share/ocr-fileformat/script/transform`](./script/transform) - Transformation scripts
+* [`$PREFIX/share/ocr-fileformat/script/validate`](./script/validate) - Validation scripts
 
 ## Transformation
 
@@ -129,26 +131,38 @@ ocr-transform alto hocr sample.xml sample.hocr -- foo=bar
 
 Try `ocr-transform -h` to get an overview:
 
-```
-Usage: ocr-transform [-dl] <input-fmt> <output-fmt> [<input> [<output>]] [-- <saxon_opts>]
-Input formats:
-- 'alto'
-- 'hocr'
-Output formats:
-- 'alto2.0'
-- 'alto2.1'
-- 'hocr'
-Saxon-HE 9.7.0.4J from Saxonica
-Java version 1.7.0_95
-Usage: see http://www.saxonica.com/html/documentation/using-xsl/commandline.html
-Options available: -? -a -catalog -config -cr -diag -dtd -ea -expand -explain -export -ext -im -init -it -l -license -m -nogo -now -o -opt -or -outval -p -pack -quit -r -repeat -s -sa -scmin -strip -t -T -threads -TJ -TP -traceout -tree -u -val -versionmsg -warnings -x -xi -xmlversion -xsd -xsdversion -xsiloc -xsl -xsltversion -y
-Use -XYZ:? for details of option XYZ
-Params: 
-param=value           Set stylesheet string parameter
-+param=filename       Set stylesheet document parameter
-?param=expression     Set stylesheet parameter using XPath
-!param=value          Set serialization parameter
-```
+<!-- BEGIN-EVAL echo '<pre>';./bin/ocr-transform.sh -h 2>&1;echo '</pre>'  -->
+<pre>
+Usage: ocr-transform.sh [-dhL] <from> <to> [<infile> [<outfile>]] [-- <script-args>]
+
+    Options:
+        --help   -h      Show this help
+        --debug  -d      Increase debug level by 1, can be repeated
+        --list   -L      List transformations
+
+    Transformations:
+        alto2.0 alto3.0
+        alto2.0 alto3.1
+        alto2.0 hocr
+        alto2.1 alto3.0
+        alto2.1 alto3.1
+        alto2.1 hocr
+        gcv hocr
+        hocr alto2.0
+        hocr alto2.1
+
+    Saxon options:
+        Usage: see http://www.saxonica.com/html/documentation/using-xsl/commandline.html
+        Options available: -? -a -catalog -config -cr -diag -dtd -ea -expand -explain -export -ext -im -init -it -l -license -m -nogo -now -o -opt -or -outval -p -pack -quit -r -repeat -s -sa -scmin -strip -t -T -threads -TJ -TP -traceout -tree -u -val -versionmsg -warnings -x -xi -xmlversion -xsd -xsdversion -xsiloc -xsl -xsltversion -y
+        Use -XYZ:? for details of option XYZ
+        Params: 
+          param=value           Set stylesheet string parameter
+          +param=filename       Set stylesheet document parameter
+          ?param=expression     Set stylesheet parameter using XPath
+          !param=value          Set serialization parameter
+</pre>
+
+<!-- END-EVAL -->
 
 ### Transformation GUI
 
@@ -163,19 +177,34 @@ capable stylesheet transformer.
 
 ### Supported Transformations
 
-| From ╲ To  | hOCR               | ALTO               | PAGEXML | FineReader | Plain Text         |
-| ---:       | ---                | ---                | ---     | ---        | ---                |
-| hOCR       | -                  | :white_check_mark: | -       | -          | :white_check_mark: |
-| ALTO       | :white_check_mark: | -                  | -       | -          | :white_check_mark: |
-| PAGE       | -                  | -                  | -       | -          | -                  |
-| FineReader | -                  | -                  | -       | -          | -                  |
+| From ╲ To           | hOCR | ALTO | PAGEXML | FineReader | Google Cloud Vision |
+| ---:                | ---  | ---  | ---     | ---        | ---                 |
+| hOCR                | -    | ✓    | -       | -          | -                   |
+| ALTO                | ✓    | ✓    | -       | -          | -                   |
+| PAGE                | -    | -    | -       | -          | -                   |
+| FineReader          | -    | -    | -       | -          | -                   |
+| Google Cloud Vision | ✓    | -    | -       | -          | -                   |
 
 ## Validation
 
-```
-Usage: ocr-validate [-dh] <schema> <file>
 
-```
+<!-- BEGIN-EVAL echo '<pre>';./bin/ocr-validate.sh -h 2>&1;echo '</pre>'  -->
+<pre>
+Usage: ocr-validate.sh [-dhL] <schema> <file> [<resultsFile>]
+
+    Options:
+        --help   -h      Show this help
+        --debug  -d      Increase debug level by 1, can be repeated
+        --list   -L      List available schemas
+
+    Schemas:
+        abbyy-6-schema-v1 abbyy-8-schema-v2 abbyy-9-schema-v1 abbyy-10-schema-v1 
+        alto-1-0 alto-1-1 alto-1-2 alto-1-3 alto-1-4 alto-2-0 alto-2-1 alto-2-2-draft alto-3-0 alto-3-1 
+        hocr 
+        page-2009-03-16 page-2010-01-12 page-2010-03-19 page-2013-07-15 
+</pre>
+
+<!-- END-EVAL -->
 
 ### Validation CLI
 
@@ -195,9 +224,9 @@ The XSD files are installed under `$PREFIX/share/ocr-fileformat/xsd`
 
 ### Supported Validation Formats
 
-|            | hOCR                     | ALTO               | PAGEXML                  | FineReader         |
-|-----------:|--------------------------|--------------------|--------------------------|--------------------|
-| Validation | :white_check_mark: | :white_check_mark: | :white_check_mark:       | :white_check_mark: |
+|            | hOCR | ALTO | PAGEXML | FineReader | Google Cloud Vision |
+| ---:       | ---  | ---  | ---     | ---        | ---                 |
+| Validation | ✓    | ✓    | ✓       | ✓          | -                   |
 
 
 ## License
@@ -212,3 +241,4 @@ During the installation process several projects are included (in [`./vendor`](.
 * ABBYY FineReader XSD, `?`
 * [hOCR-to-ALTO](https://github.com/kba/hOCR-to-ALTO) by Filip Kriz [@filak](https://github.com/filak), [`CC BY-SA 4.0`](https://creativecommons.org/licenses/by-sa/4.0/legalcode)
 * [hocr-spec](https://github.com/kba/hocr-spec-python) by Konstantin Baierer [@kba](https://github.com/kba), [`MIT`](https://github.com/kba/hocr-spec-python/blob/master/LICENSE)
+* [gcv2hocr](https://github.com/dinosauria123/gcv2hocr) by Endo Michiaki, [`CC BY 4.0`](https://creativecommons.org/licenses/by/4.0/legalcode)
