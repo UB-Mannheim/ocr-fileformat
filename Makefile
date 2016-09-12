@@ -1,5 +1,6 @@
 PKG_NAME = ocr-fileformat
 PKG_VERSION = 0.1.0
+DOCKER_IMAGE = ubma/ocr-fileformat
 
 CP = cp -r
 LN = ln -sf
@@ -72,6 +73,9 @@ clean:
 
 realclean: clean
 	$(MAKE) -C vendor clean
+
+docker:
+	docker build -t "$(DOCKER_IMAGE)" .
 
 release:
 	$(RM) $(PKG_NAME)_$(PKG_VERSION)
