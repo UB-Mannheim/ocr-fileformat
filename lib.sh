@@ -70,7 +70,7 @@ setup_validations () {
     declare -a validators=($(
         find "$SHAREDIR/xsd" "$SHAREDIR/script/validate" \
             ! -type d \( -name '*.xsd' -or -executable \) \
-            |sort -h))
+            |sort))
     local path fmt
     for path in "${validators[@]}";do
         fmt=${path##*/}
@@ -90,7 +90,7 @@ setup
 # show_schemas ()
 show_schemas() {
     local schema schemagroup
-    declare -a sorted=($(IFS=$'\n'; echo "${!OCR_VALIDATORS[*]}"|sort -V))
+    declare -a sorted=($(IFS=$'\n'; echo "${!OCR_VALIDATORS[*]}"|sort -t- -nk2  -k1))
     for schema in "${sorted[@]}";do
         [[ -n "$schemagroup" && "$schemagroup" != ${schema%%-*} ]] && echo
         echo -n "$schema "
@@ -106,7 +106,7 @@ show_transformations() {
         for out_fmt in "${out_fmts[@]}";do
             echo "${in_fmt} ${out_fmt}";
         done
-    done|sort -V
+    done|sort
 }
 
 # show_saxon_options ()
