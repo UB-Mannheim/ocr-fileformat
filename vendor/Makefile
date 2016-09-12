@@ -1,7 +1,7 @@
 CP = cp -rv
 MKDIR = mkdir -p
 RM = rm -rfv
-UNZIP = unzip -u
+UNZIP = unzip -o
 WGET = wget --progress=bar:force --no-verbose
 GIT_CLONE = git clone --depth 1
 
