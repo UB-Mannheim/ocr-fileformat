@@ -1,6 +1,7 @@
 # ocr-fileformat
 
 [![Build Status](https://travis-ci.org/UB-Mannheim/ocr-fileformat.svg?branch=master)](https://travis-ci.org/UB-Mannheim/ocr-fileformat)
+[![GitHub release](https://img.shields.io/github/release/UB-Mannheim/ocr-fileformat.svg?maxAge=2592000)](https://github.com/UB-Mannheim/ocr-fileformat/releases)
 
 Validate and transform between OCR file formats (hOCR, ALTO, PAGE, FineReader)
 
