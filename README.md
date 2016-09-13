@@ -1,6 +1,7 @@
 # ocr-fileformat
 
 [![Build Status](https://travis-ci.org/UB-Mannheim/ocr-fileformat.svg?branch=master)](https://travis-ci.org/UB-Mannheim/ocr-fileformat)
+[![GitHub release](https://img.shields.io/github/release/UB-Mannheim/ocr-fileformat.svg?maxAge=2592000)](https://github.com/UB-Mannheim/ocr-fileformat/releases)
 
 Validate and transform between OCR file formats (hOCR, ALTO, PAGE, FineReader)
 
@@ -169,14 +170,12 @@ The XSD files are installed under `$PREFIX/share/ocr-fileformat/xsd`
 
 ## License
 
-The XSL stylesheets for hOCR-ALTO and ALTO-hOCR transformation are licensed
-[Creative Commons Attribution-ShareAlike 4.0 International.(CC BY-SA
-4.0)](https://creativecommons.org/licenses/by-sa/4.0/legalcode).
+This is free software. You may use it under the terms of the [MIT License](LICENSE).
 
-Projects included during the installation process (in [`./vendor`](./blob/master/vendor)):
+During the installation process several projects are included (in [`./vendor`](./blob/master/vendor)). These projects have different licenses:
 * [Saxon HE 9.7](http://saxon.sourceforge.net/#F9.7HE), [`MPL`](https://www.mozilla.org/MPL/).
 * [ALTOXML schema](/altoxml/schema), [`Open Source`](https://github.com/altoxml/schema/issues/37#issuecomment-218730230)
 * [PAGE schemas](http://www.primaresearch.org/schema/PAGE/gts/pagecontent/), `?`
 * [xsd-validator](/amouat/xsd-validator), `Apache 2.0`
 * ABBYY FineReader XSD, `?`
-* [hOCR-to-ALTO](https://github.com/kba/hOCR-to-ALTO) by Filip Kriz, `CC BY-SA 4.0`
+* [hOCR-to-ALTO](https://github.com/kba/hOCR-to-ALTO) by Filip Kriz, [`CC BY-SA 4.0`](https://creativecommons.org/licenses/by-sa/4.0/legalcode)
