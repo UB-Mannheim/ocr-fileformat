@@ -2,15 +2,19 @@
 
 [![Build Status](https://travis-ci.org/UB-Mannheim/ocr-fileformat.svg?branch=master)](https://travis-ci.org/UB-Mannheim/ocr-fileformat)
 [![GitHub release](https://img.shields.io/github/release/UB-Mannheim/ocr-fileformat.svg?maxAge=2592000)](https://github.com/UB-Mannheim/ocr-fileformat/releases)
+[![ocr-fileformat Docker build](https://img.shields.io/docker/automated/ubma/ocr-fileformat.svg?maxAge=2592000?style=plastic)](https://hub.docker.com/r/ubma/ocr-fileformat)
 
 Validate and transform between OCR file formats (hOCR, ALTO, PAGE, FineReader)
 
 ![Screenshot GUI](./screenshot.png)
 
-<!-- vim :GenTocGFM -->
+<!-- BEGIN-MARKDOWN-TOC -->
 * [Installation](#installation)
+	* [Docker](#docker)
+	* [System-wide](#system-wide)
 * [Usage](#usage)
 	* [CLI](#cli)
+	* [GUI](#gui)
 	* [API](#api)
 * [Transformation](#transformation)
 	* [Transformation CLI](#transformation-cli)
@@ -24,7 +28,30 @@ Validate and transform between OCR file formats (hOCR, ALTO, PAGE, FineReader)
 	* [Supported Validation Formats](#supported-validation-formats)
 * [License](#license)
 
+<!-- END-MARKDOWN-TOC -->
+
 ## Installation
+
+### Docker
+
+You can run the [command line scripts](#cli) and [web interface](#gui) as a
+[Docker container](https://hub.docker.com/r/ubma/ocr-fileformat), you only need
+Docker installed.
+
+To start the web interface on [http://localhost:8080](http://localhost:8080):
+
+```sh
+docker run --rm -it -p 8080:8080 ubma/ocr-fileformat
+```
+
+To run the command line scripts, mount the directory containing your input
+files into the container's `/data` directory:
+
+```sh
+docker run --rm -it -v "$PWD:/data" ubma/ocr-fileformat ocr-transform alto2.0 hocr somefile.alto
+```
+
+### System-wide
 
 To install system-wide to `/usr/local`:
 
@@ -63,6 +90,11 @@ script (CLI), using a web interface (GUI) or in you own tools (API)
 
 * [`ocr-transform`](./blob/master/bin/ocr-transform.sh): Transformation of OCR output between OCR formats
 * [`ocr-validate`](./blob/master/bin/ocr-validate.sh): Validation of OCR output against OCR format schemas
+
+### GUI
+
+The web interface is for testing validation and transformations. You can upload
+a file or select an input file by URL.
 
 ### API
 
