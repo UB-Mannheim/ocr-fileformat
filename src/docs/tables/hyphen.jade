@@ -1,0 +1,18 @@
+include mixins
+
+table
+	tr
+		th hOCR
+		th ALTO
+		th ABBYY
+	tr
+		td
+			+xmlPre('&shy')
+			blockquote
+				| Soft hyphens must be represented using the HTML &shy; entity.
+				a(href="https://github.com/kba/hocr-spec/blob/master/hocr-spec.md#6-inline-representations") [1]
+			p Regular hyphenation characters are just dashes
+		td
+			+xmlPre('<HYP/>')
+			a(href="https://github.com/altoxml/schema/blob/master/v3/alto-3-1.xsd#L840") [1]
+

@@ -1,0 +1,40 @@
+include mixins
+
+table
+	tr
+		th Level
+		th hOCR
+		th ALTO
+		th ABBYY
+	tr
+		th Page
+		td -
+		td
+			+xmlPre('<Page PC="0.743">')
+			a(href="https://github.com/altoxml/schema/blob/master/v3/alto-3-1.xsd#L207") [1]
+		td -
+	tr
+		th Word
+		td
+			+xmlPre('<span\n  class="ocrx_word"\n  title="x_wconf 71>foo</span>')
+			| "if possible, convert word confidences to values between 0 and 100 and have them approximate posterior
+			probabilities (expressed in %)"
+			a(href="https://github.com/kba/hocr-spec/blob/master/hocr-spec.md#8-ocr-engine-specific-markup") [1]
+		td
+			+xmlPre('<String WC="0.422">')
+			| "Word Confidence: Confidence level of the ocr for this string. A value between 0 (unsure) and 1 (sure)."
+			a(href="https://github.com/altoxml/schema/blob/master/v3/alto-3-1.xsd#L437") [1]
+		td -
+	tr
+		th Character
+		td
+			+xmlPre('<span\n  class="ocrx_word"\n  title="x_wconf 71>foo</span>')
+			p
+				| "if possible, convert word confidences to values between 0 and 100
+				| and have them approximate posterior probabilities (expressed in %)"
+				a(href="https://github.com/kba/hocr-spec/blob/master/hocr-spec.md#8-ocr-engine-specific-markup") [1]
+			p Not implemented in common engines?
+		td
+			+xmlPre('<String CC="0 0 4 0" CONTENT="luft"/>')
+			p "Confidence level of each character in that string. A list of numbers, one number between 0 (sure) and 9 (unsure) for each character."
+				a(href="https://github.com/altoxml/schema/blob/master/v3/alto-3-1.xsd#L484") [1]

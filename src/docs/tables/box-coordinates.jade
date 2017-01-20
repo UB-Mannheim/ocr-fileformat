@@ -1,0 +1,14 @@
+include mixins
+
+table
+	tr
+		th hOCR
+		th ALTO
+		th ABBYY
+	tr
+		td
+			+xmlPre('<div title="bbox 100 200 150 250"/>')
+		td
+			+xmlPre('<String\n  HEIGHT="250"\n  WIDTH="150"\n  VPOS="100"\n  HPOS="200"/>')
+		td
+			+xmlPre('<line\n  l="200"\n  t="100"\n  r="1200"\n  b="130">')

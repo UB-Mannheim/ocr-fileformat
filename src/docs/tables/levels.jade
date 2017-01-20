@@ -1,0 +1,46 @@
+include mixins
+
+table
+	tr
+		th
+		th hOCR
+		th ALTO
+		th ABBYY
+	tr
+		th Page
+		td
+			+xmlPre('<div class="ocr_page">')
+		td
+			+xmlPre('<Page>')
+		td
+			+xmlPre('<page>')
+	tr
+		th Text Area / Column
+		td
+			+xmlPre('<div class="ocr_carea">')
+			+xmlPre('<div class="ocrx_block">')
+		td
+			+xmlPre('<PrintSpace>')
+	tr
+		th Paragraph
+		td
+			+xmlPre('<div class="ocr_par">')
+		td
+			+xmlPre('<TextBlock STYLEREFS="...">')
+	tr
+		th Text Line
+		td
+			+xmlPre('<div class="ocr_line">')
+		td
+			+xmlPre('<TextLine>')
+		td
+			+xmlPre('<line>\n  <formatting>...</formatting>\n</line>')
+	tr
+		th Word
+		td
+			+xmlPre('<div class="ocrx_word">')
+		td
+			+xmlPre('<TextLine>')
+		td
+			+xmlPre('<line>\n  <formatting>...</formatting>\n</line>')
+

@@ -1,0 +1,128 @@
+doctype html
+html
+  head
+    link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', rel='stylesheet')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/notie/3.2.0/notie.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/themes/prism.min.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/themes/prism-coy.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css')
+    link(rel='stylesheet', href='ocr-fileformat.css')
+    link(rel='icon', type='image/png', sizes='32x32', href='favicon.png')
+    title OCR Fileformat
+  body
+    // Static navbar
+    nav.navbar.navbar-inverse
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#') OCR Fileformat
+        #navbar.navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li.active
+              a(data-toggle='tab', href='#transform') Transform
+            li
+              a(data-toggle='tab', href='#validate') Validate
+            li
+              a(data-toggle='tab', href='#help') Help
+        // /.nav-collapse
+      // /.container-fluid
+    .container
+      section.tab-content
+        article#transform.tab-pane.active
+          .row
+            .col-xs-6
+              // Tab panes
+              .tab-content.input
+                #transform-url-tab.tab-pane.active(role='tabpanel')
+                  input#transform-url.form-control(type='url', placeholder='http://example.org/xml', style='width:100%')
+                #transform-file-tab.tab-pane(role='tabpanel')
+                  input#transform-file.form-control(type='file', style='width:100%')
+              // Nav tabs
+              ul.nav.nav-tabs.nav-justified(role='tablist')
+                li.active(role='presentation')
+                  a(role='tab', data-toggle='tab', href='#transform-url-tab', tabindex='-1') URL
+                li(role='presentation')
+                  a(role='tab', data-toggle='tab', href='#transform-file-tab', tabindex='-1') Upload
+            .col-xs-6
+              .form-inline.formats(role='form')
+                select#transform-from.form-control(disabled='')
+                  option(disabled='', selected='', value='')  -- input -- 
+                select#transform-to.form-control(disabled='')
+                  option(disabled='', selected='', value='')  -- output -- 
+                button#transform-submit.btn.btn-success(disabled='')
+                  | Transform
+                  span.hidden.glyphicon.glyphicon-refresh.spinning
+          .row
+            .col-xs-12
+              #transform-result.result.hidden
+                .btn-group.btn-group-sm(role='group')
+                  a.btn.btn-default.btn-primary.download(type='button')
+                    span.glyphicon.glyphicon-download &nbsp;
+                    | Download
+                pre \n
+        article#validate.tab-pane
+          .row
+            .col-xs-6
+              // Tab panes
+              .tab-content.input
+                #validate-url-tab.tab-pane.active(role='tabpanel')
+                  input#validate-url.form-control(type='url', placeholder='http://example.org/xml', style='width:100%')
+                #validate-file-tab.tab-pane(role='tabpanel')
+                  input#validate-file.form-control(type='file', style='width:100%')
+              // Nav tabs
+              ul.nav.nav-tabs.nav-justified(role='tablist')
+                li.active(role='presentation')
+                  a(role='tab', data-toggle='tab', href='#validate-url-tab', tabindex='-1') URL
+                li(role='presentation')
+                  a(role='tab', data-toggle='tab', href='#validate-file-tab', tabindex='-1') Upload
+            .col-xs-6
+              .form-inline.formats(role='form')
+                select#validate-format.form-control
+                  option(disabled='', selected='', value='')  -- format -- 
+                button#validate-submit.btn.btn-success(disabled='')
+                  | Validate
+                  span.hidden.glyphicon.glyphicon-refresh.spinning
+          .row
+            .col-xs-12
+              #validate-result.result.hidden
+                pre.
+                  \n                                  
+        article#help.tab-pane
+          h3#examples Examples
+          h4 ABBYY FineReader
+          ul
+            li
+              a(href='http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/abbyy/417576986_0031.xml')
+                | http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/abbyy/417576986_0031.xml
+          h4 hOCR
+          ul
+            li
+              a(href='https://cdn.rawgit.com/kba/ocr-fileformat-samples/master/samples/hocr/1.1/wetzel_reisebegleiter_1901_0021.hocr')
+                | https://cdn.rawgit.com/kba/ocr-fileformat-samples/master/samples/hocr/1.1/wetzel_reisebegleiter_1901_0021.hocr
+            li
+              a(href='http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/0001-tesseract.hocr') http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/0001-tesseract.hocr
+          h4 ALTO
+          ul
+            li
+              a(href='http://chroniclingamerica.loc.gov/lccn/sn86069133/1910-10-31/ed-1/seq-1/ocr.xml') http://chroniclingamerica.loc.gov/lccn/sn86069133/1910-10-31/ed-1/seq-1/ocr.xml
+            li
+              a(href='http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/') http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/
+            li
+              a(href='http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/alto/417576986_0031.xml')
+                | http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/alto/417576986_0031.xml
+            li
+              a(href='https://rawgit.com/kba/ocr-fileformat-samples/master/samples/alto/2.0/wetzel_reisebegleiter_1901_0021.alto')
+                | https://rawgit.com/kba/ocr-fileformat-samples/master/samples/alto/2.0/wetzel_reisebegleiter_1901_0021.alto
+          h3 Source Code
+          a(href='https://github.com/UB-Mannheim/ocr-fileformat') https://github.com/UB-Mannheim/ocr-fileformat
+    a.github-fork-ribbon.left-bottom(href='https://github.com/UB-Mannheim/ocr-fileformat', title='Fork me on GitHub') Fork me on GitHub
+    script(src='https://code.jquery.com/jquery-2.2.3.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+    // <script src="https://cdn.rawgit.com/rndme/download/master/download.min.js"></script>
+    script(src='https://rawgit.com/notifyjs/notifyjs/master/dist/notify.js')
+    script(src='ocr-fileformat.js')
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/prism.min.js')
