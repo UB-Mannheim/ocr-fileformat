@@ -33,7 +33,7 @@ HOCR_SPEC_REPO = hocr-spec-python
 HOCR_SPEC_URL = https://github.com/kba/$(HOCR_SPEC_REPO)
 
 GCV2HOCR_REPO = gcv2hocr
-GCV2HOCR_URL = https://github.com/kba/$(GCV2HOCR_REPO)
+GCV2HOCR_URL = https://github.com/dinosauria123/$(GCV2HOCR_REPO)
 
 # {{{
 # SAXON_BROWSER_VERSION = 1.1
