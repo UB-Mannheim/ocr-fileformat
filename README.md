@@ -147,9 +147,11 @@ Usage: ocr-transform.sh [-dhL] <from> <to> [<infile> [<outfile>]] [-- <script-ar
         alto2.1 alto3.0
         alto2.1 alto3.1
         alto2.1 hocr
+        alto text
         gcv hocr
         hocr alto2.0
         hocr alto2.1
+        hocr text
 
     Saxon options:
         Usage: see http://www.saxonica.com/html/documentation/using-xsl/commandline.html
@@ -198,9 +200,9 @@ Usage: ocr-validate.sh [-dhL] <schema> <file> [<resultsFile>]
         --list   -L      List available schemas
 
     Schemas:
-        abbyy-6-schema-v1 abbyy-8-schema-v2 abbyy-9-schema-v1 abbyy-10-schema-v1 
-        alto-1-0 alto-1-1 alto-1-2 alto-1-3 alto-1-4 alto-2-0 alto-2-1 alto-2-2-draft alto-3-0 alto-3-1 
         hocr 
+        alto-1-0 alto-1-1 alto-1-2 alto-1-3 alto-1-4 alto-2-0 alto-2-1 alto-2-2-draft alto-3-0 alto-3-1 
+        abbyy-6-schema-v1 abbyy-8-schema-v2 abbyy-9-schema-v1 abbyy-10-schema-v1 
         page-2009-03-16 page-2010-01-12 page-2010-03-19 page-2013-07-15 
 </pre>
 
