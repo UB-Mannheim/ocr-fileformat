@@ -23,6 +23,8 @@ TSHT_URL = https://cdn.rawgit.com/kba/tsht/master/tsht
 	release \
 	vendor xsd xslt
 
+all: vendor xsd xslt
+
 check:
 	$(MAKE) -C vendor check
 
