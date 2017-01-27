@@ -1,5 +1,6 @@
 PKG_NAME = ocr-fileformat
-PKG_VERSION = 0.0.2
+PKG_VERSION = 0.2.0
+DOCKER_IMAGE = ubma/ocr-fileformat
 
 CP = cp -r
 LN = ln -sf
@@ -20,18 +21,19 @@ TSHT_URL = https://cdn.rawgit.com/kba/tsht/master/tsht
 	clean realclean \
 	test \
 	release \
-	vendor
+	vendor xsd xslt
 
 check:
 	$(MAKE) -C vendor check
 
-# TODO
-# xslt/hocr__alto2.0.xsl: vendor/hOCR-to-ALTO/hocr2alto2.0.xsl
-#     $(LN) ../$< $@
-
+.PHONY: vendor
 vendor: check
 	# download the dependencies
 	$(MAKE) -C vendor all
+
+.PHONY: xsd
+xsd: vendor
+	$(MKDIR) xsd
 	# copy Alto XSD
 	cd xsd && $(LN) ../vendor/alto-schema/*/*.xsd . && \
 		for xsd in *.xsd;do \
@@ -43,14 +45,24 @@ vendor: check
 	@cd xsd && $(LN) ../vendor/page-schema/*.xsd .
 	# copy ABBYY XSD
 	cd xsd && $(LN) ../vendor/abbyy-schema/*.xsd .
+
+.PHONY: xslt
+xslt: vendor
+	$(MKDIR) xslt
 	# symlink hocr<->alto
 	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr2alto2.0.xsl hocr__alto2.0.xsl
 	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr2alto2.1.xsl hocr__alto2.1.xsl
-	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/alto2hocr.xsl alto__hocr.xsl
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/alto2hocr.xsl alto2.0__hocr.xsl
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/alto2hocr.xsl alto2.1__hocr.xsl
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr2text.xsl hocr__text.xsl
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/alto2text.xsl alto__text.xsl
+	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.0__alto3.1.xsl
+	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.1__alto3.0.xsl
+	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.1__alto3.1.xsl
 
-install: vendor $(VENDOR_DIRNAME)
+install: all
 	$(MKDIR) $(SHAREDIR)
-	$(CP) -t $(SHAREDIR) xsd xslt vendor lib.sh
+	$(CP) script xsd xslt vendor lib.sh $(SHAREDIR)
 	$(MKDIR) $(BINDIR)
 	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-transform.sh > $(BINDIR)/ocr-transform
 	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-validate.sh > $(BINDIR)/ocr-validate
@@ -64,6 +76,7 @@ uninstall:
 
 clean:
 	$(RM) xsd/*
+	find xslt -type l -delete
 
 realclean: clean
 	$(MAKE) -C vendor clean
@@ -79,6 +92,9 @@ $(TSHT):
 test/samples:
 	$(MKDIR) test
 	git clone https://github.com/kba/ocr-fileformat-samples test/samples
+
+docker:
+	docker build -t "$(DOCKER_IMAGE)" .
 
 release:
 	$(RM) $(PKG_NAME)_$(PKG_VERSION)

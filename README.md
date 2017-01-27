@@ -1,15 +1,20 @@
 # ocr-fileformat
 
 [![Build Status](https://travis-ci.org/UB-Mannheim/ocr-fileformat.svg?branch=master)](https://travis-ci.org/UB-Mannheim/ocr-fileformat)
+[![GitHub release](https://img.shields.io/github/release/UB-Mannheim/ocr-fileformat.svg?maxAge=2592000)](https://github.com/UB-Mannheim/ocr-fileformat/releases)
+[![ocr-fileformat Docker build](https://img.shields.io/docker/automated/ubma/ocr-fileformat.svg?maxAge=2592000?style=plastic)](https://hub.docker.com/r/ubma/ocr-fileformat)
 
 Validate and transform between OCR file formats (hOCR, ALTO, PAGE, FineReader)
 
 ![Screenshot GUI](./screenshot.png)
 
-<!-- vim :GenTocGFM -->
+<!-- BEGIN-MARKDOWN-TOC -->
 * [Installation](#installation)
+	* [Docker](#docker)
+	* [System-wide](#system-wide)
 * [Usage](#usage)
 	* [CLI](#cli)
+	* [GUI](#gui)
 	* [API](#api)
 * [Transformation](#transformation)
 	* [Transformation CLI](#transformation-cli)
@@ -23,7 +28,30 @@ Validate and transform between OCR file formats (hOCR, ALTO, PAGE, FineReader)
 	* [Supported Validation Formats](#supported-validation-formats)
 * [License](#license)
 
+<!-- END-MARKDOWN-TOC -->
+
 ## Installation
+
+### Docker
+
+You can run the [command line scripts](#cli) and [web interface](#gui) as a
+[Docker container](https://hub.docker.com/r/ubma/ocr-fileformat), you only need
+Docker installed.
+
+To start the web interface on [http://localhost:8080](http://localhost:8080):
+
+```sh
+docker run --rm -it -p 8080:8080 ubma/ocr-fileformat
+```
+
+To run the command line scripts, mount the directory containing your input
+files into the container's `/data` directory:
+
+```sh
+docker run --rm -it -v "$PWD:/data" ubma/ocr-fileformat ocr-transform alto2.0 hocr somefile.alto
+```
+
+### System-wide
 
 To install system-wide to `/usr/local`:
 
@@ -62,6 +90,11 @@ script (CLI), using a web interface (GUI) or in you own tools (API)
 
 * [`ocr-transform`](./blob/master/bin/ocr-transform.sh): Transformation of OCR output between OCR formats
 * [`ocr-validate`](./blob/master/bin/ocr-validate.sh): Validation of OCR output against OCR format schemas
+
+### GUI
+
+The web interface is for testing validation and transformations. You can upload
+a file or select an input file by URL.
 
 ### API
 
@@ -130,12 +163,12 @@ capable stylesheet transformer.
 
 ### Supported Transformations
 
-|  From ╲ To | hOCR                     | ALTO                     | PAGEXML                  | FineReader               |
-|-----------:|--------------------------|--------------------------|--------------------------|--------------------------|
-|       hOCR | -                        | :white_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: |
-|       ALTO | :white_check_mark:       | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: |
-|       PAGE | :heavy_multiplication_x: | :heavy_multiplication_x: | -                        | :heavy_multiplication_x: |
-| FineReader | :heavy_multiplication_x: | :heavy_multiplication_x: | :heavy_multiplication_x: | -                        |
+| From ╲ To  | hOCR               | ALTO               | PAGEXML | FineReader | Plain Text         |
+| ---:       | ---                | ---                | ---     | ---        | ---                |
+| hOCR       | -                  | :white_check_mark: | -       | -          | :white_check_mark: |
+| ALTO       | :white_check_mark: | -                  | -       | -          | :white_check_mark: |
+| PAGE       | -                  | -                  | -       | -          | -                  |
+| FineReader | -                  | -                  | -       | -          | -                  |
 
 ## Validation
 
@@ -169,14 +202,12 @@ The XSD files are installed under `$PREFIX/share/ocr-fileformat/xsd`
 
 ## License
 
-The XSL stylesheets for hOCR-ALTO and ALTO-hOCR transformation are licensed
-[Creative Commons Attribution-ShareAlike 4.0 International.(CC BY-SA
-4.0)](https://creativecommons.org/licenses/by-sa/4.0/legalcode).
+This is free software. You may use it under the terms of the [MIT License](LICENSE).
 
-Projects included during the installation process (in [`./vendor`](./blob/master/vendor)):
+During the installation process several projects are included (in [`./vendor`](./blob/master/vendor)). These projects have different licenses:
 * [Saxon HE 9.7](http://saxon.sourceforge.net/#F9.7HE), [`MPL`](https://www.mozilla.org/MPL/).
 * [ALTOXML schema](/altoxml/schema), [`Open Source`](https://github.com/altoxml/schema/issues/37#issuecomment-218730230)
 * [PAGE schemas](http://www.primaresearch.org/schema/PAGE/gts/pagecontent/), `?`
 * [xsd-validator](/amouat/xsd-validator), `Apache 2.0`
 * ABBYY FineReader XSD, `?`
-* [hOCR-to-ALTO](https://github.com/kba/hOCR-to-ALTO) by Filip Kriz, `CC BY-SA 4.0`
+* [hOCR-to-ALTO](https://github.com/kba/hOCR-to-ALTO) by Filip Kriz, [`CC BY-SA 4.0`](https://creativecommons.org/licenses/by-sa/4.0/legalcode)

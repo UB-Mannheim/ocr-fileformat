@@ -1,0 +1,10 @@
+#!/bin/bash
+SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+HOCR_SPEC="$SCRIPTDIR/../../vendor/hocr-spec-python/hocr-spec"
+
+format="xml"
+if [[ "$TERM" = *"color"* ]];then
+    format="ansi"
+fi
+
+python2 "$HOCR_SPEC" -f "$format" -p relaxed --filename "STDIN" "$1"

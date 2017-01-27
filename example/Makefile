@@ -13,16 +13,18 @@ DWDIFF = dwdiff -p -l -c
 PAGER = less -R
 APT_GET = sudo apt-get -y
 
-.PHONY: deps roundtrip diff idiff
-
+.PHONY: roundtrip
 roundtrip: $(BASENAME).roundtrip.hocr
 
+.PHONY: deps
 deps:
 	$(APT_GET) install $(DEBIAN_PACKAGES)
 
+.PHONY: diff
 diff: $(BASENAME).roundtrip.hocr $(BASENAME).hocr
 	$(DWDIFF) $^ || exit 0
 
+.PHONY: diff
 idiff: $(BASENAME).roundtrip.hocr $(BASENAME).hocr
 	$(DWDIFF) $^ | $(PAGER)
 
@@ -36,7 +38,7 @@ $(BASENAME).alto : $(BASENAME).hocr
 	$(OCR_TRANSFORM) hocr alto2.0 $< | $(XMLLINT) - > $@
 
 $(BASENAME).roundtrip.hocr : $(BASENAME).alto
-	$(OCR_TRANSFORM) alto hocr $< | $(XMLLINT) - > $@
+	$(OCR_TRANSFORM) alto2.0 hocr $< | $(XMLLINT) - > $@
 
 clean:
 	$(RM) $(BASENAME)*

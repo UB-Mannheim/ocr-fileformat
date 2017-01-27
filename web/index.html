@@ -1,14 +1,14 @@
 <!doctype HTML>
 <html>
   <head>
-    <link rel="stylesheet" href="ocr-schema.css"/>
-
-    <script src="https://code.jquery.com/jquery-2.2.3.js"></script>
-
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/notie/3.2.0/notie.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/themes/prism.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/themes/prism-coy.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css" />
+    <link rel="stylesheet" href="ocr-fileformat.css"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <title>OCR Fileformat</title>
   </head>
   <body>
 
@@ -16,13 +16,13 @@
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">OCR Schema</a>
+          <a class="navbar-brand" href="#">OCR Fileformat</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -36,57 +36,142 @@
 
     <div class="container">
 
-    <section class="tab-content">
+      <section class="tab-content">
 
-      <article class="tab-pane active" id="transform">
+        <article class="tab-pane active" id="transform">
 
+          <div class="row">
+
+              <div class="col-xs-6">
+
+                <!-- Tab panes -->
+                <div class="tab-content input">
+                  <div role="tabpanel" class="tab-pane active" id="transform-url-tab">
+                    <input id="transform-url"
+                      class="form-control"
+                      type="url"
+                      placeholder="http://example.org/xml"
+                      style="width:100%" />
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="transform-file-tab">
+                    <input id="transform-file"
+                      class="form-control"
+                      type="file"
+                      style="width:100%" />
+                  </div>
+                </div>
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs nav-justified" role="tablist">
+                  <li role="presentation" class="active">
+                    <a role="tab" data-toggle="tab" href="#transform-url-tab" tabindex=-1>URL</a>
+                  </li>
+                  <li role="presentation">
+                    <a role="tab" data-toggle="tab" href="#transform-file-tab" tabindex=-1>Upload</a>
+                  </li>
+                </ul>
+
+              </div>
+
+              <div class="col-xs-6">
+
+                <div class="form-inline formats" role="form">
+                  <select id="transform-from" class="form-control" disabled>
+                    <option disabled selected value> -- input -- </option>
+                  </select>
+                  <select id="transform-to" class="form-control" disabled>
+                    <option disabled selected value> -- output -- </option>
+                  </select>
+                  <button id="transform-submit" class="btn btn-success" disabled>
+                    Transform
+                    <span class="hidden glyphicon glyphicon-refresh spinning"></span>
+                  </button>
+                </div>
+
+              </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <div id="transform-result" class="result hidden">
+                <div class="btn-group btn-group-sm" role="group">
+                  <a type="button" class="btn btn-default btn-primary download">
+                    <span class="glyphicon glyphicon-download">&nbsp;</span>Download
+                  </a>
+                </div>
+                <pre>
+                  <code class="language-markup">
+                    <code></code>
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </div>
+
+        </article>
+
+        <article class="tab-pane" id="validate">
+
+          <div class="row">
+
+            <div class="col-xs-6">
+
+              <!-- Tab panes -->
+              <div class="tab-content input">
+                <div role="tabpanel" class="tab-pane active" id="validate-url-tab">
+                  <input id="validate-url"
+                  class="form-control"
+                  type="url"
+                  placeholder="http://example.org/xml"
+                  style="width:100%" />
+                </div>
+                <div role="tabpanel" class="tab-pane" id="validate-file-tab">
+                  <input id="validate-file"
+                  class="form-control"
+                  type="file"
+                  style="width:100%" />
+                </div>
+              </div>
+
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs nav-justified" role="tablist">
+                <li role="presentation" class="active">
+                  <a role="tab" data-toggle="tab" href="#validate-url-tab" tabindex=-1>URL</a>
+                </li>
+                <li role="presentation">
+                  <a role="tab" data-toggle="tab" href="#validate-file-tab" tabindex=-1>Upload</a>
+                </li>
+              </ul>
+
+            </div>
+
+            <div class="col-xs-6">
+
+              <div class="form-inline formats" role="form">
+                <select id="validate-format" class="form-control">
+                  <option disabled selected value> -- format -- </option>
+                </select>
+                <button id="validate-submit" class="btn btn-success" disabled>
+                  Validate
+                  <span class="hidden glyphicon glyphicon-refresh spinning"></span>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
         <div class="row">
-        <div class="col-xs-12">
-        <div role="form" class="form-inline">
-          <input  id="transform-url" class="form-control" type="url" placeholder="http://example.org/xml" style="width:60%" />
-          <select id="transform-from" class="form-control"></select>
-          <select id="transform-to" class="form-control"></select>
-          <button id="transform-submit" class="btn btn-success">
-            Transform
-            <span class="hidden glyphicon glyphicon-refresh spinning"></span>
-          </button>
+          <div class="col-xs-12">
+            <div class="result hidden" id="validate-result">
+              <pre>
+                <code class="language-markup">
+                  <code></code>
+                </code>
+              </pre>
+            </div>
+          </div>
         </div>
-        </div>
-        </div>
-
-        <div class="row">
-        <div class="col-xs-12">
-        <div id="transform-result" class="result hidden">
-          <pre>
-          <code class="language-markup">
-          <code></code>
-          </code>
-          </pre>
-        </div>
-        </div>
-        </div>
-
-      </article>
-
-      <article class="tab-pane" id="validate">
-
-        <div class="row">
-        <div class="col-xs-12">
-        <div class="form-inline" role="form">
-          <input  id="validate-url"    class="form-control" type="url" placeholder="http://example.org/xml" style="width:60%"/>
-          <select id="validate-schema" class="form-control"></select>
-          <button id="validate-submit" class="btn btn-success">
-            Validate
-            <span class="hidden glyphicon glyphicon-refresh spinning"></span>
-          </button>
-        </div>
-        <div class="result hidden" id="validate-result">
-          <pre><code></code></pre>
-        </div>
-
-        </div>
-        </div>
-
       </article>
 
       <article class="tab-pane" id="help">
@@ -100,37 +185,40 @@
 
         <h4>hOCR</h4>
         <ul>
-          <li><a href="https://cdn.rawgit.com/kba/ocr-schemas/master/example/wetzel_reisebegleiter_1901_0021.hocr">https://cdn.rawgit.com/kba/ocr-schemas/master/example/wetzel_reisebegleiter_1901_0021.hocr</a></li>
-          <li><a href="http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/0001-tesseract.hocr">http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/0001-tesseract.hocr</a>
-        </ul>
+          <li><a href="https://cdn.rawgit.com/kba/ocr-fileformat-samples/master/samples/hocr/1.1/wetzel_reisebegleiter_1901_0021.hocr">https://cdn.rawgit.com/kba/ocr-fileformat-samples/master/samples/hocr/1.1/wetzel_reisebegleiter_1901_0021.hocr</a></li>
+          <li><a href="http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/0001-tesseract.hocr">http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/0001-tesseract.hocr</a></li>
+          </ul>
 
-        <h4>ALTO</h4>
-        <ul>
+          <h4>ALTO</h4>
+          <ul>
 
-        <li><a href="http://chroniclingamerica.loc.gov/lccn/sn86069133/1910-10-31/ed-1/seq-1/ocr.xml">http://chroniclingamerica.loc.gov/lccn/sn86069133/1910-10-31/ed-1/seq-1/ocr.xml</a></li>
-        <li><a href="http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/">http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/</a></li>
-        <li><a href="http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/alto/417576986_0031.xml">http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/alto/417576986_0031.xml</a></li>
-        <li><a href="https://rawgit.com/kba/ocr-schemas/master/example/wetzel_reisebegleiter_1901_0021.alto">https://rawgit.com/kba/ocr-schemas/master/example/wetzel_reisebegleiter_1901_0021.alto</a></li>
+            <li><a href="http://chroniclingamerica.loc.gov/lccn/sn86069133/1910-10-31/ed-1/seq-1/ocr.xml">http://chroniclingamerica.loc.gov/lccn/sn86069133/1910-10-31/ed-1/seq-1/ocr.xml</a></li>
+            <li><a href="http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/">http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/</a></li>
+            <li><a href="http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/alto/417576986_0031.xml">http://digi.bib.uni-mannheim.de/~stweil/ocr-praxis/Testseiten/alto/417576986_0031.xml</a></li>
+            <li><a href="https://rawgit.com/kba/ocr-fileformat-samples/master/samples/alto/2.0/wetzel_reisebegleiter_1901_0021.alto">https://rawgit.com/kba/ocr-fileformat-samples/master/samples/alto/2.0/wetzel_reisebegleiter_1901_0021.alto</a></li>
 
-        </ul>
-        
-        <h3>Source Code</h3>
-        
-        <a href="https://github.com/UB-Mannheim/ocr-fileformat">https://github.com/UB-Mannheim/ocr-fileformat</a>
-        
-      </article>
+          </ul>
 
-    </section>
+          <h3>Source Code</h3>
+
+          <a href="https://github.com/UB-Mannheim/ocr-fileformat">https://github.com/UB-Mannheim/ocr-fileformat</a>
+
+        </article>
+
+      </section>
     </div>
-    </div>
-    </div>
+  </div>
+</div>
 
+<a class="github-fork-ribbon left-bottom"
+    href="https://github.com/UB-Mannheim/ocr-fileformat"
+    title="Fork me on GitHub">Fork me on GitHub</a>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <!-- <script src="https://cdn.rawgit.com/rndme/download/master/download.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/notie/3.2.0/notie.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/prism.min.js"></script>
-    <script src="ocr-schema.js"></script>
-    <a class="hidden-xs" href="https://github.com/UB-Mannheim/ocr-fileformat"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+<script src="https://code.jquery.com/jquery-2.2.3.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- <script src="https://cdn.rawgit.com/rndme/download/master/download.min.js"></script> -->
+<script src="https://rawgit.com/notifyjs/notifyjs/master/dist/notify.js"></script>
+<script src="ocr-fileformat.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.4.1/prism.min.js"></script>
     </body>
-</html>
+  </html>
