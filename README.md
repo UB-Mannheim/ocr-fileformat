@@ -6,7 +6,7 @@
 
 Validate and transform between OCR file formats (hOCR, ALTO, PAGE, FineReader)
 
-![Screenshot GUI](./screenshot.png)
+![Screenshot GUI](https://raw.githubusercontent.com/UB-Mannheim/ocr-fileformat/master/screenshot.png)
 
 <!-- BEGIN-MARKDOWN-TOC -->
 * [Installation](#installation)
@@ -206,8 +206,8 @@ This is free software. You may use it under the terms of the [MIT License](LICEN
 
 During the installation process several projects are included (in [`./vendor`](./blob/master/vendor)). These projects have different licenses:
 * [Saxon HE 9.7](http://saxon.sourceforge.net/#F9.7HE), [`MPL`](https://www.mozilla.org/MPL/).
-* [ALTOXML schema](/altoxml/schema), [`Open Source`](https://github.com/altoxml/schema/issues/37#issuecomment-218730230)
+* [ALTOXML schema](https://github.com/altoxml/schema), [`Open Source`](https://github.com/altoxml/schema/issues/37#issuecomment-218730230)
 * [PAGE schemas](http://www.primaresearch.org/schema/PAGE/gts/pagecontent/), `?`
-* [xsd-validator](/amouat/xsd-validator), `Apache 2.0`
+* [xsd-validator](https://github.com/kba/xsd-validator) by Adrian Mouat [@amouat](https://github.com/amouat), `Apache 2.0`
 * ABBYY FineReader XSD, `?`
-* [hOCR-to-ALTO](https://github.com/kba/hOCR-to-ALTO) by Filip Kriz, [`CC BY-SA 4.0`](https://creativecommons.org/licenses/by-sa/4.0/legalcode)
+* [hOCR-to-ALTO](https://github.com/kba/hOCR-to-ALTO) by Filip Kriz [@filak](https://github.com/filak), [`CC BY-SA 4.0`](https://creativecommons.org/licenses/by-sa/4.0/legalcode)
