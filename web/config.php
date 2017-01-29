@@ -15,6 +15,11 @@ $config = array(
     ),
 );
 
+$local_settings = dirname(__FILE__) . '/config.local.php';
+if (file_exists($local_settings)) {
+  include $local_settings;
+}
+
 /**
  * List of installed transform from-to-tuples.
  * List of installed schemas.
