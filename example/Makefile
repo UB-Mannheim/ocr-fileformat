@@ -32,16 +32,16 @@ $(BASENAME)_800px.jpg:
 	$(WGET) http://media.dwds.de/dta/images/$(BOOK)/$(BASENAME)_800px.jpg
 
 $(BASENAME).hocr : $(BASENAME)_800px.jpg
-	echo "tess"
 	$(TESSERACT) -l deu-frak $< stdout hocr | $(XMLLINT) - > $@
-	echo $@
+	cat $@
 
 $(BASENAME).alto : $(BASENAME).hocr
 	$(OCR_TRANSFORM) hocr alto2.0 $< | $(XMLLINT) - > $@
+	cat $@
 
 $(BASENAME).roundtrip.hocr : $(BASENAME).alto
-	echo $<
 	$(OCR_TRANSFORM) alto2.0 hocr $< | $(XMLLINT) - > $@
+	cat $@
 
 clean:
 	$(RM) $(BASENAME)*
