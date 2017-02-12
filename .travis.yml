@@ -3,4 +3,4 @@ dist: trusty
 sudo: true
 script:
   - make all
-  - cd example && make deps roundtrip
+  - cd example && make deps roundtrip diff

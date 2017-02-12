@@ -51,6 +51,8 @@ xslt: vendor
 	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/alto2hocr.xsl alto2.1__hocr.xsl
 	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr2text.xsl hocr__text.xsl
 	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/alto2text.xsl alto__text.xsl
+	# language codes lookup (new in version 1.3.2):
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/codes_lookup.xml codes_lookup.xml
 	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.0__alto3.1.xsl
 	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.1__alto3.0.xsl
 	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.1__alto3.1.xsl
