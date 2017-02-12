@@ -27,7 +27,7 @@ ABBYY_SCHEMA_BASE_URL = http://fr7.abbyy.com/FineReader_xml/FineReader
 ABBYY_SCHEMA_VERSIONS = 6-schema-v1 8-schema-v2 9-schema-v1 10-schema-v1
 
 HOCR2ALTO_REPO = hOCR-to-ALTO
-HOCR2ALTO_URL = https://github.com/kba/$(HOCR2ALTO_REPO)
+HOCR2ALTO_URL = https://github.com/filak/$(HOCR2ALTO_REPO)
 
 HOCR_SPEC_REPO = hocr-spec-python
 HOCR_SPEC_URL = https://github.com/kba/$(HOCR_SPEC_REPO)
