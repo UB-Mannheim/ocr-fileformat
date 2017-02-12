@@ -38,6 +38,7 @@ $(BASENAME).alto : $(BASENAME).hocr
 	$(OCR_TRANSFORM) hocr alto2.0 $< | $(XMLLINT) - > $@
 
 $(BASENAME).roundtrip.hocr : $(BASENAME).alto
+        echo $<
 	$(OCR_TRANSFORM) alto2.0 hocr $< | $(XMLLINT) - > $@
 
 clean:
