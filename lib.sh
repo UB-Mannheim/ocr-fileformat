@@ -47,7 +47,7 @@ declare -Ax OCR_VALIDATORS=()
 # setup_transformations ()
 setup_transformations () {
     declare -a transformers=($(
-        find "$SHAREDIR/xslt" "$SHAREDIR/script/transform" \
+        find -L "$SHAREDIR/xslt" "$SHAREDIR/script/transform" \
             ! -type d \( -name '*.xsl' -or -perm -005 \) \
         ))
     local in_fmt out_fmt
@@ -68,7 +68,7 @@ setup_transformations () {
 # setup_validations ()
 setup_validations () {
     declare -a validators=($(
-        find "$SHAREDIR/xsd" "$SHAREDIR/script/validate" \
+        find -L "$SHAREDIR/xsd" "$SHAREDIR/script/validate" \
             ! -type d \( -name '*.xsd' -or -perm -005 \) \
             |sort))
     local path fmt
