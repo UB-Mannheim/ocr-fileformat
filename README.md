@@ -211,3 +211,4 @@ During the installation process several projects are included (in [`./vendor`](.
 * [xsd-validator](https://github.com/kba/xsd-validator) by Adrian Mouat [@amouat](https://github.com/amouat), `Apache 2.0`
 * ABBYY FineReader XSD, `?`
 * [hOCR-to-ALTO](https://github.com/kba/hOCR-to-ALTO) by Filip Kriz [@filak](https://github.com/filak), [`CC BY-SA 4.0`](https://creativecommons.org/licenses/by-sa/4.0/legalcode)
+* [hocr-spec](https://github.com/kba/hocr-spec-python) by Konstantin Baierer [@kba](https://github.com/kba), [`MIT`](https://github.com/kba/hocr-spec-python/blob/master/LICENSE)

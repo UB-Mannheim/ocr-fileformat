@@ -5,7 +5,7 @@ MAINTAINER Konstantin Baierer <konstantin.baierer@gmail.com>
 EXPOSE 8080
 ADD . /ocr-fileformat
 WORKDIR /ocr-fileformat
-RUN apk add --no-cache openjdk8-jre php7 php7-json py-lxml git make ca-certificates wget bash \
+RUN apk add --no-cache openjdk8-jre php7 php7-json python py-lxml git make ca-certificates wget bash \
     && update-ca-certificates \
     && make install \
     && cp docker.config.php web/config.local.php \
