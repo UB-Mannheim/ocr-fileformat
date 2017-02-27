@@ -1,7 +1,7 @@
 # ocr-fileformat
 
 [![Build Status](https://travis-ci.org/UB-Mannheim/ocr-fileformat.svg?branch=master)](https://travis-ci.org/UB-Mannheim/ocr-fileformat)
-[![GitHub release](https://img.shields.io/github/release/UB-Mannheim/ocr-fileformat.svg?maxAge=2592000)](https://github.com/UB-Mannheim/ocr-fileformat/releases)
+[![GitHub release](https://img.shields.io/github/release/UB-Mannheim/ocr-fileformat.svg?maxAge=3600)](https://github.com/UB-Mannheim/ocr-fileformat/releases)
 [![ocr-fileformat Docker build](https://img.shields.io/docker/automated/ubma/ocr-fileformat.svg?maxAge=2592000?style=plastic)](https://hub.docker.com/r/ubma/ocr-fileformat)
 
 Validate and transform between OCR file formats (hOCR, ALTO, PAGE, FineReader)
@@ -48,7 +48,7 @@ To run the command line scripts, mount the directory containing your input
 files into the container's `/data` directory:
 
 ```sh
-docker run --rm -it -v "$PWD:/data" ubma/ocr-fileformat ocr-transform alto2.0 hocr somefile.alto
+docker run --rm -it -v "$PWD":/data ubma/ocr-fileformat ocr-transform alto2.0 hocr somefile.alto
 ```
 
 ### System-wide
@@ -197,7 +197,7 @@ The XSD files are installed under `$PREFIX/share/ocr-fileformat/xsd`
 
 |            | hOCR                     | ALTO               | PAGEXML                  | FineReader         |
 |-----------:|--------------------------|--------------------|--------------------------|--------------------|
-| Validation | :heavy_multiplication_x: | :white_check_mark: | :white_check_mark:       | :white_check_mark: |
+| Validation | :white_check_mark: | :white_check_mark: | :white_check_mark:       | :white_check_mark: |
 
 
 ## License
