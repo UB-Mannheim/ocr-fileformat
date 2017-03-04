@@ -181,11 +181,11 @@ capable stylesheet transformer.
 
 | From ╲ To           | hOCR | ALTO | PAGEXML | FineReader | Google Cloud Vision |
 | ---:                | ---  | ---  | ---     | ---        | ---                 |
-| hOCR                | -    | ✓    | -       | -          | -                   |
-| ALTO                | ✓    | ✓    | -       | -          | -                   |
-| PAGE                | -    | -    | -       | -          | -                   |
-| FineReader          | -    | -    | -       | -          | -                   |
-| Google Cloud Vision | ✓    | -    | -       | -          | -                   |
+| hOCR                | =    | ✓    | -       | -          | -                   |
+| ALTO                | ✓    | =    | -       | -          | -                   |
+| PAGEXML             | -    | -    | =       | -          | -                   |
+| FineReader          | -    | -    | -       | =          | -                   |
+| Google Cloud Vision | ✓    | -    | -       | -          | =                   |
 
 ## Validation
 
@@ -203,7 +203,7 @@ Usage: ocr-validate.sh [-dhL] <schema> <file> [<resultsFile>]
         hocr 
         alto-1-0 alto-1-1 alto-1-2 alto-1-3 alto-1-4 alto-2-0 alto-2-1 alto-2-2-draft alto-3-0 alto-3-1 
         abbyy-6-schema-v1 abbyy-8-schema-v2 abbyy-9-schema-v1 abbyy-10-schema-v1 
-        page-2009-03-16 page-2010-01-12 page-2010-03-19 page-2013-07-15 
+        page-2009-03-16 page-2010-01-12 page-2010-03-19 page-2013-07-15 page-2016-07-15
 </pre>
 
 <!-- END-EVAL -->
