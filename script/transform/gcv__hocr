@@ -1,4 +1,7 @@
 #!/bin/bash
+SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+VENDORDIR="$(cd $SCRIPTDIR/../../vendor/; pwd)"
+VENDORSCRIPT="$VENDORDIR/gcv2hocr/gcv2hocr"
 INFILE="$1"
 OUTFILE="$2"
 #TODO
@@ -8,12 +11,14 @@ HEIGHT=2000
 is_temp=
 if [[ "$2" = "-" ]];then
     is_temp=true
-    OUTFILE="$(mktemp "/tmp/gcv2hocr_XXXXXXX.hocr")"
+    OUTFILE="$(mktemp)"
 fi
 
-./vendor/gcv2hocr/gcv2hocr "$INFILE" "$OUTFILE" "$WIDTH" "$HEIGHT"
+"$VENDORSCRIPT" "$INFILE" "$OUTFILE" "$WIDTH" "$HEIGHT"
 
 if [[ "$is_temp" = true ]];then
     cat "$OUTFILE"
     rm "$OUTFILE"
 fi
+
+rm preout1.txt preout2.txt
