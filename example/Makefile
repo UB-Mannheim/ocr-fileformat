@@ -33,12 +33,15 @@ $(BASENAME)_800px.jpg:
 
 $(BASENAME).hocr : $(BASENAME)_800px.jpg
 	$(TESSERACT) -l deu-frak $< stdout hocr | $(XMLLINT) - > $@
+	cat $@
 
 $(BASENAME).alto : $(BASENAME).hocr
 	$(OCR_TRANSFORM) hocr alto2.0 $< | $(XMLLINT) - > $@
+	cat $@
 
 $(BASENAME).roundtrip.hocr : $(BASENAME).alto
 	$(OCR_TRANSFORM) alto2.0 hocr $< | $(XMLLINT) - > $@
+	cat $@
 
 clean:
 	$(RM) $(BASENAME)*
