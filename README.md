@@ -1,5 +1,6 @@
 # ocr-fileformat
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/46847fb2bf764f77bd8feb35b003120a)](https://www.codacy.com/app/UB-Mannheim/ocr-fileformat?utm_source=github.com&utm_medium=referral&utm_content=UB-Mannheim/ocr-fileformat&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/UB-Mannheim/ocr-fileformat.svg?branch=master)](https://travis-ci.org/UB-Mannheim/ocr-fileformat)
 [![GitHub release](https://img.shields.io/github/release/UB-Mannheim/ocr-fileformat.svg?maxAge=3600)](https://github.com/UB-Mannheim/ocr-fileformat/releases)
 [![ocr-fileformat Docker build](https://img.shields.io/docker/automated/ubma/ocr-fileformat.svg?maxAge=2592000?style=plastic)](https://hub.docker.com/r/ubma/ocr-fileformat)
