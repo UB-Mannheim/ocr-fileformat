@@ -92,6 +92,7 @@ function submit(tabName, params) {
         }
         pane.find(".result pre code").html(escapeHTML(data));
         pane.find(".result").removeClass('hidden');
+        /*global Prism*/
         Prism.highlightAll()
     });
 }
