@@ -59,7 +59,7 @@ function onChangeFormat() {
     var selectedFrom = $("#transform-from").val();
     var selectedTo = $("#transform-to").val();
     $("#transform-to").attr('disabled', selectedFrom === null);
-    if (selectedFrom && !selectedTo) {
+    if (selectedFrom) {
         $("#transform-to option").slice(1).remove();
         window.api.formats.transform[selectedFrom].forEach(function(to) {
             $("#transform-to").append($("<option>").append(to));
@@ -122,7 +122,7 @@ $(function() {
         }
         $.notify("Loaded formats", 'success');
 
-        $("select").on('change', onChangeFormat);
+        $("#transform-from").on('change', onChangeFormat);
 
         $("a").on('shown.bs.tab', maybeEnableSubmit);
         $(":input").on('input change', maybeEnableSubmit);
