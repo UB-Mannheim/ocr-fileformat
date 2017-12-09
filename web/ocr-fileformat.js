@@ -45,7 +45,7 @@ function escapeHTML(str) {
         replace(/</g, '&lt;').
         replace(/"/g, '&quot;').
         replace(/'/g, '&#39;').
-        replace(/\//g, '&#x2F').
+        replace(/\//g, '&#x2F;').
         replace(/>/g, '&gt;');
 }
 
