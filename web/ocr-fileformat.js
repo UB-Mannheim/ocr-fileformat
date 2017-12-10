@@ -1,18 +1,20 @@
-var OcrFileformatAPI = function OcrFileformatAPI(endpoint) {
+/* globals $ */
+
+let OcrFileformatAPI = function OcrFileformatAPI(endpoint) {
     this.endpoint = endpoint;
 };
 
 OcrFileformatAPI.prototype.urlFor = function urlFor(action, params) {
     params || (params = {});
-    url = this.endpoint + '?do=' + action;
-    for (var paramName of Object.keys(params)) {
+    let url = this.endpoint + '?do=' + action;
+    for (let paramName of Object.keys(params)) {
         url += '&' + paramName + '=' + params[paramName];
     }
     return url;
 };
 
 OcrFileformatAPI.prototype.updateFormats = function updateFormats(cb) {
-    var self = this;
+    let self = this;
     this.request('list', null, null, function(err, formats) {
         self.formats = formats;
         cb(err);
@@ -20,9 +22,9 @@ OcrFileformatAPI.prototype.updateFormats = function updateFormats(cb) {
 };
 
 OcrFileformatAPI.prototype.request = function request(endpoint, query, formData, cb) {
-    ajaxCall = {
+    let ajaxCall = {
         type: 'GET',
-        url: api.urlFor(endpoint, query),
+        url: window.api.urlFor(endpoint, query),
         success: function(data) {
             cb(null, data);
         },
@@ -32,7 +34,7 @@ OcrFileformatAPI.prototype.request = function request(endpoint, query, formData,
     };
     if (formData) {
         ajaxCall.type = 'POST';
-        ajaxCall.data = formData
+        ajaxCall.data = formData;
         ajaxCall.processData =  false;
         ajaxCall.contentType = false;
     }
@@ -56,8 +58,7 @@ function onChangeFormat() {
         });
         $("#transform-from").removeAttr('disabled');
     }
-    var selectedFrom = $("#transform-from").val();
-    var selectedTo = $("#transform-to").val();
+    let selectedFrom = $("#transform-from").val();
     $("#transform-to").attr('disabled', selectedFrom === null);
     if (selectedFrom) {
         $("#transform-to option").slice(1).remove();
@@ -73,48 +74,50 @@ function onChangeFormat() {
 }
 
 function submit(tabName, params) {
-    var pane = $("#" + tabName);
-    var input = pane.find(".input .active input");
+    let pane = $("#" + tabName);
+    let input = pane.find(".input .active input");
+    let formData;
+    let url = input.val();
     if (input.attr('type') === 'file') {
-        var formData = new FormData();
+        formData = new FormData();
         formData.append('file', input.prop('files')[0]);
     } else {
-        var url = input.val();
         params.url = url;
     }
     $("button .spinning", pane).removeClass('hidden');
-    api.request(tabName, params, formData, function(err, data) {
+    window.api.request(tabName, params, formData, function(err, data) {
         pane.find("button .spinning").addClass('hidden');
-        if (err)
+        if (err) {
             return $.notify(err, 'error');
+        }
         if (url)  {
             pane.find(".result a.download").attr('href', url);
         }
         pane.find(".result pre code").html(escapeHTML(data));
         pane.find(".result").removeClass('hidden');
-        /*global Prism*/
-        Prism.highlightAll()
+        /* global Prism*/
+        Prism.highlightAll();
     });
 }
 
 function maybeEnableSubmit() {
-    var el = $(".tab-pane.active")
-    var inputSet = !!$(".input .active input", el).val();
-    var selects = $(".formats select", el);
-    var formatsSet = selects.length == selects.map(function() { return $(this).val(); }).length;
+    let el = $(".tab-pane.active");
+    let inputSet = !!$(".input .active input", el).val();
+    let selects = $(".formats select", el);
+    let formatsSet = selects.length == selects.map(function() { return $(this).val(); }).length;
     $("button", el).attr('disabled', !(inputSet && formatsSet));
 }
 
 function hashRoute() {
-    var hash = window.location.hash;
-    var pageTab = hash.replace(/-.*/,'');
+    let hash = window.location.hash;
+    let pageTab = hash.replace(/-.*/, '');
     $("a[data-toggle='tab'][href='" + pageTab + "']").tab('show');
     $("a[data-toggle='tab'][href='" + hash + "']").tab('show');
 }
 
 $(function() {
     $.notify.defaults({position: 'bottom right'});
-    var api = window.api = new OcrFileformatAPI('ocr-fileformat.php');
+    const api = window.api = new OcrFileformatAPI('ocr-fileformat.php');
     $.notify("Loading formats", 'info');
     api.updateFormats(function(err) {
         if (err) {
