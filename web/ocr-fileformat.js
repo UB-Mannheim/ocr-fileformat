@@ -87,8 +87,9 @@ function submit(tabName, params) {
     $("button .spinning", pane).removeClass('hidden');
     window.api.request(tabName, params, formData, function(err, data) {
         pane.find("button .spinning").addClass('hidden');
-        if (err)
+        if (err) {
             return $.notify(err, 'error');
+        }
         if (url)  {
             pane.find(".result a.download").attr('href', url);
         }
