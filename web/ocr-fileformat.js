@@ -77,12 +77,12 @@ function submit(tabName, params) {
     let pane = $("#" + tabName);
     let input = pane.find(".input .active input");
     let formData;
-    let url = input.val();
-    if (input.attr('type') === 'file') {
+    const isFileUpload = input.attr('type') === 'file';
+    if (isFileUpload) {
         formData = new FormData();
         formData.append('file', input.prop('files')[0]);
     } else {
-        params.url = url;
+        params.url = input.val();
     }
     $("button .spinning", pane).removeClass('hidden');
     window.api.request(tabName, params, formData, function(err, data) {
@@ -90,10 +90,20 @@ function submit(tabName, params) {
         if (err) {
             return $.notify(err, 'error');
         }
-        if (url)  {
-            pane.find(".result a.download").attr('href', url);
+        const resultDataContainer = pane.find('.result pre code');
+        const outputFormat = $("#transform-to").val();
+        if (isFileUpload) {
+            const basename = input.val().replace(/.*\\/, ''); // C:\fakepath\bla.foo -> bla.foo
+            const extension = outputFormat === 'text' ? 'text'
+                : outputFormat === 'hocr' ? 'html'
+                : outputFormat + '.xml';
+            pane.find(".result a.download")
+                .attr('download', `${basename}.${extension}`)
+                .attr('href', `data:text/plain;charset=utf-8,${encodeURIComponent(data)}`);
+        } else {
+            pane.find(".result a.download").attr('href', input.val());
         }
-        pane.find(".result pre code").html(escapeHTML(data));
+        resultDataContainer.html(escapeHTML(data));
         pane.find(".result").removeClass('hidden');
         /* global Prism*/
         Prism.highlightAll();
@@ -147,3 +157,5 @@ $(function() {
         hashRoute();
     });
 });
+
+/* vim: set sw=4 : */
