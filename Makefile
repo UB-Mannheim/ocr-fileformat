@@ -1,5 +1,5 @@
 PKG_NAME = ocr-fileformat
-PKG_VERSION = 0.2.1
+PKG_VERSION = 0.2.2
 DOCKER_IMAGE = ubma/ocr-fileformat
 
 CP = cp -r
@@ -16,17 +16,39 @@ BINDIR = $(PREFIX)/bin
 TSHT = ./test/tsht
 TSHT_URL = https://cdn.rawgit.com/kba/tsht/master/tsht
 
+# BEGIN-EVAL makefile-parser --make-help Makefile
+
+help:
+	@echo ""
+	@echo "  Targets"
+	@echo ""
+	@echo "    all        Download vendor assets, link XSD schemas and XSLT stylesheets"
+	@echo "    vendor     Download all vendor assets"
+	@echo "    xsd        Link all XSD schemas"
+	@echo "    xslt       Link all XSLT stylesheets"
+	@echo "    install    Install ocr-fileformat"
+	@echo "    uninstall  Uninstall ocr-fileformat"
+	@echo "    clean      Remove linked assets"
+	@echo "    realclean  Remove linked assets and vendor files"
+	@echo "    docker     Create the docker image"
+	@echo "    release    Make release tarball / zipball"
+
+# END-EVAL
+
+# Download vendor assets, link XSD schemas and XSLT stylesheets
 all: vendor xsd xslt
 
 check:
 	$(MAKE) -C vendor check
 
 .PHONY: vendor
+# Download all vendor assets
 vendor: check
 	# download the dependencies
 	$(MAKE) -C vendor all
 
 .PHONY: xsd
+# Link all XSD schemas
 xsd: vendor
 	$(MKDIR) xsd
 	# copy Alto XSD
@@ -42,6 +64,7 @@ xsd: vendor
 	cd xsd && $(LN) ../vendor/abbyy-schema/*.xsd .
 
 .PHONY: xslt
+# Link all XSLT stylesheets
 xslt: vendor
 	$(MKDIR) xslt
 	# symlink hocr<->alto as well as the language codes lookup xml
@@ -56,6 +79,7 @@ xslt: vendor
 	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.1__alto3.0.xsl
 	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.1__alto3.1.xsl
 
+# Install ocr-fileformat
 install: all
 	$(MKDIR) $(SHAREDIR)
 	$(CP) script xsd xslt vendor lib.sh $(SHAREDIR)
@@ -65,21 +89,26 @@ install: all
 	chmod a+x $(BINDIR)/ocr-transform $(BINDIR)/ocr-validate
 	find $(SHAREDIR) -exec chmod u+w {} \;
 
+# Uninstall ocr-fileformat
 uninstall:
 	$(RM) $(BINDIR)/ocr-transform
 	$(RM) $(BINDIR)/ocr-validate
 	$(RM) $(SHAREDIR)
 
+# Remove linked assets
 clean:
 	$(RM) xsd/*
 	find xslt -type l -delete
 
+# Remove linked assets and vendor files
 realclean: clean
 	$(MAKE) -C vendor clean
 
+# Create the docker image
 docker:
 	docker build -t "$(DOCKER_IMAGE)" .
 
+# Make release tarball / zipball
 release:
 	$(RM) $(PKG_NAME)_$(PKG_VERSION)
 	$(MKDIR) $(PKG_NAME)_$(PKG_VERSION)
