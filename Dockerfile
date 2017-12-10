@@ -3,7 +3,7 @@ FROM alpine:edge
 MAINTAINER Konstantin Baierer <konstantin.baierer@gmail.com>
 
 EXPOSE 8080
-ADD . /ocr-fileformat
+COPY . /ocr-fileformat
 WORKDIR /ocr-fileformat
 RUN apk add --no-cache openjdk8-jre php7 php7-json python py-lxml git make ca-certificates wget bash gcc libc-dev \
     && update-ca-certificates \
