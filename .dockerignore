@@ -8,7 +8,3 @@ xslt
 !xslt/alto2.0__alto3.0.xsl
 !xslt/alto2.1__alto3.0.xsl
 !xslt/alto2.1__alto3.1.xsl
-
-vendor/*
-!vendor/Makefile
-!vendor/saxon9he.jar
