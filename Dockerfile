@@ -3,11 +3,11 @@ FROM alpine:edge
 MAINTAINER Konstantin Baierer <konstantin.baierer@gmail.com>
 
 EXPOSE 8080
+RUN apk add --no-cache openjdk8-jre php7 php7-json python py-lxml git make ca-certificates wget bash gcc libc-dev \
+    && update-ca-certificates
 COPY . /ocr-fileformat
 WORKDIR /ocr-fileformat
-RUN apk add --no-cache openjdk8-jre php7 php7-json python py-lxml git make ca-certificates wget bash gcc libc-dev \
-    && update-ca-certificates \
-    && make install \
+RUN make install \
     && cp docker.config.php web/config.local.php \
     && mv web /ocr-fileformat-web \
     && rm -rf /ocr-fileformat \
