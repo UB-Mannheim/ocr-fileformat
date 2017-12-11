@@ -108,10 +108,10 @@ realclean: clean
 docker:
 	docker build -t "$(DOCKER_IMAGE)" .
 
-# Create the docker image for development (larger but faster build)
+# Create the docker image for development
 docker-dev:
 	@mv .dockerignore .dockerignore.BAK
-	docker build -f Dockerfile-dev -t "$(DOCKER_IMAGE)" .
+	$(MAKE) docker
 	@mv .dockerignore.BAK .dockerignore
 
 # Make release tarball / zipball
