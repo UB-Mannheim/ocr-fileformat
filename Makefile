@@ -1,5 +1,5 @@
 PKG_NAME = ocr-fileformat
-PKG_VERSION = 0.2.2
+PKG_VERSION = 0.2.3
 DOCKER_IMAGE = ubma/ocr-fileformat
 
 CP = cp -r
