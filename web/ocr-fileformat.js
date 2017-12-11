@@ -1,4 +1,6 @@
 /* globals $ */
+/* globals Blob */
+/* global Prism */
 
 let OcrFileformatAPI = function OcrFileformatAPI(endpoint) {
     this.endpoint = endpoint;
@@ -90,22 +92,32 @@ function submit(tabName, params) {
         if (err) {
             return $.notify(err, 'error');
         }
-        const resultDataContainer = pane.find('.result pre code');
-        const outputFormat = $("#transform-to").val();
-        if (isFileUpload) {
-            const basename = input.val().replace(/.*\\/, ''); // C:\fakepath\bla.foo -> bla.foo
+    pane.find(".result a.download").on('click', ev => {
+            const outputFormat = $("#transform-to").val();
+            const basename = input.val()
+                .replace(/^.*\\/, '')  // C:\fakepath\foo.hocr -> foo.hocr
+                .replace(/^.*\//, '')  // http://bla/foo.bar -> foo.hocr?raw=true
+                .replace(/\?.*$$/, '') // foo.hocr?raw=true -> foo.hocr
+                ;
             const extension = outputFormat === 'text' ? 'text'
                 : outputFormat === 'hocr' ? 'html'
                 : outputFormat + '.xml';
-            pane.find(".result a.download")
-                .attr('download', `${basename}.${extension}`)
-                .attr('href', `data:text/plain;charset=utf-8,${encodeURIComponent(data)}`);
-        } else {
-            pane.find(".result a.download").attr('href', input.val());
-        }
-        resultDataContainer.html(escapeHTML(data));
+            const type = outputFormat === 'text' ? 'text/plain'
+                : outputFormat === 'hocr' ? 'text/html'
+                : 'text/xml';
+            const downloadUrl = window.URL.createObjectURL(new Blob([data], {type}));
+            const filename = `${basename}.${extension}`;
+            const dummyLink = document.createElement('a');
+            dummyLink.setAttribute('download', filename);
+            dummyLink.href = downloadUrl;
+            dummyLink.style.display = 'none';
+            document.body.appendChild(dummyLink);
+            dummyLink.click();
+            document.body.removeChild(dummyLink);
+            window.URL.revokeObjectURL(downloadUrl);
+        });
+        pane.find('.result pre code').html(escapeHTML(data));
         pane.find(".result").removeClass('hidden');
-        /* global Prism*/
         Prism.highlightAll();
     });
 }
@@ -114,7 +126,7 @@ function maybeEnableSubmit() {
     let el = $(".tab-pane.active");
     let inputSet = !!$(".input .active input", el).val();
     let selects = $(".formats select", el);
-    let formatsSet = selects.length == selects.map(function() { return $(this).val(); }).length;
+    let formatsSet = selects.length == selects.map(function() {return $(this).val();}).length;
     $("button", el).attr('disabled', !(inputSet && formatsSet));
 }
 
@@ -146,10 +158,10 @@ $(function() {
             submit('validate', {format: $("#validate-format").val()});
         });
         $("#transform-submit").on('click', function() {
-            submit('transform', {from: $("#transform-from").val(), to: $("#transform-to").val() });
+            submit('transform', {from: $("#transform-from").val(), to: $("#transform-to").val()});
         });
 
-        $("a[data-toggle='tab']").on('click tap', function() { window.location.hash = $(this).attr('href'); });
+        $("a[data-toggle='tab']").on('click tap', function() {window.location.hash = $(this).attr('href');});
 
         $(window).on('hashchange', hashRoute);
 
