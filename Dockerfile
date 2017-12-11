@@ -5,10 +5,12 @@ MAINTAINER Konstantin Baierer <konstantin.baierer@gmail.com>
 EXPOSE 8080
 COPY . /ocr-fileformat
 WORKDIR /ocr-fileformat
-RUN apk add --no-cache openjdk8-jre php7 php7-json python py-lxml git make ca-certificates wget bash gcc libc-dev \
+RUN apk add --no-cache openjdk8-jre php7 php7-json php7-openssl python py-lxml git make ca-certificates wget bash gcc libc-dev \
     && update-ca-certificates \
     && make install \
     && cp docker.config.php web/config.local.php \
+    && sed -i '/^upload_max_filesize/ s/=.*$/= 100M/' /etc/php7/php.ini \
+    && sed -i 's/;extension=php_openssl.dll/extension=php_openssl.dll/' /etc/php7/php.ini \
     && mv web /ocr-fileformat-web \
     && rm -rf /ocr-fileformat \
     && apk del git make wget gcc libc-dev
