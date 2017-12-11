@@ -9,6 +9,7 @@ RUN apk add --no-cache openjdk8-jre php7 php7-json python py-lxml git make ca-ce
     && update-ca-certificates \
     && make install \
     && cp docker.config.php web/config.local.php \
+    && sed -i '/^upload_max_filesize/ s/=.*$/= 100M' \
     && mv web /ocr-fileformat-web \
     && rm -rf /ocr-fileformat \
     && apk del git make wget gcc libc-dev
