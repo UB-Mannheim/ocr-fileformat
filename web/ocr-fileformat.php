@@ -30,8 +30,6 @@ function sendJSON($data)
  */
 function pipeToCommand($cmd, $xml)
 {
-  global $config;
-  $errfile = "/tmp/error-output.txt";
   $descriptorspec = array(
     0 => array("pipe", "r"),
     1 => array("pipe", "w"),
