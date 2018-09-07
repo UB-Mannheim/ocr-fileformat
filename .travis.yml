@@ -2,5 +2,6 @@ language: cpp
 dist: trusty
 sudo: true
 script:
+  - sudo apt-get update
   - make all
   - cd example && make deps roundtrip diff
