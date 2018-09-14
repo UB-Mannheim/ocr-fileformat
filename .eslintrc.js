@@ -17,7 +17,6 @@ module.exports = {
         'curly': 0,
         'indent': [0, 4],
         'key-spacing': 0,
-        'linebreak-style': 0,
         'linebreak-style': 2,
         'max-len': 0,
         'new-cap': 0,
