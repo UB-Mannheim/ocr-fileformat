@@ -242,6 +242,6 @@ During the installation process several projects are included (in [`./vendor`](.
 * [PAGE schemas](http://www.primaresearch.org/schema/PAGE/gts/pagecontent/), `?`
 * [xsd-validator](https://github.com/kba/xsd-validator) by Adrian Mouat [@amouat](https://github.com/amouat), `Apache 2.0`
 * ABBYY FineReader XSD, `?`
-* [hOCR-to-ALTO](https://github.com/kba/hOCR-to-ALTO) by Filip Kriz [@filak](https://github.com/filak), [`CC BY-SA 4.0`](https://creativecommons.org/licenses/by-sa/4.0/legalcode)
+* [hOCR-to-ALTO](https://github.com/filak/hOCR-to-ALTO) by Filip Kriz [@filak](https://github.com/filak), [`MIT`](https://github.com/filak/hOCR-to-ALTO/blob/master/LICENSE.txt)
 * [hocr-spec](https://github.com/kba/hocr-spec-python) by Konstantin Baierer [@kba](https://github.com/kba), [`MIT`](https://github.com/kba/hocr-spec-python/blob/master/LICENSE)
 * [gcv2hocr](https://github.com/dinosauria123/gcv2hocr) by Endo Michiaki, [`CC BY 4.0`](https://creativecommons.org/licenses/by/4.0/legalcode)
