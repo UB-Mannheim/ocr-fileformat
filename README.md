@@ -184,7 +184,7 @@ capable stylesheet transformer.
 | ---:                | ---  | ---  | ---     | ---        | ---                 |
 | hOCR                | =    | ✓    | -       | -          | -                   |
 | ALTO                | ✓    | =    | -       | -          | -                   |
-| PAGEXML             | -    | -    | =       | -          | -                   |
+| PAGEXML             | ✓    | -    | =       | -          | -                   |
 | FineReader          | -    | -    | -       | =          | -                   |
 | Google Cloud Vision | ✓    | -    | -       | -          | =                   |
 
@@ -245,3 +245,4 @@ During the installation process several projects are included (in [`./vendor`](.
 * [hOCR-to-ALTO](https://github.com/filak/hOCR-to-ALTO) by Filip Kriz [@filak](https://github.com/filak), [`MIT`](https://github.com/filak/hOCR-to-ALTO/blob/master/LICENSE.txt)
 * [hocr-spec](https://github.com/kba/hocr-spec-python) by Konstantin Baierer [@kba](https://github.com/kba), [`MIT`](https://github.com/kba/hocr-spec-python/blob/master/LICENSE)
 * [gcv2hocr](https://github.com/dinosauria123/gcv2hocr) by Endo Michiaki, [`CC BY 4.0`](https://creativecommons.org/licenses/by/4.0/legalcode)
+* [format-converters](https://github.com/OCR-D/format-converters) by OCR-D, [`Apache 2.0`](https://github.com/OCR-D/format-converters/blob/master/LICENSE)

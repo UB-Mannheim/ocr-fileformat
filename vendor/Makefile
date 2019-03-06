@@ -6,10 +6,10 @@ WGET = wget --progress=bar:force --no-verbose
 GIT_CLONE = git clone --depth 1
 
 SAXON_HE_VERSION_MAJOR = 9
-SAXON_HE_VERSION_MINOR = 7
-SAXON_HE_VERSION_PATCH = 0-4J
+SAXON_HE_VERSION_MINOR = 8
+SAXON_HE_VERSION_PATCH = 0-1J
 SAXON_HE_ZIP = SaxonHE$(SAXON_HE_VERSION_MAJOR)-$(SAXON_HE_VERSION_MINOR)-$(SAXON_HE_VERSION_PATCH).zip
-SAXON_HE_URL = https://sourceforge.net/projects/saxon/files/Saxon-HE/$(SAXON_HE_VERSION_MAJOR).$(SAXON_HE_VERSION_MINOR)/$(SAXON_HE_ZIP)/download
+SAXON_HE_URL = https://netcologne.dl.sourceforge.net/project/saxon/Saxon-HE/$(SAXON_HE_VERSION_MAJOR).$(SAXON_HE_VERSION_MINOR)/$(SAXON_HE_ZIP)
 SAXON_HE_JAR = saxon9he.jar
 
 PAGE_SCHEMA_REPO = page-schema
@@ -35,6 +35,9 @@ HOCR_SPEC_URL = https://github.com/kba/$(HOCR_SPEC_REPO)
 GCV2HOCR_REPO = gcv2hocr
 GCV2HOCR_URL = https://github.com/dinosauria123/$(GCV2HOCR_REPO)
 
+PAGE2HOCR_REPO = format-converters
+PAGE2HOCR_URL = https://github.com/OCR-D/$(PAGE2HOCR_REPO)
+
 # {{{
 # SAXON_BROWSER_VERSION = 1.1
 # SAXON_BROWSER_ZIP = Saxon-CE_$(SAXON_BROWSER_VERSION).zip
@@ -56,6 +59,7 @@ all:\
 	$(XSD_VALIDATOR_REPO)\
 	$(HOCR2ALTO_REPO)\
 	$(GCV2HOCR_REPO)\
+	$(PAGE2HOCR_REPO)\
 	$(HOCR_SPEC_REPO)\
 	$(SAXON_HE_JAR)
 
@@ -110,3 +114,6 @@ $(HOCR_SPEC_REPO):
 $(GCV2HOCR_REPO):
 	$(GIT_CLONE) "$(GCV2HOCR_URL)" "$@"
 	$(MAKE) -C $(GCV2HOCR_REPO)
+
+$(PAGE2HOCR_REPO):
+	$(GIT_CLONE) "$(PAGE2HOCR_URL)" "$@"
