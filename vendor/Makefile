@@ -13,7 +13,7 @@ SAXON_HE_URL = https://netcologne.dl.sourceforge.net/project/saxon/Saxon-HE/$(SA
 SAXON_HE_JAR = saxon9he.jar
 
 PAGE_SCHEMA_REPO = page-schema
-PAGE_SCHEMA_VERSIONS = 2009-03-16 2010-01-12 2010-03-19 2013-07-15 2016-07-15 2017-07-15 2018-07-15
+PAGE_SCHEMA_VERSIONS = 2009-03-16 2010-01-12 2010-03-19 2013-07-15 2016-07-15 2017-07-15 2018-07-15 2019-07-15
 PAGE_SCHEMA_BASE_URL = http://www.primaresearch.org/schema/PAGE/gts/pagecontent/
 
 ALTO_SCHEMA_REPO = alto-schema
