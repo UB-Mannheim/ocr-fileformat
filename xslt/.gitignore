@@ -1,2 +1,3 @@
 *.xsl
 !alto2.0__alto3.0.xsl
+!tei__hocr.xsl
