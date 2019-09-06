@@ -88,7 +88,7 @@
     <xsl:variable name="pagenodes" select="//*[@function]" />
     <xsl:variable name="pagebox" select="util:get-bbox($pagenodes)" />
     
-    <div class="ocr_page" id="page_{$pageno}" title="bbox {$pagebox}">
+    <div class="ocr_page" id="page_{$pageno}" title="image &quot;{$docTitle}&quot;; bbox {$pagebox}; ppageno {$pageno - 1}">
       <div class="ocr_carea" id="block_{$pageno}" title="bbox {$pagebox}">
         <xsl:apply-templates select="//p|//figure" />
       </div>
