@@ -8,13 +8,15 @@
   
   <xsl:output method="html" encoding="UTF-8" indent="yes"
               omit-xml-declaration="yes" />
-  <xsl:param name="docTitle" select="'OCRed document'"/>
-  <xsl:param name="langs" select="'de'"/>
-  <xsl:param name="npages" select="1"/>
-  <xsl:param name="scripts" select="'Latg'"/>
-  <xsl:param name="system" select="'unknown'"/>
-  <xsl:param name="width" />
-  <xsl:param name="height" />
+  <xsl:param name="docTitle" select="'document_name'"/>
+  <xsl:param name="langs"    select="'de'"/>
+  <xsl:param name="npages"   select="1"/>
+  <xsl:param name="scripts"  select="'Latg'"/>
+  <xsl:param name="system"   select="'unknown'"/>
+  <xsl:param name="left"     select="-1"/>
+  <xsl:param name="top"      select="-1"/>
+  <xsl:param name="width"    select="-1"/>
+  <xsl:param name="height"   select="-1"/>
 
   <!-- converts comma-separated to space-separated coordinates -->
   <xsl:function name="util:coords">
@@ -23,37 +25,69 @@
   </xsl:function>
 
   <!-- calculates bounding box of all nodes with attribute 'function' -->
-  <xsl:function name="util:get-bbox">
+  <xsl:function name="util:get-pagebox">
     <xsl:param name="nodes" />
     <xsl:variable name="bbox">
-      <xsl:for-each select="$nodes">
-        <xsl:sort select="tokenize(./@function, ',')[1]" data-type="number" order="ascending" />
-        <xsl:if test="position() = 1">
-          <xsl:value-of select="tokenize(./@function, ',')[1]" />
-        </xsl:if>
-        <xsl:text> </xsl:text>
-      </xsl:for-each>
-      <xsl:for-each select="$nodes">
-        <xsl:sort select="tokenize(./@function, ',')[2]" data-type="number" order="ascending" />
-        <xsl:if test="position() = 1">
-          <xsl:value-of select="tokenize(./@function, ',')[2]" />
-        </xsl:if>
-        <xsl:text> </xsl:text>
-      </xsl:for-each>
-      <xsl:for-each select="$nodes">
-        <xsl:sort select="tokenize(./@function, ',')[3]" data-type="number" order="descending" />
-        <xsl:if test="position() = 1">
-          <xsl:value-of select="tokenize(./@function, ',')[3]" />
-        </xsl:if>
-        <xsl:text> </xsl:text>
-      </xsl:for-each>
-      <xsl:for-each select="$nodes">
-        <xsl:sort select="tokenize(./@function, ',')[4]" data-type="number" order="descending" />
-        <xsl:if test="position() = 1">
-          <xsl:value-of select="tokenize(./@function, ',')[4]" />
-        </xsl:if>
-        <xsl:text> </xsl:text>
-      </xsl:for-each>
+      <xsl:choose>
+        <xsl:when test="$left = -1">
+          <xsl:for-each select="$nodes">
+            <xsl:sort select="tokenize(./@function, ',')[1]" data-type="number" order="ascending" />
+            <xsl:if test="position() = 1">
+              <xsl:value-of select="tokenize(./@function, ',')[1]" />
+            </xsl:if>
+            <xsl:text> </xsl:text>
+          </xsl:for-each>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$left" />
+          <xsl:text> </xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
+      <xsl:choose>
+        <xsl:when test="$top = -1">
+          <xsl:for-each select="$nodes">
+            <xsl:sort select="tokenize(./@function, ',')[2]" data-type="number" order="ascending" />
+            <xsl:if test="position() = 1">
+              <xsl:value-of select="tokenize(./@function, ',')[2]" />
+            </xsl:if>
+            <xsl:text> </xsl:text>
+          </xsl:for-each>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$top" />
+          <xsl:text> </xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
+      <xsl:choose>
+        <xsl:when test="$width = -1">
+          <xsl:for-each select="$nodes">
+            <xsl:sort select="tokenize(./@function, ',')[3]" data-type="number" order="descending" />
+            <xsl:if test="position() = 1">
+              <xsl:value-of select="tokenize(./@function, ',')[3]" />
+            </xsl:if>
+            <xsl:text> </xsl:text>
+          </xsl:for-each>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$width" />
+          <xsl:text> </xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
+      <xsl:choose>
+        <xsl:when test="$height = -1">
+          <xsl:for-each select="$nodes">
+            <xsl:sort select="tokenize(./@function, ',')[4]" data-type="number" order="descending" />
+            <xsl:if test="position() = 1">
+              <xsl:value-of select="tokenize(./@function, ',')[4]" />
+            </xsl:if>
+            <xsl:text> </xsl:text>
+          </xsl:for-each>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="$height" />
+          <xsl:text> </xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
     </xsl:variable>
     <xsl:value-of select="normalize-space($bbox)" />
   </xsl:function>
@@ -86,7 +120,7 @@
   <xsl:template match="milestone[@type='page']">
     <xsl:variable name="pageno" select="@n" />
     <xsl:variable name="pagenodes" select="//*[@function]" />
-    <xsl:variable name="pagebox" select="util:get-bbox($pagenodes)" />
+    <xsl:variable name="pagebox" select="util:get-pagebox($pagenodes)" />
     
     <div class="ocr_page" id="page_{$pageno}" title="image &quot;{$docTitle}&quot;; bbox {$pagebox}; ppageno {$pageno - 1}">
       <div class="ocr_carea" id="block_{$pageno}" title="bbox {$pagebox}">
