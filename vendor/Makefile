@@ -38,6 +38,11 @@ GCV2HOCR_URL = https://github.com/dinosauria123/$(GCV2HOCR_REPO)
 PAGE2HOCR_REPO = format-converters
 PAGE2HOCR_URL = https://github.com/OCR-D/$(PAGE2HOCR_REPO)
 
+ALTO2PAGE_VERSION = 1.5.02
+ALTO2PAGE_ZIP = JPageConverter_$(ALTO2PAGE_VERSION).zip
+ALTO2PAGE_URL = https://github.com/PRImA-Research-Lab/prima-page-converter/releases/download/$(ALTO2PAGE_VERSION)/$(ALTO2PAGE_ZIP)
+ALTO2PAGE_DIR = JPageConverter 1.5
+
 # {{{
 # SAXON_BROWSER_VERSION = 1.1
 # SAXON_BROWSER_ZIP = Saxon-CE_$(SAXON_BROWSER_VERSION).zip
@@ -61,13 +66,16 @@ all:\
 	$(GCV2HOCR_REPO)\
 	$(PAGE2HOCR_REPO)\
 	$(HOCR_SPEC_REPO)\
-	$(SAXON_HE_JAR)
+	$(SAXON_HE_JAR) \
+	$(ALTO2PAGE_DIR)
 
 clean:
 	$(RM) $(ALTO_SCHEMA_REPO)
 	$(RM) $(SAXON_HE_JAR)
 	$(RM) $(SAXON_HE_ZIP)
 	$(RM) $(PAGE_SCHEMA_REPO)
+	$(RM) $(ALTO2PAGE_DIR)
+	$(RM) $(ALTO2PAGE_ZIP)
 
 check:
 	@which \
@@ -117,3 +125,9 @@ $(GCV2HOCR_REPO):
 
 $(PAGE2HOCR_REPO):
 	$(GIT_CLONE) "$(PAGE2HOCR_URL)" "$@"
+
+$(ALTO2PAGE_ZIP):
+	$(WGET) -O "$@" "$(ALTO2PAGE_URL)"
+
+$(ALTO2PAGE_DIR): $(ALTO2PAGE_ZIP)
+	$(UNZIP) "$<"
