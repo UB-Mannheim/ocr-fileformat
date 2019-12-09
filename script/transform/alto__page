@@ -1,7 +1,7 @@
 #!/bin/bash -x
 SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 VENDORDIR="$(cd $SCRIPTDIR/../../vendor/; pwd)"
-JAR="$VENDORDIR/JPageConverter 1.5/PageConverter.jar"
+JAR="$VENDORDIR/JPageConverter/PageConverter.jar"
 INFILE="$1"
 OUTFILE="$2"
 

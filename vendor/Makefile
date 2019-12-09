@@ -38,10 +38,9 @@ GCV2HOCR_URL = https://github.com/dinosauria123/$(GCV2HOCR_REPO)
 PAGE2HOCR_REPO = format-converters
 PAGE2HOCR_URL = https://github.com/OCR-D/$(PAGE2HOCR_REPO)
 
-ALTO2PAGE_VERSION = 1.5.02
-ALTO2PAGE_ZIP = JPageConverter_$(ALTO2PAGE_VERSION).zip
-ALTO2PAGE_URL = https://github.com/PRImA-Research-Lab/prima-page-converter/releases/download/$(ALTO2PAGE_VERSION)/$(ALTO2PAGE_ZIP)
-ALTO2PAGE_DIR = JPageConverter 1.5
+ALTO2PAGE_ZIP = JPageConverter.zip
+ALTO2PAGE_URL = https://github.com/PRImA-Research-Lab/prima-page-converter/releases/download/1.5.02/JPageConverter_1.5.02.zip
+ALTO2PAGE_DIR = JPageConverter
 
 # {{{
 # SAXON_BROWSER_VERSION = 1.1
@@ -75,7 +74,7 @@ clean:
 	$(RM) $(SAXON_HE_ZIP)
 	$(RM) $(PAGE_SCHEMA_REPO)
 	$(RM) $(ALTO2PAGE_DIR)
-	$(RM) $(ALTO2PAGE_ZIP)
+	$(RM) $(ALTO2PAGE-ZIP)
 
 check:
 	@which \
@@ -131,3 +130,4 @@ $(ALTO2PAGE_ZIP):
 
 $(ALTO2PAGE_DIR): $(ALTO2PAGE_ZIP)
 	$(UNZIP) "$<"
+	mv "JPageConverter 1.5" "$@"
