@@ -28,6 +28,7 @@ ABBYY_SCHEMA_VERSIONS = 6-schema-v1 8-schema-v2 9-schema-v1 10-schema-v1
 
 HOCR2ALTO_REPO = hOCR-to-ALTO
 HOCR2ALTO_URL = https://github.com/filak/$(HOCR2ALTO_REPO)
+HOCR2ALTO_COMMITID = 43f9d9dcdd38d37071f8ef1998d377d21c9cadd2
 
 HOCR_SPEC_REPO = hocr-spec-python
 HOCR_SPEC_URL = https://github.com/kba/$(HOCR_SPEC_REPO)
@@ -108,7 +109,8 @@ $(ALTO_SCHEMA_REPO):
 	$(GIT_CLONE) "$(ALTO_SCHEMA_URL)" "$@"
 
 $(HOCR2ALTO_REPO):
-	$(GIT_CLONE) "$(HOCR2ALTO_URL)" "$@"
+	git clone "$(HOCR2ALTO_URL)" "$@"
+	cd "$@" && git checkout $(HOCR2ALTO_COMMITID)
 
 $(SAXON_HE_JAR):
 	$(MAKE) $(SAXON_HE_ZIP)
