@@ -3,7 +3,7 @@ BOOK=wetzel_reisebegleiter_1901
 PAGE=0021
 BASENAME=$(BOOK)_$(PAGE)
 
-DEBIAN_PACKAGES = libxml2-utils tesseract-ocr tesseract-ocr-script-fraktur wget dwdiff
+DEBIAN_PACKAGES = libxml2-utils tesseract-ocr tesseract-ocr-script-frak wget dwdiff
 XMLLINT = xmllint --format
 OCR_TRANSFORM = ../bin/ocr-transform.sh
 TESSERACT = tesseract -l Fraktur
