@@ -38,8 +38,10 @@ GCV2HOCR_URL = https://github.com/dinosauria123/$(GCV2HOCR_REPO)
 PAGE2HOCR_REPO = format-converters
 PAGE2HOCR_URL = https://github.com/OCR-D/$(PAGE2HOCR_REPO)
 
+ALTO2PAGE_VERSION_MAJOR_MINOR = 1.5
+ALTO2PAGE_VERSION = $(ALTO2PAGE_VERSION_MAJOR_MINOR).02
 ALTO2PAGE_ZIP = JPageConverter.zip
-ALTO2PAGE_URL = https://github.com/PRImA-Research-Lab/prima-page-converter/releases/download/1.5.02/JPageConverter_1.5.02.zip
+ALTO2PAGE_URL = https://github.com/PRImA-Research-Lab/prima-page-converter/releases/download/$(ALTO2PAGE_VERSION)/JPageConverter_$(ALTO2PAGE_VERSION).zip
 ALTO2PAGE_DIR = JPageConverter
 
 # {{{
@@ -130,4 +132,4 @@ $(ALTO2PAGE_ZIP):
 
 $(ALTO2PAGE_DIR): $(ALTO2PAGE_ZIP)
 	$(UNZIP) "$<"
-	mv "JPageConverter 1.5" "$@"
+	mv "JPageConverter $(ALTO2PAGE_VERSION_MAJOR_MINOR)" "$@"
