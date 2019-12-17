@@ -34,6 +34,7 @@ $(BASENAME)_800px.jpg:
 $(BASENAME).hocr : $(BASENAME)_800px.jpg
 	$(TESSERACT) $< stdout hocr | $(XMLLINT) - > $@
 
+
 $(BASENAME).alto : $(BASENAME).hocr
 	$(OCR_TRANSFORM) hocr alto2.0 $< | $(XMLLINT) - > $@
 
@@ -47,4 +48,4 @@ $(BASENAME).roundtrip.hocr : $(BASENAME).alto
 	$(OCR_TRANSFORM) alto2.0 hocr $< | $(XMLLINT) - > $@
 
 clean:
-	$(RM) $(BASENAME)*
+	$(RM) $(BASENAME)*.hocr $(BASENAME)*.alto
