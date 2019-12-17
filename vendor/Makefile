@@ -74,7 +74,7 @@ clean:
 	$(RM) $(SAXON_HE_ZIP)
 	$(RM) $(PAGE_SCHEMA_REPO)
 	$(RM) $(ALTO2PAGE_DIR)
-	$(RM) $(ALTO2PAGE-ZIP)
+	$(RM) $(ALTO2PAGE_ZIP)
 
 check:
 	@which \
