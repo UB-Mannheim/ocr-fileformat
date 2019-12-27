@@ -86,8 +86,10 @@ install: all
 	$(MKDIR) $(SHAREDIR)
 	$(CP) script xsd xslt vendor lib.sh $(SHAREDIR)
 	$(MKDIR) $(BINDIR)
-	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-transform.sh > $(BINDIR)/ocr-transform
-	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-validate.sh > $(BINDIR)/ocr-validate
+	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-transform.sh | \
+	  sed "s/[$$](git describe)/$$(git describe)/" > $(BINDIR)/ocr-transform
+	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-validate.sh | \
+	  sed "s/[$$](git describe)/$$(git describe)/" > $(BINDIR)/ocr-validate
 	chmod a+x $(BINDIR)/ocr-transform $(BINDIR)/ocr-validate
 	find $(SHAREDIR) -exec chmod u+w {} \;
 

@@ -8,12 +8,13 @@ source "$SHAREDIR/lib.sh"
 show_usage () {
     [[ "$#" -gt 0 ]] && logerr "$@"
 
-    echo >&2 "Usage: ${0##*/} [-dhL] <schema> <file> [<resultsFile>]
+    echo >&2 "Usage: ${0##*/} [-dhLv] <schema> <file> [<resultsFile>]
 
     Options:
-        --help   -h      Show this help
-        --debug  -d      Increase debug level by 1, can be repeated
-        --list   -L      List available schemas"
+        --help    -h     Show this help
+        --version -v     Show version
+        --debug   -d     Increase debug level by 1, can be repeated
+        --list    -L     List available schemas"
     echo >&2 -e "\n${INDENT}Schemas:"
     show_schemas|sed "s/^/${INDENT}${INDENT}/"
     echo
@@ -21,6 +22,13 @@ show_usage () {
     [[ "$#" -gt 0 ]] && exit 1
 }
 #}}}
+
+#{{{ show_version ()
+show_version () {
+    echo "${0##*/} $(git describe)"
+}
+#}}}
+
 #{{{ main ()
 main () {
     local schema="$1" file="$2"
@@ -58,6 +66,7 @@ while [[ "$1" = -* ]]; do
         --debug|-d) let DEBUG+=1 ;;
         --list|-L) show_schemas|sed -e 's/\s*$//' -e 's/ \+/\n/g' ; exit 0 ;;
         --help|-h) show_usage ; exit 0 ;;
+        --version|-v) show_version ; exit 0 ;;
         *) logerr "Unknown option '$1'" && show_usage && exit 1 ;;
     esac
     shift

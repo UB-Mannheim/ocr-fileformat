@@ -134,12 +134,13 @@ Try `ocr-transform -h` to get an overview:
 
 <!-- BEGIN-EVAL echo '<pre>';./bin/ocr-transform.sh -h 2>&1;echo '</pre>'  -->
 <pre>
-Usage: ocr-transform [-dhL] <from> <to> [<infile> [<outfile>]] [-- <script-args>]
+Usage: ocr-transform [-dhLv] <from> <to> [<infile> [<outfile>]] [-- <script-args>]
 
     Options:
-        --help   -h      Show this help
-        --debug  -d      Increase debug level by 1, can be repeated
-        --list   -L      List transformations
+        --help    -h     Show this help
+        --version -v     Show version
+        --debug   -d     Increase debug level by 1, can be repeated
+        --list    -L     List transformations
 
     Transformations:
         abbyy hocr
@@ -203,9 +204,10 @@ capable stylesheet transformer.
 Usage: ocr-validate [-dhL] <schema> <file> [<resultsFile>]
 
     Options:
-        --help   -h      Show this help
-        --debug  -d      Increase debug level by 1, can be repeated
-        --list   -L      List available schemas
+        --help    -h     Show this help
+        --version -v     Show version
+        --debug   -d     Increase debug level by 1, can be repeated
+        --list    -L     List available schemas
 
     Schemas:
         hocr

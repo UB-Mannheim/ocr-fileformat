@@ -8,12 +8,13 @@ source "$SHAREDIR/lib.sh"
 show_usage () {
     [[ "$#" -gt 0 ]] && logerr "$@"
 
-    echo >&2 "Usage: ${0##*/} [-dhL] <from> <to> [<infile> [<outfile>]] [-- <script-args>]
+    echo >&2 "Usage: ${0##*/} [-dhLv] <from> <to> [<infile> [<outfile>]] [-- <script-args>]
 
     Options:
-        --help   -h      Show this help
-        --debug  -d      Increase debug level by 1, can be repeated
-        --list   -L      List transformations"
+        --help    -h     Show this help
+        --version -v     Show version
+        --debug   -d     Increase debug level by 1, can be repeated
+        --list    -L     List transformations"
     echo >&2 -e "\n${INDENT}Transformations:"
     show_transformations|sed "s/^/${INDENT}${INDENT}/"
     echo >&2 -e "\n${INDENT}Saxon options:"
@@ -22,6 +23,13 @@ show_usage () {
     [[ "$#" -gt 0 ]] && exit 1
 }
 #}}}
+
+#{{{ show_version ()
+show_version () {
+    echo "${0##*/} $(git describe)"
+}
+#}}}
+
 #{{{ main ()
 main () {
     local from="$1" to="$2" infile='-' outfile='-' transformer
@@ -90,6 +98,7 @@ while [[ "$1" = -* ]]; do
         -d|--debug) let DEBUG+=1 ;;
         -L|--list) show_transformations ; exit 0 ;;
         -h|--help) show_usage ; exit 0 ;;
+        -v|--version) show_version ; exit 0 ;;
         *) logerr "Unknown option '$1'" && show_usage && exit 1 ;;
     esac
     shift
