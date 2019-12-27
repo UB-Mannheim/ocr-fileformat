@@ -76,6 +76,7 @@ xslt: vendor
 	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/alto2text.xsl alto__text.xsl
 	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/codes_lookup.xml codes_lookup.xml
 	cd xslt && $(LN) ../vendor/format-converters/page2hocr.xsl page__hocr.xsl
+	cd xslt && $(LN) ../vendor/format-converters/abbyy2hocr.xsl abbyy__hocr.xsl
 	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.0__alto3.1.xsl
 	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.1__alto3.0.xsl
 	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.1__alto3.1.xsl
