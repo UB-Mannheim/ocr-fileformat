@@ -1,0 +1,19 @@
+#!/bin/bash -x
+SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+VENDORDIR="$(cd $SCRIPTDIR/../../vendor/; pwd)"
+JAR="$VENDORDIR/JPageConverter/PageConverter.jar"
+INFILE="$1"
+OUTFILE="$2"
+
+is_temp=
+if [[ "$2" = "-" ]];then
+    is_temp=true
+    OUTFILE="$(mktemp)"
+fi
+
+java -jar "$JAR" -neg-coords toZero -source-xml "$INFILE" -target-xml "$OUTFILE"
+
+if [[ "$is_temp" = true ]];then
+    cat "$OUTFILE"
+    rm "$OUTFILE"
+fi

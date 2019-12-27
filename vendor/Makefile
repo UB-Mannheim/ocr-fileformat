@@ -13,7 +13,7 @@ SAXON_HE_URL = https://netcologne.dl.sourceforge.net/project/saxon/Saxon-HE/$(SA
 SAXON_HE_JAR = saxon9he.jar
 
 PAGE_SCHEMA_REPO = page-schema
-PAGE_SCHEMA_VERSIONS = 2009-03-16 2010-01-12 2010-03-19 2013-07-15 2016-07-15 2017-07-15 2018-07-15
+PAGE_SCHEMA_VERSIONS = 2009-03-16 2010-01-12 2010-03-19 2013-07-15 2016-07-15 2017-07-15 2018-07-15 2019-07-15
 PAGE_SCHEMA_BASE_URL = http://www.primaresearch.org/schema/PAGE/gts/pagecontent/
 
 ALTO_SCHEMA_REPO = alto-schema
@@ -28,6 +28,7 @@ ABBYY_SCHEMA_VERSIONS = 6-schema-v1 8-schema-v2 9-schema-v1 10-schema-v1
 
 HOCR2ALTO_REPO = hOCR-to-ALTO
 HOCR2ALTO_URL = https://github.com/filak/$(HOCR2ALTO_REPO)
+HOCR2ALTO_COMMITID = 43f9d9dcdd38d37071f8ef1998d377d21c9cadd2
 
 HOCR_SPEC_REPO = hocr-spec-python
 HOCR_SPEC_URL = https://github.com/kba/$(HOCR_SPEC_REPO)
@@ -37,6 +38,12 @@ GCV2HOCR_URL = https://github.com/dinosauria123/$(GCV2HOCR_REPO)
 
 PAGE2HOCR_REPO = format-converters
 PAGE2HOCR_URL = https://github.com/OCR-D/$(PAGE2HOCR_REPO)
+
+ALTO2PAGE_VERSION_MAJOR_MINOR = 1.5
+ALTO2PAGE_VERSION = $(ALTO2PAGE_VERSION_MAJOR_MINOR).02
+ALTO2PAGE_ZIP = JPageConverter.zip
+ALTO2PAGE_URL = https://github.com/PRImA-Research-Lab/prima-page-converter/releases/download/$(ALTO2PAGE_VERSION)/JPageConverter_$(ALTO2PAGE_VERSION).zip
+ALTO2PAGE_DIR = JPageConverter
 
 # {{{
 # SAXON_BROWSER_VERSION = 1.1
@@ -61,13 +68,16 @@ all:\
 	$(GCV2HOCR_REPO)\
 	$(PAGE2HOCR_REPO)\
 	$(HOCR_SPEC_REPO)\
-	$(SAXON_HE_JAR)
+	$(SAXON_HE_JAR) \
+	$(ALTO2PAGE_DIR)
 
 clean:
 	$(RM) $(ALTO_SCHEMA_REPO)
 	$(RM) $(SAXON_HE_JAR)
 	$(RM) $(SAXON_HE_ZIP)
 	$(RM) $(PAGE_SCHEMA_REPO)
+	$(RM) $(ALTO2PAGE_DIR)
+	$(RM) $(ALTO2PAGE_ZIP)
 
 check:
 	@which \
@@ -99,7 +109,8 @@ $(ALTO_SCHEMA_REPO):
 	$(GIT_CLONE) "$(ALTO_SCHEMA_URL)" "$@"
 
 $(HOCR2ALTO_REPO):
-	$(GIT_CLONE) "$(HOCR2ALTO_URL)" "$@"
+	git clone "$(HOCR2ALTO_URL)" "$@"
+	cd "$@" && git checkout $(HOCR2ALTO_COMMITID)
 
 $(SAXON_HE_JAR):
 	$(MAKE) $(SAXON_HE_ZIP)
@@ -117,3 +128,10 @@ $(GCV2HOCR_REPO):
 
 $(PAGE2HOCR_REPO):
 	$(GIT_CLONE) "$(PAGE2HOCR_URL)" "$@"
+
+$(ALTO2PAGE_ZIP):
+	$(WGET) -O "$@" "$(ALTO2PAGE_URL)"
+
+$(ALTO2PAGE_DIR): $(ALTO2PAGE_ZIP)
+	$(UNZIP) "$<"
+	mv "JPageConverter $(ALTO2PAGE_VERSION_MAJOR_MINOR)" "$@"

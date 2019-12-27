@@ -4,3 +4,4 @@
 vendor/*
 !vendor/Makefile
 ocr-fileformat_*
+*~

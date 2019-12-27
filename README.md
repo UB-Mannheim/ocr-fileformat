@@ -183,8 +183,8 @@ capable stylesheet transformer.
 | From ╲ To           | hOCR | ALTO | PAGEXML | FineReader | Google Cloud Vision |
 | ---:                | ---  | ---  | ---     | ---        | ---                 |
 | hOCR                | =    | ✓    | -       | -          | -                   |
-| ALTO                | ✓    | =    | -       | -          | -                   |
-| PAGEXML             | ✓    | -    | =       | -          | -                   |
+| ALTO                | ✓    | =    | ✓       | -          | -                   |
+| PAGEXML             | ✓    | ✓    | =       | -          | -                   |
 | FineReader          | ✓    | -    | -       | =          | -                   |
 | Google Cloud Vision | ✓    | -    | -       | -          | =                   |
 

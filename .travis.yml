@@ -2,6 +2,7 @@ language: cpp
 dist: trusty
 sudo: true
 script:
+  - sudo add-apt-repository -y ppa:alex-p/tesseract-ocr
   - sudo apt-get update
   - make all
   - cd example && make deps roundtrip diff
