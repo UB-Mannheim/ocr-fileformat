@@ -6,8 +6,8 @@ xsd
 
 xslt
 !xslt/alto2.0__alto3.0.xsl
-!xslt/alto2.1__alto3.0.xsl
-!xslt/alto2.1__alto3.1.xsl
+!xslt/page__text.xsl
+!xslt/tei__hocr.xsl
 
 vendor/*
 !vendor/Makefile
