@@ -1,4 +1,5 @@
 *.xml
 *.xsl
 !alto2.0__alto3.0.xsl
+!page__text.xsl
 !tei__hocr.xsl
