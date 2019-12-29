@@ -26,7 +26,7 @@ show_usage () {
 
 #{{{ show_version ()
 show_version () {
-    echo "${0##*/} $(git describe)"
+    echo "${0##*/} VERSION"
 }
 #}}}
 
