@@ -1,6 +1,12 @@
+# Makefile for ocr-fileformat
+
 PKG_NAME = ocr-fileformat
 PKG_VERSION = 0.2.3
 DOCKER_IMAGE = ubma/ocr-fileformat
+
+# Either get the version from Git (if available) or use PKG_VERSION.
+ROOTDIR = $(abspath $(dir $(MAKEFILE_LIST)))
+VERSION = $(shell test -d "$(ROOTDIR)/.git" && git -C "$(ROOTDIR)" describe --tags || echo $(PKG_VERSION))
 
 CP = cp -r
 LN = ln -sf
@@ -87,9 +93,9 @@ install: all
 	$(CP) script xsd xslt vendor lib.sh $(SHAREDIR)
 	$(MKDIR) $(BINDIR)
 	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-transform.sh | \
-	  sed "s/[$$](git describe)/$$(git describe)/" > $(BINDIR)/ocr-transform
+	  sed "s/VERSION/$(VERSION)/" > $(BINDIR)/ocr-transform
 	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-validate.sh | \
-	  sed "s/[$$](git describe)/$$(git describe)/" > $(BINDIR)/ocr-validate
+	  sed "s/VERSION/$(VERSION)/" > $(BINDIR)/ocr-validate
 	chmod a+x $(BINDIR)/ocr-transform $(BINDIR)/ocr-validate
 	find $(SHAREDIR) -exec chmod u+w {} \;
 
