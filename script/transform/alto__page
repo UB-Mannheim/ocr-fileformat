@@ -11,7 +11,7 @@ if [[ "$2" = "-" ]];then
     OUTFILE="$(mktemp)"
 fi
 
-java -jar "$JAR" -neg-coords toZero -source-xml "$INFILE" -target-xml "$OUTFILE"
+java -jar "$JAR" -neg-coords toZero -source-xml "$INFILE" -target-xml "$OUTFILE" "${@:3}"
 
 if [[ "$is_temp" = true ]];then
     cat "$OUTFILE"

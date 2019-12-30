@@ -1,1 +1,2 @@
-alto__page
+#!/bin/bash
+./alto__page "$@" -convert-to ALTO
