@@ -188,13 +188,14 @@ capable stylesheet transformer.
 
 ### Supported Transformations
 
-| From ╲ To           | hOCR | ALTO | PAGEXML | FineReader | Google Cloud Vision |
-| ---:                | ---  | ---  | ---     | ---        | ---                 |
-| hOCR                | =    | ✓    | -       | -          | -                   |
-| ALTO                | ✓    | =    | ✓       | -          | -                   |
-| PAGEXML             | ✓    | ✓    | =       | -          | -                   |
-| FineReader          | ✓    | -    | -       | =          | -                   |
-| Google Cloud Vision | ✓    | -    | -       | -          | =                   |
+| From ╲ To           | hOCR | ALTO | PAGEXML | FineReader |
+| ---:                | ---  | ---  | ---     | ---        |
+| hOCR                | =    | ✓    | -       | -          |
+| ALTO                | ✓    | =    | ✓       | -          |
+| PAGEXML             | ✓    | ✓    | =       | -          |
+| FineReader          | ✓    | -    | -       | =          |
+| Google Cloud Vision | ✓    | -    | -       | -          |
+| TEI                 | ✓    | -    | -       | -          |
 
 ## Validation
 
@@ -245,7 +246,7 @@ The XSD files are installed under `$PREFIX/share/ocr-fileformat/xsd`
 
 This is free software. You may use it under the terms of the [MIT License](LICENSE).
 
-During the installation process several projects are included (in [`./vendor`](./blob/master/vendor)). These projects have different licenses:
+During the installation process several projects are included (in [`./vendor`](./vendor)). These projects have different licenses:
 * [Saxon HE 9.7](http://saxon.sourceforge.net/#F9.7HE), [`MPL`](https://www.mozilla.org/MPL/).
 * [ALTOXML schema](https://github.com/altoxml/schema), ["Open Source"](https://github.com/altoxml/schema/issues/37#issuecomment-218730230) for ALTO <= 3.1, [`CC BY SA 4.0`](https://creativecommons.org/licenses/by-sa/4.0/legalcode) since ALTO 4.0
 * [PAGE schemas](http://www.primaresearch.org/schema/PAGE/gts/pagecontent/), `?`
