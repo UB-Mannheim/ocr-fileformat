@@ -188,14 +188,14 @@ capable stylesheet transformer.
 
 ### Supported Transformations
 
-| From ╲ To           | hOCR | ALTO | PAGEXML | FineReader |
-| ---:                | ---  | ---  | ---     | ---        |
-| hOCR                | =    | ✓    | -       | -          |
-| ALTO                | ✓    | =    | ✓       | -          |
-| PAGEXML             | ✓    | ✓    | =       | -          |
-| FineReader          | ✓    | -    | -       | =          |
-| Google Cloud Vision | ✓    | -    | -       | -          |
-| TEI                 | ✓    | -    | -       | -          |
+| From ╲ To           | hOCR | ALTO | PAGEXML |
+| ---:                | ---  | ---  | ---     |
+| hOCR                | =    | ✓    | -       |
+| ALTO                | ✓    | =    | ✓       |
+| PAGEXML             | ✓    | ✓    | =       |
+| FineReader          | ✓    | -    | -       |
+| Google Cloud Vision | ✓    | -    | -       |
+| TEI                 | ✓    | -    | -       |
 
 ## Validation
 
