@@ -155,6 +155,7 @@ Usage: ocr-transform [-dhLv] <from> <to> [<infile> [<outfile>]] [-- <script-args
         gcv hocr
         hocr alto2.0
         hocr alto2.1
+        hocr page
         hocr text
         page alto
         page hocr
@@ -190,7 +191,7 @@ capable stylesheet transformer.
 
 | From ╲ To           | hOCR | ALTO | PAGEXML |
 | ---:                | ---  | ---  | ---     |
-| hOCR                | =    | ✓    | -       |
+| hOCR                | =    | ✓    | ✓       |
 | ALTO                | ✓    | =    | ✓       |
 | PAGEXML             | ✓    | ✓    | =       |
 | FineReader          | ✓    | -    | -       |
