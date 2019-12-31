@@ -92,7 +92,7 @@ function submit(tabName, params) {
         if (err) {
             return $.notify(err, 'error');
         }
-    pane.find(".result a.download").on('click', ev => {
+    pane.find(".result a.download").off('click').on('click', ev => {
             const outputFormat = $("#transform-to").val();
             const basename = input.val()
                 .replace(/^.*\\/, '')  // C:\fakepath\foo.hocr -> foo.hocr
