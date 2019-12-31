@@ -31,6 +31,11 @@ show_version () {
 
 #{{{ main ()
 main () {
+    # debug option -d -d to print all commands to the terminal
+    if (( DEBUG > 1 ));then
+        set -x
+    fi
+
     local schema="$1" file="$2"
     shift 2
 
@@ -56,7 +61,7 @@ main () {
     if [[ "${OCR_VALIDATORS[$schema]}" = *.xsd ]];then
         "exec_xsdv" "$schema" "$file"
     else
-        "${OCR_VALIDATORS[$schema]}" "$file"
+        source "${OCR_VALIDATORS[$schema]}" "$file"
     fi
 }
 #}}}
