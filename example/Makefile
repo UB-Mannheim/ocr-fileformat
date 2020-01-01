@@ -45,7 +45,7 @@ $(BASENAME).alto.page.alto : $(BASENAME).alto.page
 	$(OCR_TRANSFORM) page alto $< | $(XMLLINT) - > $@
 
 $(BASENAME).roundtrip.hocr : $(BASENAME).alto
-	$(OCR_TRANSFORM) alto2.0 hocr $< | $(XMLLINT) - > $@
+	$(OCR_TRANSFORM) alto hocr $< | $(XMLLINT) - > $@
 
 clean:
 	$(RM) $(BASENAME)*.hocr $(BASENAME)*.alto
