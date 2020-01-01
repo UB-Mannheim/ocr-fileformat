@@ -28,7 +28,7 @@ ABBYY_SCHEMA_VERSIONS = 6-schema-v1 8-schema-v2 9-schema-v1 10-schema-v1
 
 HOCR2ALTO_REPO = hOCR-to-ALTO
 HOCR2ALTO_URL = https://github.com/filak/$(HOCR2ALTO_REPO)
-HOCR2ALTO_COMMITID = 43f9d9dcdd38d37071f8ef1998d377d21c9cadd2
+HOCR2ALTO_COMMITID = 7b21c4727a099117ed00c4f335aa83d0392c919f
 
 HOCR_SPEC_REPO = hocr-spec-python
 HOCR_SPEC_URL = https://github.com/kba/$(HOCR_SPEC_REPO)

@@ -74,12 +74,15 @@ xsd: vendor
 xslt: vendor
 	$(MKDIR) xslt
 	# symlink hocr<->alto as well as the language codes lookup xml
-	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr2alto2.0.xsl hocr__alto2.0.xsl
-	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr2alto2.1.xsl hocr__alto2.1.xsl
-	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/alto2hocr.xsl alto2.0__hocr.xsl
-	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/alto2hocr.xsl alto2.1__hocr.xsl
-	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr2text.xsl hocr__text.xsl
-	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/alto2text.xsl alto__text.xsl
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr__alto2.0.xsl hocr__alto2.0.xsl
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr__alto2.1.xsl hocr__alto2.1.xsl
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr__alto3.xsl hocr__alto3.0.xsl
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr__alto4.xsl hocr__alto4.0.xsl
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/alto__hocr.xsl alto__hocr.xsl
+	cd xslt && $(LN) alto__hocr.xsl alto2.0__hocr.xsl
+	cd xslt && $(LN) alto__hocr.xsl alto2.1__hocr.xsl
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr__text.xsl hocr__text.xsl
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/alto__text.xsl alto__text.xsl
 	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/codes_lookup.xml codes_lookup.xml
 	cd xslt && $(LN) ../vendor/format-converters/page2hocr.xsl page__hocr.xsl
 	cd xslt && $(LN) ../vendor/format-converters/abbyy2hocr.xsl abbyy__hocr.xsl
