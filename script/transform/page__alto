@@ -5,6 +5,7 @@ VENDORDIR="$(cd $SCRIPTDIR/../../vendor/; pwd)"
 JAR="$VENDORDIR/JPageConverter/PageConverter.jar"
 INFILE="$1"
 OUTFILE="$2"
+ARGUMENT="$3"
 
 if [[ "$1" = "-" ]]; then
     INFILE="$(mktemp)"
@@ -22,6 +23,10 @@ if [[ "$1" = "-" ]]; then
 fi
 
 if [[ "$2" = "-" ]]; then
-    cat "$OUTFILE"
+    if [[ -z "$ARGUMENT" ]]; then
+        cat "$OUTFILE"
+    else
+        java -cp "$VENDORDIR/saxon9he.jar" net.sf.saxon.Query -s:"$OUTFILE" -qs:/ "$ARGUMENT"
+    fi
     rm "$OUTFILE"
 fi
