@@ -154,6 +154,7 @@ Usage: ocr-transform [-dhLv] <from> <to> [<infile> [<outfile>]] [-- <script-args
         alto page
         alto text
         gcv hocr
+        gcv page
         hocr alto2.0
         hocr alto2.1
         hocr page
@@ -196,7 +197,7 @@ capable stylesheet transformer.
 | ALTO                | ✓    | =    | ✓       |
 | PAGEXML             | ✓    | ✓    | =       |
 | FineReader          | ✓    | -    | ✓       |
-| Google Cloud Vision | ✓    | -    | -       |
+| Google Cloud Vision | ✓    | -    | ✓       |
 | TEI                 | ✓    | -    | -       |
 
 ## Validation
