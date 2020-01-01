@@ -1,7 +1,5 @@
 FROM alpine:edge
 
-MAINTAINER Konstantin Baierer <konstantin.baierer@gmail.com>
-
 EXPOSE 8080
 COPY . /ocr-fileformat
 WORKDIR /ocr-fileformat
