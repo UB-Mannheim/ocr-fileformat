@@ -144,6 +144,7 @@ Usage: ocr-transform [-dhLv] <from> <to> [<infile> [<outfile>]] [-- <script-args
 
     Transformations:
         abbyy hocr
+        abbyy page
         alto2.0 alto3.0
         alto2.0 alto3.1
         alto2.0 hocr
@@ -194,7 +195,7 @@ capable stylesheet transformer.
 | hOCR                | =    | ✓    | ✓       |
 | ALTO                | ✓    | =    | ✓       |
 | PAGEXML             | ✓    | ✓    | =       |
-| FineReader          | ✓    | -    | -       |
+| FineReader          | ✓    | -    | ✓       |
 | Google Cloud Vision | ✓    | -    | -       |
 | TEI                 | ✓    | -    | -       |
 
