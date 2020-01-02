@@ -1,4 +1,5 @@
 #!/bin/bash
+
 SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 VENDORDIR="$(cd $SCRIPTDIR/../../vendor/; pwd)"
 VENDORSCRIPT="$VENDORDIR/gcv2hocr/gcv2hocr"
@@ -8,15 +9,22 @@ OUTFILE="$2"
 WIDTH=2000
 HEIGHT=2000
 
-is_temp=
-if [[ "$2" = "-" ]];then
-    is_temp=true
+if [[ "$1" = "-" ]]; then
+    INFILE="$(mktemp)"
+    cat >"$INFILE"
+fi
+
+if [[ "$2" = "-" ]]; then
     OUTFILE="$(mktemp)"
 fi
 
 "$VENDORSCRIPT" "$INFILE" "$OUTFILE" "$WIDTH" "$HEIGHT"
 
-if [[ "$is_temp" = true ]];then
+if [[ "$1" = "-" ]]; then
+    rm "$INFILE"
+fi
+
+if [[ "$2" = "-" ]]; then
     cat "$OUTFILE"
     rm "$OUTFILE"
 fi
