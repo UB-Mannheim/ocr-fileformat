@@ -32,6 +32,11 @@ show_version () {
 
 #{{{ main ()
 main () {
+    # debug option -d -d to print all commands to the terminal
+    if (( DEBUG > 1 ));then
+        set -x
+    fi
+
     local from="$1" to="$2" infile='-' outfile='-' transformer
     shift 2
 
@@ -88,7 +93,7 @@ main () {
         exec_saxon "${script_args[@]}"
     else
         script_args=("$infile" "$outfile" "${script_args[@]}")
-        "$transformer" "${script_args[@]}"
+        source "$transformer" "${script_args[@]}"
     fi
 }
 #}}}
