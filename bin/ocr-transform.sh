@@ -39,7 +39,6 @@ main () {
 
     local from="$1" to="$2" infile='-' outfile='-' transformer
     shift 2
-    declare -a script_args
 
     # Validate parameters
     if [[ -z "$from" ]];then
@@ -54,6 +53,8 @@ main () {
             show_usage "No mapping from '$from' to '$to'"
         fi
     fi
+
+    declare -a script_args
 
     # <infile>
     if [[ "$1" == '--' ]];then
@@ -91,8 +92,7 @@ main () {
         [[ "$outfile" != '-' ]] &&  script_args=("${script_args[@]}" "-o:$outfile")
         exec_saxon "${script_args[@]}"
     else
-        script_args=("${script_args[@]}" "$infile")
-        script_args=("${script_args[@]}" "$outfile")
+        script_args=("$infile" "$outfile" "${script_args[@]}")
         source "$transformer" "${script_args[@]}"
     fi
 }
