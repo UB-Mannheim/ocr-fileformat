@@ -1,7 +1,7 @@
 # Makefile for ocr-fileformat
 
 PKG_NAME = ocr-fileformat
-PKG_VERSION = 0.2.3
+PKG_VERSION = 0.3.0
 DOCKER_IMAGE = ubma/ocr-fileformat
 
 # Either get the version from Git (if available) or use PKG_VERSION.
