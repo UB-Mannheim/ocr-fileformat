@@ -82,7 +82,6 @@ clean:
 check:
 	@which wget >/dev/null || (echo "Missing wget. Please install package wget." && exit 1)
 	@which unzip >/dev/null || (echo "Missing unzip. Please install package unzip." && exit 1)
-	@which xwget >/dev/null || (echo "Missing wget. Please install package wget." && exit 1)
 	@which git >/dev/null || (echo "Missing git. Please install package git." && exit 1)
 
 $(ABBYY_SCHEMA_REPO):
