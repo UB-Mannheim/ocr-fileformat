@@ -85,6 +85,8 @@ main () {
     fi
 
     # Run it
+    optstate=$(set +o)
+    set -o errexit
     transformer=${OCR_TRANSFORMERS[${from}__${to}]}
     if [[ "$transformer" = *.xsl ]];then
         script_args=("${script_args[@]}" "-xsl:$transformer")
@@ -95,6 +97,7 @@ main () {
         script_args=("$infile" "$outfile" "${script_args[@]}")
         source "$transformer" "${script_args[@]}"
     fi
+    eval "$optstate"
 }
 #}}}
 
