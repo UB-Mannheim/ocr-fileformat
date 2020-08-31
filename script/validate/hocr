@@ -7,4 +7,4 @@ if [[ "$TERM" = *"color"* ]];then
     format="ansi"
 fi
 
-python2 "$HOCR_SPEC" -f "$format" -p relaxed --filename "STDIN" "$1"
+python3 "$HOCR_SPEC" -f "$format" -p relaxed --filename "STDIN" "$1"
