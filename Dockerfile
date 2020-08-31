@@ -3,7 +3,7 @@ FROM alpine:edge
 EXPOSE 8080
 COPY . /ocr-fileformat
 WORKDIR /ocr-fileformat
-RUN apk add --no-cache openjdk8-jre php7 php7-json php7-openssl python py-lxml py-future git make ca-certificates wget bash gcc libc-dev \
+RUN apk add --no-cache openjdk8-jre php7 php7-json php7-openssl python3 py-lxml py-future git make ca-certificates wget bash gcc libc-dev \
     && update-ca-certificates \
     && make install \
     && cp docker.config.php web/config.local.php \
