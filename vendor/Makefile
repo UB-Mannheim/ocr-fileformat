@@ -4,6 +4,7 @@ RM = rm -rfv
 UNZIP = unzip -o
 WGET = wget --progress=bar:force --no-verbose
 GIT_CLONE = git clone --depth 1
+PIP = pip3
 
 SAXON_HE_VERSION_MAJOR = 9
 SAXON_HE_VERSION_MINOR = 9
@@ -45,6 +46,9 @@ ALTO2PAGE_ZIP = JPageConverter.zip
 ALTO2PAGE_URL = https://github.com/PRImA-Research-Lab/prima-page-converter/releases/download/$(ALTO2PAGE_VERSION)/JPageConverter_$(ALTO2PAGE_VERSION).zip
 ALTO2PAGE_DIR = JPageConverter
 
+PAGE_TO_ALTO_REPO = page-to-alto
+PAGE_TO_ALTO_URL = https://github.com/kba/page-to-alto
+
 # {{{
 # SAXON_BROWSER_VERSION = 1.1
 # SAXON_BROWSER_ZIP = Saxon-CE_$(SAXON_BROWSER_VERSION).zip
@@ -69,7 +73,8 @@ all:\
 	$(PAGE2HOCR_REPO)\
 	$(HOCR_SPEC_REPO)\
 	$(SAXON_HE_JAR) \
-	$(ALTO2PAGE_DIR)
+	$(ALTO2PAGE_DIR) \
+	$(PAGE_TO_ALTO_REPO)
 
 clean:
 	$(RM) $(ALTO_SCHEMA_REPO)
@@ -133,3 +138,7 @@ $(ALTO2PAGE_ZIP):
 $(ALTO2PAGE_DIR): $(ALTO2PAGE_ZIP)
 	$(UNZIP) "$<"
 	mv "JPageConverter $(ALTO2PAGE_VERSION_MAJOR_MINOR)" "$@"
+
+$(PAGE_TO_ALTO_REPO):
+	$(GIT_CLONE) "$(PAGE_TO_ALTO_URL)" "$@"
+	cd "$@"; $(PIP) install .
