@@ -14,7 +14,7 @@ SAXON_HE_JAR = saxon9he.jar
 
 PAGE_SCHEMA_REPO = page-schema
 PAGE_SCHEMA_VERSIONS = 2009-03-16 2010-01-12 2010-03-19 2013-07-15 2016-07-15 2017-07-15 2018-07-15 2019-07-15
-PAGE_SCHEMA_BASE_URL = https://github.com/PRImA-Research-Lab/PAGE-XML/blob/master/PAGE-release/gts/pagecontent
+PAGE_SCHEMA_BASE_URL = https://raw.githubusercontent.com/PRImA-Research-Lab/PAGE-XML/master/PAGE-release/gts/pagecontent
 
 ALTO_SCHEMA_REPO = alto-schema
 ALTO_SCHEMA_URL = https://github.com/altoxml/schema
