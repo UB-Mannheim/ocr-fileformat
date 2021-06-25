@@ -1,0 +1,32 @@
+#!/bin/bash
+
+SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+VENDORDIR="$(cd $SCRIPTDIR/../../vendor/; pwd)"
+JAR="$VENDORDIR/JPageConverter/PageConverter.jar"
+INFILE="$1"
+OUTFILE="$2"
+ARGUMENT="$3"
+
+if [[ "$1" = "-" ]]; then
+    INFILE="$(mktemp)"
+    cat >"$INFILE"
+fi
+
+if [[ "$2" = "-" ]]; then
+    OUTFILE="$(mktemp)"
+fi
+
+java -jar "$JAR" -neg-coords toZero -source-xml "$INFILE" -target-xml "$OUTFILE" -convert-to ALTO 2>&1
+
+if [[ "$1" = "-" ]]; then
+    rm "$INFILE"
+fi
+
+if [[ "$2" = "-" ]]; then
+    if [[ -z "$ARGUMENT" ]]; then
+        cat "$OUTFILE"
+    else
+        java -cp "$VENDORDIR/saxon9he.jar" net.sf.saxon.Query -s:"$OUTFILE" -qs:/ "$ARGUMENT"
+    fi
+    rm "$OUTFILE"
+fi
