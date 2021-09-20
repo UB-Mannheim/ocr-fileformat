@@ -49,6 +49,9 @@ ALTO2PAGE_DIR = JPageConverter
 PAGE_TO_ALTO_REPO = page-to-alto
 PAGE_TO_ALTO_URL = https://github.com/kba/page-to-alto
 
+IM2ALTO_REPO = im2alto
+IM2ALTO_URL = https://github.com/karkraeg/im2alto
+
 # {{{
 # SAXON_BROWSER_VERSION = 1.1
 # SAXON_BROWSER_ZIP = Saxon-CE_$(SAXON_BROWSER_VERSION).zip
@@ -74,7 +77,8 @@ all:\
 	$(HOCR_SPEC_REPO)\
 	$(SAXON_HE_JAR) \
 	$(ALTO2PAGE_DIR) \
-	$(PAGE_TO_ALTO_REPO)
+	$(PAGE_TO_ALTO_REPO) \
+	$(IM2ALTO_REPO)
 
 clean:
 	$(RM) $(ALTO_SCHEMA_REPO)
@@ -142,3 +146,6 @@ $(ALTO2PAGE_DIR): $(ALTO2PAGE_ZIP)
 $(PAGE_TO_ALTO_REPO):
 	$(GIT_CLONE) "$(PAGE_TO_ALTO_URL)" "$@"
 	cd "$@"; $(PIP) install .
+
+$(IM2ALTO_REPO):
+	$(GIT_CLONE) "$(IM2ALTO_URL)" "$@"
