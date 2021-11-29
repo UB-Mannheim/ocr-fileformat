@@ -89,8 +89,8 @@ script (CLI), using a web interface (GUI) or in you own tools (API)
 
 ### CLI
 
-* [`ocr-transform`](./blob/master/bin/ocr-transform.sh): Transformation of OCR output between OCR formats
-* [`ocr-validate`](./blob/master/bin/ocr-validate.sh): Validation of OCR output against OCR format schemas
+* [`ocr-transform`](./bin/ocr-transform.sh): Transformation of OCR output between OCR formats
+* [`ocr-validate`](./bin/ocr-validate.sh): Validation of OCR output against OCR format schemas
 
 ### GUI
 
