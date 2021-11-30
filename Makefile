@@ -89,6 +89,7 @@ xslt: vendor
 	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.0__alto3.1.xsl
 	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.1__alto3.0.xsl
 	cd xslt && $(LN) alto2.0__alto3.0.xsl alto2.1__alto3.1.xsl
+	cd xslt && $(LN) ../vendor/im2alto/iw2alto.xsl mybib__alto3.0.xsl
 
 # Install ocr-fileformat
 install: all
