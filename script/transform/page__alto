@@ -15,7 +15,7 @@ if [[ "$2" = "-" ]]; then
     OUTFILE="$(mktemp)"
 fi
 
-page-to-alto "${ARGUMENTS[@]}" "$INFILE" > "$OUTFILE"; retval="$?"
+page-to-alto "${ARGUMENTS[@]}" -O "$OUTFILE" "$INFILE" ; retval="$?"
 
 if [[ "$1" = "-" ]]; then
     rm "$INFILE"
