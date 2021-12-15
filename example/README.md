@@ -23,4 +23,4 @@ This will compare `x.hocr` to `x.roundtrip.hocr` using `dwdiff` and open the res
 
 ## License
 
-The example data is from the [Deutsches Textarchiv](http://www.deutschestextarchiv.de/book/show/wetzel_reisebegleiter_1901) project, data is licensed CC BY-NC 3.0.
+The example data is from the [Deutsches Textarchiv](https://www.deutschestextarchiv.de/book/show/wetzel_reisebegleiter_1901) project, data is licensed CC BY-NC 3.0.

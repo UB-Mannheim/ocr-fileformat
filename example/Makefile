@@ -1,4 +1,4 @@
-# http://media.dwds.de/dta/images/wetzel_reisebegleiter_1901/wetzel_reisebegleiter_1901_0021_800px.jpg
+# https://media.dwds.de/dta/images/wetzel_reisebegleiter_1901/wetzel_reisebegleiter_1901_0021_800px.jpg
 BOOK=wetzel_reisebegleiter_1901
 PAGE=0021
 BASENAME=$(BOOK)_$(PAGE)
