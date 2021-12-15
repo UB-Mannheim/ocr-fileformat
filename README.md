@@ -224,7 +224,7 @@ Usage: ocr-validate [-dhL] <schema> <file> [<resultsFile>]
 
 ### Validation CLI
 
-For example, to validate an XML file againt the ALTO 3.1 schema:
+For example, to validate an XML file against the ALTO 3.1 schema:
 
 ```
 ocr-validate alto-3-1 myFile.alto
