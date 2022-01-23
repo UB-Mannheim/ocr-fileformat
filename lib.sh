@@ -118,9 +118,9 @@ show_saxon_options () {
 #{{{ run saxon / xsd-validator (xsdv.sh)
 # exec_saxon ()
 exec_saxon() {
-    (( DEBUG > 0 )) && loginfo Executing "java -jar $SHAREDIR/vendor/saxon9he.jar" "$@"
+    (( DEBUG > 0 )) && loginfo Executing "java -jar $SHAREDIR/vendor/saxon.jar" "$@"
     (( DEBUG > 1 )) && SAXON_ARGS+=('-t')
-    java -jar "$SHAREDIR/vendor/saxon9he.jar" "$@"
+    java -jar "$SHAREDIR/vendor/saxon.jar" "$@"
 }
 
 # exec_xsdv ()

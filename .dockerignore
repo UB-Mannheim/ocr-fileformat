@@ -11,4 +11,4 @@ xslt
 
 vendor/*
 !vendor/Makefile
-!vendor/saxon9he.jar
+!vendor/saxon*.jar
