@@ -6,12 +6,11 @@ WGET = wget --progress=bar:force --no-verbose
 GIT_CLONE = git clone --depth 1
 PIP = pip3
 
-SAXON_HE_VERSION_MAJOR = 9
-SAXON_HE_VERSION_MINOR = 9
-SAXON_HE_VERSION_PATCH = 1-7J
-SAXON_HE_ZIP = SaxonHE$(SAXON_HE_VERSION_MAJOR)-$(SAXON_HE_VERSION_MINOR)-$(SAXON_HE_VERSION_PATCH).zip
-SAXON_HE_URL = https://netcologne.dl.sourceforge.net/project/saxon/Saxon-HE/$(SAXON_HE_VERSION_MAJOR).$(SAXON_HE_VERSION_MINOR)/$(SAXON_HE_ZIP)
-SAXON_HE_JAR = saxon9he.jar
+SAXON_HE_VERSION_MAJOR = 10
+SAXON_HE_VERSION_MINOR = 6
+SAXON_HE_ZIP = SaxonHE$(SAXON_HE_VERSION_MAJOR)-$(SAXON_HE_VERSION_MINOR)J.zip
+SAXON_HE_URL = https://netcologne.dl.sourceforge.net/project/saxon/Saxon-HE/$(SAXON_HE_VERSION_MAJOR)/Java/$(SAXON_HE_ZIP)
+SAXON_HE_JAR = saxon-he-$(SAXON_HE_VERSION_MAJOR).$(SAXON_HE_VERSION_MINOR).jar
 
 PAGE_SCHEMA_REPO = page-schema
 PAGE_SCHEMA_VERSIONS = 2009-03-16 2010-01-12 2010-03-19 2013-07-15 2016-07-15 2017-07-15 2018-07-15 2019-07-15
@@ -75,14 +74,14 @@ all:\
 	$(GCV2HOCR_REPO)\
 	$(PAGE2HOCR_REPO)\
 	$(HOCR_SPEC_REPO)\
-	$(SAXON_HE_JAR) \
+	saxon.jar \
 	$(ALTO2PAGE_DIR) \
 	$(PAGE_TO_ALTO_REPO) \
 	$(IM2ALTO_REPO)
 
 clean:
 	$(RM) $(ALTO_SCHEMA_REPO)
-	$(RM) $(SAXON_HE_JAR)
+	$(RM) $(SAXON_HE_JAR) saxon.jar
 	$(RM) $(SAXON_HE_ZIP)
 	$(RM) $(PAGE_SCHEMA_REPO)
 	$(RM) $(ALTO2PAGE_DIR)
@@ -118,6 +117,9 @@ $(ALTO_SCHEMA_REPO):
 $(HOCR2ALTO_REPO):
 	git clone "$(HOCR2ALTO_URL)" "$@"
 	cd "$@" && git checkout $(HOCR2ALTO_COMMITID)
+
+saxon.jar: $(SAXON_HE_JAR)
+	ln -sf "$<" "$@"
 
 $(SAXON_HE_JAR):
 	$(MAKE) $(SAXON_HE_ZIP)
