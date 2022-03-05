@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Default to the parent dir of this script. Overwritten by `make install`
-SHAREDIR="$(readlink -f "$(dirname "$(readlink -f "$0")")/..")"
+SHAREDIR="$(readlink "$(dirname "$(readlink "$0")")/..")"
 source "$SHAREDIR/lib.sh"
 
 #{{{ show_usage ()
@@ -55,7 +55,7 @@ main () {
     if [[ "$file" == "-" ]];then
         ((DEBUG > 1)) && loginfo "Reading from STDIN"
     else 
-        file=$(readlink -f "$file")
+        file=$(readlink "$file")
         if [[ ! -e "$file" ]];then
             show_usage "No such file: '$file'"
         fi
