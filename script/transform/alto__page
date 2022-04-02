@@ -16,7 +16,7 @@ if [[ "$2" = "-" ]]; then
     OUTFILE="$(mktemp)"
 fi
 
-java -jar "$JAR" -neg-coords toZero -source-xml "$INFILE" -target-xml "$OUTFILE" 2>&1
+java -jar "$JAR" -neg-coords toZero -source-xml "$INFILE" -target-xml "$OUTFILE" -convert-to LATEST 2>&1
 
 if [[ "$1" = "-" ]]; then
     rm "$INFILE"
