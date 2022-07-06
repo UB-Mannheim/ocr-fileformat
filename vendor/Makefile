@@ -16,40 +16,15 @@ PAGE_SCHEMA_REPO = page-schema
 PAGE_SCHEMA_VERSIONS = 2009-03-16 2010-01-12 2010-03-19 2013-07-15 2016-07-15 2017-07-15 2018-07-15 2019-07-15
 PAGE_SCHEMA_BASE_URL = https://raw.githubusercontent.com/PRImA-Research-Lab/PAGE-XML/master/PAGE-release/gts/pagecontent
 
-ALTO_SCHEMA_REPO = alto-schema
-ALTO_SCHEMA_URL = https://github.com/altoxml/schema
-
-XSD_VALIDATOR_REPO = xsd-validator
-XSD_VALIDATOR_URL = https://github.com/kba/xsd-validator
-
 ABBYY_SCHEMA_REPO = abbyy-schema
 ABBYY_SCHEMA_BASE_URL = https://fr7.abbyy.com/FineReader_xml/FineReader
 ABBYY_SCHEMA_VERSIONS = 6-schema-v1 8-schema-v2 9-schema-v1 10-schema-v1
-
-HOCR2ALTO_REPO = hOCR-to-ALTO
-HOCR2ALTO_URL = https://github.com/filak/$(HOCR2ALTO_REPO)
-HOCR2ALTO_COMMITID = c80ad8d3a6c1330d6bbcb147d83e4b17b109f4f3
-
-HOCR_SPEC_REPO = hocr-spec-python
-HOCR_SPEC_URL = https://github.com/kba/$(HOCR_SPEC_REPO)
-
-GCV2HOCR_REPO = gcv2hocr
-GCV2HOCR_URL = https://github.com/dinosauria123/$(GCV2HOCR_REPO)
-
-PAGE2HOCR_REPO = format-converters
-PAGE2HOCR_URL = https://github.com/OCR-D/$(PAGE2HOCR_REPO)
 
 ALTO2PAGE_VERSION_MAJOR_MINOR = 1.5
 ALTO2PAGE_VERSION = $(ALTO2PAGE_VERSION_MAJOR_MINOR).05
 ALTO2PAGE_ZIP = JPageConverter.zip
 ALTO2PAGE_URL = https://github.com/PRImA-Research-Lab/prima-page-converter/releases/download/$(ALTO2PAGE_VERSION)/JPageConverter_$(ALTO2PAGE_VERSION).zip
 ALTO2PAGE_DIR = JPageConverter
-
-PAGE_TO_ALTO_REPO = page-to-alto
-PAGE_TO_ALTO_URL = https://github.com/kba/page-to-alto
-
-IM2ALTO_REPO = im2alto
-IM2ALTO_URL = https://github.com/karkraeg/im2alto
 
 # {{{
 # SAXON_BROWSER_VERSION = 1.1
@@ -67,20 +42,13 @@ IM2ALTO_URL = https://github.com/karkraeg/im2alto
 
 all:\
 	$(PAGE_SCHEMA_REPO)\
-	$(ALTO_SCHEMA_REPO)\
 	$(ABBYY_SCHEMA_REPO)\
-	$(XSD_VALIDATOR_REPO)\
-	$(HOCR2ALTO_REPO)\
-	$(GCV2HOCR_REPO)\
-	$(PAGE2HOCR_REPO)\
-	$(HOCR_SPEC_REPO)\
+	gcv2hocr \
 	saxon.jar \
 	$(ALTO2PAGE_DIR) \
-	$(PAGE_TO_ALTO_REPO) \
-	$(IM2ALTO_REPO)
+	page-to-alto
 
 clean:
-	$(RM) $(ALTO_SCHEMA_REPO)
 	$(RM) $(SAXON_HE_JAR) saxon.jar
 	$(RM) $(SAXON_HE_ZIP)
 	$(RM) $(PAGE_SCHEMA_REPO)
@@ -108,16 +76,6 @@ $(PAGE_SCHEMA_REPO):
 			fi; \
 		done;
 
-$(XSD_VALIDATOR_REPO):
-	$(GIT_CLONE) "$(XSD_VALIDATOR_URL)" "$@"
-
-$(ALTO_SCHEMA_REPO):
-	$(GIT_CLONE) "$(ALTO_SCHEMA_URL)" "$@"
-
-$(HOCR2ALTO_REPO):
-	git clone "$(HOCR2ALTO_URL)" "$@"
-	cd "$@" && git checkout $(HOCR2ALTO_COMMITID)
-
 saxon.jar: $(SAXON_HE_JAR)
 	ln -sf "$<" "$@"
 
@@ -128,15 +86,8 @@ $(SAXON_HE_JAR):
 $(SAXON_HE_ZIP):
 	$(WGET) -O "$@" "$(SAXON_HE_URL)"
 
-$(HOCR_SPEC_REPO):
-	$(GIT_CLONE) "$(HOCR_SPEC_URL)" "$@"
-
-$(GCV2HOCR_REPO):
-	$(GIT_CLONE) "$(GCV2HOCR_URL)" "$@"
-	$(MAKE) -C $(GCV2HOCR_REPO)
-
-$(PAGE2HOCR_REPO):
-	$(GIT_CLONE) "$(PAGE2HOCR_URL)" "$@"
+gcv2hocr:
+	$(MAKE) -C $<
 
 $(ALTO2PAGE_ZIP):
 	$(WGET) -O "$@" "$(ALTO2PAGE_URL)"
@@ -145,9 +96,5 @@ $(ALTO2PAGE_DIR): $(ALTO2PAGE_ZIP)
 	$(UNZIP) "$<"
 	mv "JPageConverter $(ALTO2PAGE_VERSION_MAJOR_MINOR)" "$@"
 
-$(PAGE_TO_ALTO_REPO):
-	$(GIT_CLONE) "$(PAGE_TO_ALTO_URL)" "$@"
+page-to-alto:
 	cd "$@"; $(PIP) install .
-
-$(IM2ALTO_REPO):
-	$(GIT_CLONE) "$(IM2ALTO_URL)" "$@"

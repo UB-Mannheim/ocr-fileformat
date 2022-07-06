@@ -1,0 +1,24 @@
+[submodule "vendor/alto-schema"]
+	path = vendor/alto-schema
+	url = https://github.com/altoxml/schema.git
+[submodule "vendor/format-converters"]
+	path = vendor/format-converters
+	url = https://github.com/OCR-D/format-converters.git
+[submodule "vendor/gcv2hocr"]
+	path = vendor/gcv2hocr
+	url = https://github.com/dinosauria123/gcv2hocr.git
+[submodule "vendor/hocr-spec-python"]
+	path = vendor/hocr-spec-python
+	url = https://github.com/kba/hocr-spec-python.git
+[submodule "vendor/hOCR-to-ALTO"]
+	path = vendor/hOCR-to-ALTO
+	url = https://github.com/filak/hOCR-to-ALTO.git
+[submodule "vendor/im2alto"]
+	path = vendor/im2alto
+	url = https://github.com/karkraeg/im2alto.git
+[submodule "vendor/page-to-alto"]
+	path = vendor/page-to-alto
+	url = https://github.com/kba/page-to-alto.git
+[submodule "vendor/xsd-validator"]
+	path = vendor/xsd-validator
+	url = https://github.com/kba/xsd-validator.git
