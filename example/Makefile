@@ -24,7 +24,7 @@ deps:
 diff: $(BASENAME).roundtrip.hocr $(BASENAME).hocr
 	$(DWDIFF) $^ || exit 0
 
-.PHONY: diff
+.PHONY: idiff
 idiff: $(BASENAME).roundtrip.hocr $(BASENAME).hocr
 	$(DWDIFF) $^ | $(PAGER)
 
