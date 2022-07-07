@@ -51,6 +51,7 @@ check:
 # Download all vendor assets
 vendor: check
 	# download the dependencies
+	git submodule update --init
 	$(MAKE) -C vendor all
 
 .PHONY: xsd
