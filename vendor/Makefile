@@ -6,8 +6,8 @@ WGET = wget --progress=bar:force --no-verbose
 GIT_CLONE = git clone --depth 1
 PIP = pip3
 
-SAXON_HE_VERSION_MAJOR = 10
-SAXON_HE_VERSION_MINOR = 8
+SAXON_HE_VERSION_MAJOR = 11
+SAXON_HE_VERSION_MINOR = 2
 SAXON_HE_ZIP = SaxonHE$(SAXON_HE_VERSION_MAJOR)-$(SAXON_HE_VERSION_MINOR)J.zip
 SAXON_HE_URL = https://netcologne.dl.sourceforge.net/project/saxon/Saxon-HE/$(SAXON_HE_VERSION_MAJOR)/Java/$(SAXON_HE_ZIP)
 SAXON_HE_JAR = saxon-he-$(SAXON_HE_VERSION_MAJOR).$(SAXON_HE_VERSION_MINOR).jar
@@ -79,9 +79,8 @@ $(PAGE_SCHEMA_REPO):
 saxon.jar: $(SAXON_HE_JAR)
 	ln -sf "$<" "$@"
 
-$(SAXON_HE_JAR):
-	$(MAKE) $(SAXON_HE_ZIP)
-	$(UNZIP) "$(SAXON_HE_ZIP)" "$@"
+$(SAXON_HE_JAR): $(SAXON_HE_ZIP)
+	$(UNZIP) "$<"
 
 $(SAXON_HE_ZIP):
 	$(WGET) -O "$@" "$(SAXON_HE_URL)"
