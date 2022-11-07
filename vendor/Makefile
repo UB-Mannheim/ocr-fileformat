@@ -38,7 +38,7 @@ ALTO2PAGE_DIR = JPageConverter
 #     wget -O '$@' '$(SAXON_BROWSER_URL)'
 #}}}
 
-.PHONY: all check $(PAGE_SCHEMA_REPO) $(ABBYY_SCHEMA_REPO)
+.PHONY: all check $(PAGE_SCHEMA_REPO) $(ABBYY_SCHEMA_REPO) page-to-alto
 
 all:\
 	$(PAGE_SCHEMA_REPO)\
