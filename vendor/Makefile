@@ -38,7 +38,7 @@ ALTO2PAGE_DIR = JPageConverter
 #     wget -O '$@' '$(SAXON_BROWSER_URL)'
 #}}}
 
-.PHONY: all check $(PAGE_SCHEMA_REPO) $(ABBYY_SCHEMA_REPO) page-to-alto
+.PHONY: all check $(PAGE_SCHEMA_REPO) $(ABBYY_SCHEMA_REPO) gcv2hocr page-to-alto
 
 all:\
 	$(PAGE_SCHEMA_REPO)\
@@ -86,7 +86,7 @@ $(SAXON_HE_ZIP):
 	$(WGET) -O "$@" "$(SAXON_HE_URL)"
 
 gcv2hocr:
-	$(MAKE) -C $<
+	$(MAKE) -C $@
 
 $(ALTO2PAGE_ZIP):
 	$(WGET) -O "$@" "$(ALTO2PAGE_URL)"
