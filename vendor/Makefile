@@ -2,7 +2,6 @@ MKDIR = mkdir -p
 RM = rm -rfv
 UNZIP = unzip -o
 WGET = wget --progress=bar:force --no-verbose
-GIT_CLONE = git clone --depth 1
 PIP = pip3
 
 SAXON_HE_VERSION_MAJOR = 11
@@ -58,7 +57,6 @@ clean:
 check:
 	@which wget >/dev/null || (echo "Missing wget. Please install package wget." && exit 1)
 	@which unzip >/dev/null || (echo "Missing unzip. Please install package unzip." && exit 1)
-	@which git >/dev/null || (echo "Missing git. Please install package git." && exit 1)
 
 $(ABBYY_SCHEMA_REPO):
 	@$(MKDIR) "$@" && cd "$@" && \
