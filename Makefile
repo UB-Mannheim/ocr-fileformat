@@ -93,14 +93,20 @@ xslt: vendor
 	cd xslt && $(LN) ../vendor/im2alto/iw2alto.xsl mybib__alto3.0.xsl
 
 # Install ocr-fileformat
+define SEDSCRIPT
+cat <<"EOF"
+/^SHAREDIR=/c\
+SHAREDIR="$(SHAREDIR)" 
+s/VERSION/$(VERSION)/
+EOF
+endef
+export SEDSCRIPT
 install: all
 	$(MKDIR) $(SHAREDIR)
 	$(CP) script xsd xslt vendor lib.sh $(SHAREDIR)
 	$(MKDIR) $(BINDIR)
-	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-transform.sh | \
-	  sed "s/VERSION/$(VERSION)/" > $(BINDIR)/ocr-transform
-	sed '/^SHAREDIR=/c SHAREDIR="$(SHAREDIR)"' bin/ocr-validate.sh | \
-	  sed "s/VERSION/$(VERSION)/" > $(BINDIR)/ocr-validate
+	eval "$$SEDSCRIPT" | sed -f - bin/ocr-transform.sh > $(BINDIR)/ocr-transform
+	eval "$$SEDSCRIPT" | sed -f - bin/ocr-validate.sh  > $(BINDIR)/ocr-validate
 	chmod a+x $(BINDIR)/ocr-transform $(BINDIR)/ocr-validate
 	find $(SHAREDIR) -exec chmod u+w {} \;
 
