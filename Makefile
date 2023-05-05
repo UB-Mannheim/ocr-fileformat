@@ -108,7 +108,7 @@ xslt: vendor
 define SEDSCRIPT
 cat <<"EOF"
 /^SHAREDIR=/c\
-SHAREDIR="$(SHAREDIR)" 
+SHAREDIR="$(SHAREDIR)"
 s/VERSION/$(VERSION)/
 EOF
 endef
@@ -120,7 +120,7 @@ install: all
 	eval "$$SEDSCRIPT" | sed -f - bin/ocr-transform.sh > $(BINDIR)/ocr-transform
 	eval "$$SEDSCRIPT" | sed -f - bin/ocr-validate.sh  > $(BINDIR)/ocr-validate
 	chmod a+x $(BINDIR)/ocr-transform $(BINDIR)/ocr-validate
-	find $(SHAREDIR) -exec chmod u+w {} \;
+	find $(SHAREDIR) -not -type l -exec chmod u+w {} \;
 
 # Uninstall ocr-fileformat
 uninstall:
