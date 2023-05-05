@@ -8,13 +8,16 @@ source "$SHAREDIR/lib.sh"
 show_usage () {
     [[ "$#" -gt 0 ]] && logerr "$@"
 
-    echo >&2 "Usage: ${0##*/} [-dhLv] <schema> <file> [<resultsFile>]
+    echo >&2 "Usage:
+${0##*/} [OPTIONS] <schema> <file> [<resultsFile>]
+${0##*/} [OPTIONS] -h|--help       Show this help, and exit
+${0##*/} [OPTIONS] -v|--version    Show version, and exit
+${0##*/} [OPTIONS] -L|--list       List available schemas, and exit
 
     Options:
-        --help    -h     Show this help
-        --version -v     Show version
         --debug   -d     Increase debug level by 1, can be repeated
-        --list    -L     List available schemas"
+
+"
     echo >&2 -e "\n${INDENT}Schemas:"
     show_schemas|sed "s/^/${INDENT}${INDENT}/"
     echo

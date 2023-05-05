@@ -164,6 +164,7 @@ Usage: ocr-transform [-dhLv] <from> <to> [<infile> [<outfile>]] [-- <script-args
         page page2019
         page text
         tei hocr
+        textract page
 
     Saxon options:
         Usage: see http://www.saxonica.com/documentation/index.html#!using-xsl/commandline
@@ -198,6 +199,7 @@ capable stylesheet transformer.
 | PAGEXML             | ✓    | ✓    | =       |
 | FineReader          | ✓    | -    | ✓       |
 | Google Cloud Vision | ✓    | -    | ✓       |
+| Amazon AWS Textract | -    | -    | ✓       |
 | TEI                 | ✓    | -    | -       |
 
 ## Validation
@@ -260,3 +262,5 @@ During the installation process several projects are included (in [`./vendor`](.
 * [gcv2hocr](https://github.com/dinosauria123/gcv2hocr) by Endo Michiaki, [`CC BY 4.0`](https://creativecommons.org/licenses/by/4.0/legalcode)
 * [format-converters](https://github.com/OCR-D/format-converters) by OCR-D, [`Apache 2.0`](https://github.com/OCR-D/format-converters/blob/master/LICENSE)
 * [prima-page-converter](https://github.com/PRImA-Research-Lab/prima-page-converter/) by PRImA Research Lab , [`Apache 2.0`](https://github.com/PRImA-Research-Lab/prima-page-converter/blob/master/LICENSE)
+* [page-to-alto](https://github.com/kba/page-to-alto/) by Konstantin Baierer @kba, [`Apache 2.0`](https://github.com/OCR-D/format-converters/blob/master/LICENSE)
+* [textract2page](https://github.com/slub/textract2page/) by Arne Rümmler @rue-a, [`Apache 2.0`](https://github.com/OCR-D/format-converters/blob/master/LICENSE)

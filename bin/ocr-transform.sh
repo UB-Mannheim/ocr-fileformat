@@ -8,17 +8,19 @@ source "$SHAREDIR/lib.sh"
 show_usage () {
     [[ "$#" -gt 0 ]] && logerr "$@"
 
-    echo >&2 "Usage: ${0##*/} [-dhLv] <from> <to> [<infile> [<outfile>]] [-- <script-args>]
+    echo >&2 "Usage:
+${0##*/} [OPTIONS] <from> <to> [<infile> [<outfile>]] [-- <script-args>]
+${0##*/} [OPTIONS] <from> <to> --help-args Show script-args, and exit
+${0##*/} [OPTIONS] -h|--help               Show this help, and exit
+${0##*/} [OPTIONS] -v|--version            Show version, and exit
+${0##*/} [OPTIONS] -L|--list               List available from/to, and exit
 
     Options:
-        --help    -h     Show this help
-        --version -v     Show version
         --debug   -d     Increase debug level by 1, can be repeated
-        --list    -L     List transformations"
+
+"
     echo >&2 -e "\n${INDENT}Transformations:"
     show_transformations|sed "s/^/${INDENT}${INDENT}/"
-    echo >&2 -e "\n${INDENT}Saxon options:"
-    show_saxon_options|sed "s/^/${INDENT}${INDENT}/"
 
     [[ "$#" -gt 0 ]] && exit 1
 }
@@ -52,6 +54,23 @@ main () {
         if ! in_array "$to" "${possible[@]}";then
             show_usage "No mapping from '$from' to '$to'"
         fi
+    fi
+    transformer=${OCR_TRANSFORMERS[${from}__${to}]}
+
+    if [[ "$1" == '--help-args' ]];then
+        if [[ "$transformer" = */gcv__hocr ]];then
+            echo >&2 -e "${INDENT}Extra arguments: <width> <height>"
+        elif [[ "$transformer" = */page__alto ]];then
+            echo >&2 -e "${INDENT}page-to-alto options:"
+            page-to-alto --help|sed '1,/^Options:/d;/--output-file/,$d' >&2
+        elif [[ "$transformer" = */textract__page ]];then
+            echo >&2 -e "${INDENT}textract2page arguments: <image-file>"
+            echo >&2 -e "${INDENT}textract2page options:"
+        else
+            # xsl and other transformers both take arbitrary Saxon options
+            show_saxon_options|sed "s/^/${INDENT}${INDENT}/"
+        fi
+        exit 0
     fi
 
     declare -a script_args
@@ -87,7 +106,6 @@ main () {
     # Run it
     optstate=$(set +o)
     set -o errexit
-    transformer=${OCR_TRANSFORMERS[${from}__${to}]}
     if [[ "$transformer" = *.xsl ]];then
         script_args=("${script_args[@]}" "-xsl:$transformer")
         script_args=("${script_args[@]}" "-s:$infile")

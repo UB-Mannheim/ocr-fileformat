@@ -22,3 +22,6 @@
 [submodule "vendor/xsd-validator"]
 	path = vendor/xsd-validator
 	url = https://github.com/kba/xsd-validator.git
+[submodule "vendor/textract2page"]
+	path = vendor/textract2page
+	url = https://github.com/slub/textract2page.git

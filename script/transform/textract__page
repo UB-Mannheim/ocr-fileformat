@@ -2,12 +2,9 @@
 
 SCRIPTDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 VENDORDIR="$(cd $SCRIPTDIR/../../vendor/; pwd)"
-VENDORSCRIPT="$VENDORDIR/gcv2hocr/gcv2hocr"
 INFILE="$1"
 OUTFILE="$2"
-#TODO
-WIDTH=${3:-2000}
-HEIGHT=${4:-2000}
+ARGUMENTS=("${@:3}")
 
 if [[ "$1" = "-" ]]; then
     INFILE="$(mktemp)"
@@ -18,15 +15,18 @@ if [[ "$2" = "-" ]]; then
     OUTFILE="$(mktemp)"
 fi
 
-"$VENDORSCRIPT" "$INFILE" "$OUTFILE" "$WIDTH" "$HEIGHT"
+textract2page "${ARGUMENTS[@]:1}" -O "$OUTFILE" "$INFILE" "${ARGUMENTS[0]}"; retval="$?"
 
 if [[ "$1" = "-" ]]; then
     rm "$INFILE"
+fi
+
+if (( retval > 0 ));then
+    rm "$OUTFILE"
+    exit $retval
 fi
 
 if [[ "$2" = "-" ]]; then
     cat "$OUTFILE"
     rm "$OUTFILE"
 fi
-
-rm preout1.txt preout2.txt
