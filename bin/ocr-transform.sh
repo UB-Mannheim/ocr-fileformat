@@ -130,4 +130,8 @@ while [[ "$1" = -* ]]; do
     shift
 done
 
+if [[ -d "$SHAREDIR/venv" ]];then
+    . "$SHAREDIR/venv/bin/activate"
+fi
+
 main "$@"
