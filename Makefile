@@ -18,6 +18,7 @@ ZIP = zip
 PREFIX = $(DESTDIR)/usr/local
 SHAREDIR = $(PREFIX)/share/$(PKG_NAME)
 BINDIR = $(PREFIX)/bin
+PYTHON = python3
 
 TSHT = ./test/tsht
 TSHT_URL = https://cdn.rawgit.com/kba/tsht/master/tsht
@@ -38,6 +39,12 @@ help:
 	@echo "    realclean  Remove linked assets and vendor files"
 	@echo "    docker     Create the docker image"
 	@echo "    release    Make release tarball / zipball"
+	@echo
+	@echo
+	@echo "  Variables"
+	@echo
+	@echo "    PREFIX     Top-level directory for installation [$(PREFIX)]"
+	@echo "    PYTHON     Python version to use for tools [$(PYTHON)]"
 
 # END-EVAL
 
@@ -52,7 +59,12 @@ check:
 vendor: check
 	# download the dependencies
 	git submodule update --init
-	$(MAKE) -C vendor all
+	# create+activate a Python venv if not already active
+	if [ -z "$(VIRTUAL_ENV)" ]; then \
+	$(PYTHON) -m venv $(SHAREDIR)/venv && \
+	. $(SHAREDIR)/venv/bin/activate && \
+	$(SHAREDIR)/venv/bin/pip install -U pip; \
+	fi && $(MAKE) -C vendor all
 
 .PHONY: xsd
 # Link all XSD schemas
