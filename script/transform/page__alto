@@ -21,7 +21,7 @@ if [[ "$1" = "-" ]]; then
     rm "$INFILE"
 fi
 
-if (( retval > 0 ));then
+if (( retval > 0 )); then
     rm "$OUTFILE"
     exit $retval
 fi
