@@ -63,7 +63,7 @@ vendor: check
 	if [ -z "$(VIRTUAL_ENV)" ]; then \
 	$(PYTHON) -m venv $(SHAREDIR)/venv && \
 	. $(SHAREDIR)/venv/bin/activate && \
-	$(SHAREDIR)/venv/bin/pip install -U pip; \
+	pip install -U pip; \
 	fi && $(MAKE) -C vendor all
 
 .PHONY: xsd
