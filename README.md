@@ -134,13 +134,15 @@ Try `ocr-transform -h` to get an overview:
 
 <!-- BEGIN-EVAL echo '<pre>';./bin/ocr-transform.sh -h 2>&1;echo '</pre>'  -->
 <pre>
-Usage: ocr-transform [-dhLv] <from> <to> [<infile> [<outfile>]] [-- <script-args>]
+Usage:
+ocr-transform [OPTIONS] <from> <to> [<infile> [<outfile>]] [-- <script-args>]
+ocr-transform [OPTIONS] <from> <to> --help-args Show script-args, and exit
+ocr-transform [OPTIONS] -h|--help               Show this help, and exit
+ocr-transform [OPTIONS] -v|--version            Show version, and exit
+ocr-transform [OPTIONS] -L|--list               List available from/to, and exit
 
     Options:
-        --help    -h     Show this help
-        --version -v     Show version
         --debug   -d     Increase debug level by 1, can be repeated
-        --list    -L     List transformations
 
     Transformations:
         abbyy hocr
@@ -151,6 +153,7 @@ Usage: ocr-transform [-dhLv] <from> <to> [<infile> [<outfile>]] [-- <script-args
         alto2.1 alto3.0
         alto2.1 alto3.1
         alto2.1 hocr
+        alto4.2 alto2.1
         alto page
         alto text
         gcv hocr
@@ -165,16 +168,6 @@ Usage: ocr-transform [-dhLv] <from> <to> [<infile> [<outfile>]] [-- <script-args
         page text
         tei hocr
         textract page
-
-    Saxon options:
-        Usage: see http://www.saxonica.com/documentation/index.html#!using-xsl/commandline
-        Options available: -? -a -catalog -config -cr -diag -dtd -ea -expand -explain -export -ext -im -init -it -jit -l -lib -license -m -nogo -now -o -opt -or -outval -p -quit -r -relocate -repeat -s -sa -scmin -strip -t -T -target -threads -TJ -Tlevel -Tout -TP -traceout -tree -u -val -versionmsg -warnings -x -xi -xmlversion -xsd -xsdversion -xsiloc -xsl -y
-        Use -XYZ:? for details of option XYZ
-        Params:
-          param=value           Set stylesheet string parameter
-          +param=filename       Set stylesheet document parameter
-          ?param=expression     Set stylesheet parameter using XPath
-          !param=value          Set serialization parameter
 </pre>
 
 <!-- END-EVAL -->
@@ -194,9 +187,9 @@ capable stylesheet transformer.
 
 | From ╲ To           | hOCR | ALTO | PAGEXML |
 | ---:                | ---  | ---  | ---     |
-| hOCR                | =    | ✓    | ✓       |
-| ALTO                | ✓    | =    | ✓       |
-| PAGEXML             | ✓    | ✓    | =       |
+| hOCR                | -    | ✓    | ✓       |
+| ALTO                | ✓    | ✓    | ✓       |
+| PAGEXML             | ✓    | ✓    | ✓       |
 | FineReader          | ✓    | -    | ✓       |
 | Google Cloud Vision | ✓    | -    | ✓       |
 | Amazon AWS Textract | -    | -    | ✓       |
@@ -207,17 +200,18 @@ capable stylesheet transformer.
 
 <!-- BEGIN-EVAL echo '<pre>';./bin/ocr-validate.sh -h 2>&1;echo '</pre>'  -->
 <pre>
-Usage: ocr-validate [-dhL] <schema> <file> [<resultsFile>]
+Usage:
+ocr-validate [OPTIONS] <schema> <file> [<resultsFile>]
+ocr-validate [OPTIONS] -h|--help       Show this help, and exit
+ocr-validate [OPTIONS] -v|--version    Show version, and exit
+ocr-validate [OPTIONS] -L|--list       List available schemas, and exit
 
     Options:
-        --help    -h     Show this help
-        --version -v     Show version
         --debug   -d     Increase debug level by 1, can be repeated
-        --list    -L     List available schemas
 
     Schemas:
         hocr
-        alto-1-0 alto-1-1 alto-1-2 alto-1-3 alto-1-4 alto-2-0 alto-2-1 alto-2-2-draft alto-3-0 alto-3-1 alto-3-2-draft alto-4-0 alto-4-1
+        alto-1-0 alto-1-1 alto-1-2 alto-1-3 alto-1-4 alto-2-0 alto-2-1 alto-2-2-draft alto-3-0 alto-3-1 alto-3-2-draft alto-4-0 alto-4-1 alto-4-2 alto-4-3
         abbyy-6-schema-v1 abbyy-8-schema-v2 abbyy-9-schema-v1 abbyy-10-schema-v1
         page-2009-03-16 page-2010-01-12 page-2010-03-19 page-2013-07-15 page-2016-07-15 page-2017-07-15 page-2018-07-15 page-2019-07-15
 </pre>
@@ -242,9 +236,9 @@ The XSD files are installed under `$PREFIX/share/ocr-fileformat/xsd`
 
 ### Supported Validation Formats
 
-|            | hOCR | ALTO | PAGEXML | FineReader | Google Cloud Vision |
-| ---:       | ---  | ---  | ---     | ---        | ---                 |
-| Validation | ✓    | ✓    | ✓       | ✓          | -                   |
+|            | hOCR | ALTO | PAGEXML | FineReader | Google Cloud Vision | Amazon AWS Textract |
+| ---:       | ---  | ---  | ---     | ---        | ---                 | ---                 |
+| Validation | ✓    | ✓    | ✓       | ✓          | -                   | -                   |
 
 
 ## License
