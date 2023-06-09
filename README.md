@@ -156,6 +156,7 @@ ocr-transform [OPTIONS] -L|--list               List available from/to, and exit
         alto4.2 alto2.1
         alto page
         alto text
+        gcv alto
         gcv hocr
         gcv page
         hocr alto2.0
@@ -191,7 +192,7 @@ capable stylesheet transformer.
 | ALTO                | ✓    | ✓    | ✓       |
 | PAGEXML             | ✓    | ✓    | ✓       |
 | FineReader          | ✓    | -    | ✓       |
-| Google Cloud Vision | ✓    | -    | ✓       |
+| Google Cloud Vision | ✓    | ✓    | ✓       |
 | Amazon AWS Textract | -    | -    | ✓       |
 | TEI                 | ✓    | -    | -       |
 
