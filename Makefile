@@ -116,6 +116,7 @@ export SEDSCRIPT
 install: all
 	$(MKDIR) $(SHAREDIR)
 	$(CP) script xsd xslt vendor lib.sh $(SHAREDIR)
+	$(RM) $(SHAREDIR)/vendor/*/.git
 	$(MKDIR) $(BINDIR)
 	eval "$$SEDSCRIPT" | sed -f - bin/ocr-transform.sh > $(BINDIR)/ocr-transform
 	eval "$$SEDSCRIPT" | sed -f - bin/ocr-validate.sh  > $(BINDIR)/ocr-validate
