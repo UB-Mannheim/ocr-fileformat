@@ -8,7 +8,7 @@ DOCKER_IMAGE = ubma/ocr-fileformat
 ROOTDIR = $(abspath $(dir $(MAKEFILE_LIST)))
 VERSION = $(shell [ -d "$(ROOTDIR)/.git" ] && git -C "$(ROOTDIR)" describe --tags || echo $(PKG_VERSION))
 
-CP = cp -r
+CP = cp -a
 LN = ln -sf
 MV = mv -f
 MKDIR = mkdir -p
