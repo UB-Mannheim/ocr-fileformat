@@ -1,4 +1,3 @@
-CP = cp -rv
 MKDIR = mkdir -p
 RM = rm -rfv
 UNZIP = unzip -o
