@@ -106,11 +106,9 @@ xslt: vendor
 
 # Install ocr-fileformat
 define SEDSCRIPT
-cat <<"EOF"
-/^SHAREDIR=/c\
-SHAREDIR="$(SHAREDIR)"
-s/VERSION/$(VERSION)/
-EOF
+echo '/^SHAREDIR=/c\'
+echo 'SHAREDIR="$(SHAREDIR)"'
+echo 's/VERSION/$(VERSION)/'
 endef
 export SEDSCRIPT
 install: all
