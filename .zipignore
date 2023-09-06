@@ -1,5 +1,4 @@
 .git
-.travis.yml
 .zipignore
 .gitignore
 example
