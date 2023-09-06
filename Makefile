@@ -6,7 +6,7 @@ DOCKER_IMAGE = ubma/ocr-fileformat
 
 # Either get the version from Git (if available) or use PKG_VERSION.
 ROOTDIR = $(abspath $(dir $(MAKEFILE_LIST)))
-VERSION = $(shell [ -d "$(ROOTDIR)/.git" ] && git -C "$(ROOTDIR)" describe --tags || echo $(PKG_VERSION))
+VERSION = $(shell [ -d "$(ROOTDIR)/.git" ] && git -C "$(ROOTDIR)" describe --tags 2>/dev/null || echo $(PKG_VERSION))
 
 CP = cp -a
 LN = ln -sf
