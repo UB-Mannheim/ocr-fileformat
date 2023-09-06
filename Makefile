@@ -87,6 +87,7 @@ xsd: vendor
 xslt: vendor
 	$(MKDIR) xslt
 	# symlink hocr<->alto as well as the language codes lookup xml
+	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr__alto.xsl hocr__alto.xsl
 	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr__alto2.0.xsl hocr__alto2.0.xsl
 	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr__alto2.1.xsl hocr__alto2.1.xsl
 	cd xslt && $(LN) ../vendor/hOCR-to-ALTO/hocr__alto3.xsl hocr__alto3.0.xsl
