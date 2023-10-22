@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Default to the parent dir of this script. Overwritten by `make install`
 SHAREDIR="$(readlink -f "$(dirname "$(readlink -f "$0")")/..")"

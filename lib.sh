@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #{{{ Logging
 if [[ -n "$COLORTERM" || "$TERM" = *color* || "$TERM" = xterm* ]];then
