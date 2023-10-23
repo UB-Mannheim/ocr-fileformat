@@ -6,7 +6,11 @@ BASENAME=$(BOOK)_$(PAGE)
 DEBIAN_PACKAGES = libxml2-utils tesseract-ocr tesseract-ocr-script-frak wget dwdiff
 XMLLINT = xmllint --format
 OCR_TRANSFORM = ../bin/ocr-transform.sh
+ifdef HOMEBREW_PREFIX
+TESSERACT = $(HOMEBREW_PREFIX)/bin/tesseract -l Fraktur
+else
 TESSERACT = /usr/bin/tesseract -l Fraktur
+endif
 WGET = wget
 RM = rm -f
 DWDIFF = dwdiff -p -l -c
