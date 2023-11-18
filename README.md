@@ -187,15 +187,15 @@ capable stylesheet transformer.
 
 ### Supported Transformations
 
-| From ╲ To           | hOCR | ALTO | PAGEXML | TEI |
-| ---:                | ---  | ---  | ---     | --- |
-| hOCR                | -    | ✓    | ✓       | ✓   |
-| ALTO                | ✓    | ✓    | ✓       | -   |
-| PAGEXML             | ✓    | ✓    | ✓       | -   |
-| ABBYY FineReader    | ✓    | -    | ✓       | -   |
-| Google Cloud Vision | ✓    | ✓    | ✓       | -   |
-| Amazon AWS Textract | -    | -    | ✓       | -   |
-| TEI                 | ✓    | -    | -       | -   |
+| From ╲ To           | hOCR | ALTO | PAGEXML | TEI | Text |
+| ---:                | ---  | ---  | ---     | --- | ---  |
+| hOCR                | -    | ✓    | ✓       | ✓   | ✓    |
+| ALTO                | ✓    | ✓    | ✓       | -   | ✓    |
+| PAGEXML             | ✓    | ✓    | ✓       | -   | ✓    |
+| ABBYY FineReader    | ✓    | -    | ✓       | -   | -    |
+| Google Cloud Vision | ✓    | ✓    | ✓       | -   | -    |
+| Amazon AWS Textract | -    | -    | ✓       | -   | -    |
+| TEI                 | ✓    | -    | -       | -   | -    |
 
 ## Validation
 
