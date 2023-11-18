@@ -162,6 +162,7 @@ ocr-transform [OPTIONS] -L|--list               List available from/to, and exit
         hocr alto2.0
         hocr alto2.1
         hocr page
+        hocr tei
         hocr text
         page alto
         page hocr
@@ -186,15 +187,15 @@ capable stylesheet transformer.
 
 ### Supported Transformations
 
-| From ╲ To           | hOCR | ALTO | PAGEXML |
-| ---:                | ---  | ---  | ---     |
-| hOCR                | -    | ✓    | ✓       |
-| ALTO                | ✓    | ✓    | ✓       |
-| PAGEXML             | ✓    | ✓    | ✓       |
-| FineReader          | ✓    | -    | ✓       |
-| Google Cloud Vision | ✓    | ✓    | ✓       |
-| Amazon AWS Textract | -    | -    | ✓       |
-| TEI                 | ✓    | -    | -       |
+| From ╲ To           | hOCR | ALTO | PAGEXML | TEI |
+| ---:                | ---  | ---  | ---     | --- |
+| hOCR                | -    | ✓    | ✓       | ✓   |
+| ALTO                | ✓    | ✓    | ✓       | -   |
+| PAGEXML             | ✓    | ✓    | ✓       | -   |
+| ABBYY FineReader    | ✓    | -    | ✓       | -   |
+| Google Cloud Vision | ✓    | ✓    | ✓       | -   |
+| Amazon AWS Textract | -    | -    | ✓       | -   |
+| TEI                 | ✓    | -    | -       | -   |
 
 ## Validation
 
@@ -258,4 +259,4 @@ During the installation process several projects are included (in [`./vendor`](.
 * [format-converters](https://github.com/OCR-D/format-converters) by OCR-D, [`Apache 2.0`](https://github.com/OCR-D/format-converters/blob/master/LICENSE)
 * [prima-page-converter](https://github.com/PRImA-Research-Lab/prima-page-converter/) by PRImA Research Lab , [`Apache 2.0`](https://github.com/PRImA-Research-Lab/prima-page-converter/blob/master/LICENSE)
 * [page-to-alto](https://github.com/kba/page-to-alto/) by Konstantin Baierer @kba, [`Apache 2.0`](https://github.com/OCR-D/format-converters/blob/master/LICENSE)
-* [textract2page](https://github.com/slub/textract2page/) by Arne Rümmler @rue-a, [`Apache 2.0`](https://github.com/OCR-D/format-converters/blob/master/LICENSE)
+* [textract2page](https://github.com/slub/textract2page/) by Arne Rümmler @rue-a, [`Apache 2.0`](https://github.com/slub/textract2page/blob/master/LICENSE)
