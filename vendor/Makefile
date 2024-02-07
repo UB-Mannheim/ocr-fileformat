@@ -19,9 +19,9 @@ ABBYY_SCHEMA_BASE_URL = https://fr7.abbyy.com/FineReader_xml/FineReader
 ABBYY_SCHEMA_VERSIONS = 6-schema-v1 8-schema-v2 9-schema-v1 10-schema-v1
 
 ALTO2PAGE_VERSION_MAJOR_MINOR = 1.5
-ALTO2PAGE_VERSION = $(ALTO2PAGE_VERSION_MAJOR_MINOR).05
+ALTO2PAGE_VERSION = $(ALTO2PAGE_VERSION_MAJOR_MINOR).06
 ALTO2PAGE_ZIP = JPageConverter.zip
-ALTO2PAGE_URL = https://github.com/PRImA-Research-Lab/prima-page-converter/releases/download/$(ALTO2PAGE_VERSION)/JPageConverter_$(ALTO2PAGE_VERSION).zip
+ALTO2PAGE_URL = https://github.com/UB-Mannheim/prima-page-converter/releases/download/$(ALTO2PAGE_VERSION)/JPageConverter_$(ALTO2PAGE_VERSION).zip
 ALTO2PAGE_DIR = JPageConverter
 
 # {{{
@@ -91,7 +91,8 @@ $(ALTO2PAGE_ZIP):
 
 $(ALTO2PAGE_DIR): $(ALTO2PAGE_ZIP)
 	$(UNZIP) "$<"
-	mv "JPageConverter $(ALTO2PAGE_VERSION_MAJOR_MINOR)" "$@"
+	rm -rf "$@"
+	mv "JPageConverter $(ALTO2PAGE_VERSION)" "$@"
 
 page-to-alto:
 	cd "$@"; $(PIP) install .
