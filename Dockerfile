@@ -13,7 +13,7 @@ RUN apk add --no-cache openjdk8-jre php7 php7-json php7-openssl python3 py-lxml 
     && rm -rf /ocr-fileformat \
     && apk del git make wget gcc libc-dev
 # Disable POST upload limit
-sed -i 's,post_max_size = 8M,post_max_size = 0,' /etc/php7/php.ini
+RUN sed -i 's,post_max_size = 8M,post_max_size = 0,' /etc/php7/php.ini
 VOLUME /data
 WORKDIR /data
 CMD php7 -S $(hostname -i):8080 -t /ocr-fileformat-web
