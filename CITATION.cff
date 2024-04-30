@@ -1,0 +1,36 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: ocr-fileformat
+message: >-
+  You may cite this software using the metadata from this file.
+type: software
+authors:
+  - name: Universitätsbibliothek Mannheim
+    country: DE
+    city: Mannheim
+  - given-names: Konstantin
+    family-names: Baierer
+    orcid: 'https://orcid.org/0000-0003-2397-242X'
+  - given-names: Stefan
+    family-names: Weil
+    affiliation: Universitätsbibliothek Mannheim
+    orcid: 'https://orcid.org/0000-0002-0524-9898'
+  - family-names: Zumstein
+    given-names: Philipp
+    affiliation: Universitätsbibliothek Mannheim
+    orcid: 'https://orcid.org/0000-0002-6485-9434'
+  - given-names: Robert
+    family-names: Sachunsky
+  - given-names: Jörg
+    orcid: 'https://orcid.org/0000-0002-6406-4906'
+    family-names: Mechnich
+    affiliation: Universitätsbibliothek Mannheim
+  - given-names: Uwe
+    family-names: Hartwig
+  - given-names: Mike
+    family-names: Gerber
+  - given-names: Clemens
+    orcid: 'https://orcid.org/0000-0001-5293-8322'
+    family-names: Neudecker
