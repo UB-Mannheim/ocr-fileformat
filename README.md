@@ -205,7 +205,6 @@ capable stylesheet transformer.
 
 ## Validation
 
-
 <!-- BEGIN-EVAL echo '```';./bin/ocr-validate.sh -h 2>&1;echo '```'  -->
 ```
 Usage:

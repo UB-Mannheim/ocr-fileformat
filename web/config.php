@@ -1,23 +1,23 @@
 <?php
-if(!defined('IncludingScript')) {
-   die('Direct access not permitted');
+if (!defined('IncludingScript')) {
+    die('Direct access not permitted');
 }
 
-// We don't want ANSI coloring
+// We don't want ANSI coloring.
 putenv('TERM=dumb');
 
-$config = array(
+$config = [
     'ocr-validate' => dirname(__FILE__) . '/../bin/ocr-validate.sh',
     'ocr-transform' => dirname(__FILE__) . '/../bin/ocr-transform.sh',
-    'formats' => array(
-        'transform' => array(),
-        'validate' => array(),
-    ),
-);
+    'formats' => [
+        'transform' => [],
+        'validate' => [],
+    ],
+];
 
 $local_settings = dirname(__FILE__) . '/config.local.php';
-if (file_exists($local_settings)) {
-  include $local_settings;
+if (file_exists($local_settings) === TRUE) {
+    include $local_settings;
 }
 
 /**
@@ -27,7 +27,7 @@ if (file_exists($local_settings)) {
 function buildFormatList()
 {
     global $config;
-    $lines = array();
+    $lines = [];
     exec($config['ocr-transform'] . ' -L', $lines);
     foreach ($lines as $line) {
         $fromto = preg_split("/\s+/", $line);
@@ -35,7 +35,7 @@ function buildFormatList()
         $to = $fromto[1];
         // echo $from, "\t", $to, "\n";
         if (! array_key_exists($from, $config['formats']['transform'])) {
-            $config['formats']['transform'][$from] = array($to);
+            $config['formats']['transform'][$from] = [$to];
         } else {
             array_push($config['formats']['transform'][$from], $to);
         }
