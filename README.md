@@ -11,22 +11,22 @@ Validate and transform between OCR file formats (hOCR, ALTO, PAGE, FineReader)
 
 <!-- BEGIN-MARKDOWN-TOC -->
 * [Installation](#installation)
-	* [Docker](#docker)
-	* [System-wide](#system-wide)
+  * [Docker](#docker)
+  * [System-wide](#system-wide)
 * [Usage](#usage)
-	* [CLI](#cli)
-	* [GUI](#gui)
-	* [API](#api)
+  * [CLI](#cli)
+  * [GUI](#gui)
+  * [API](#api)
 * [Transformation](#transformation)
-	* [Transformation CLI](#transformation-cli)
-	* [Transformation GUI](#transformation-gui)
-	* [Transformation API](#transformation-api)
-	* [Supported Transformations](#supported-transformations)
+  * [Transformation CLI](#transformation-cli)
+  * [Transformation GUI](#transformation-gui)
+  * [Transformation API](#transformation-api)
+  * [Supported Transformations](#supported-transformations)
 * [Validation](#validation)
-	* [Validation CLI](#validation-cli)
-	* [Validation GUI](#validation-gui)
-	* [Validation API](#validation-api)
-	* [Supported Validation Formats](#supported-validation-formats)
+  * [Validation CLI](#validation-cli)
+  * [Validation GUI](#validation-gui)
+  * [Validation API](#validation-api)
+  * [Supported Validation Formats](#supported-validation-formats)
 * [License](#license)
 
 <!-- END-MARKDOWN-TOC -->
@@ -132,8 +132,8 @@ ocr-transform alto hocr sample.xml sample.hocr -- foo=bar
 
 Try `ocr-transform -h` to get an overview:
 
-<!-- BEGIN-EVAL echo '<pre>';./bin/ocr-transform.sh -h 2>&1;echo '</pre>'  -->
-<pre>
+<!-- BEGIN-EVAL echo '```';./bin/ocr-transform.sh -h 2>&1;echo '```'  -->
+```
 Usage:
 ocr-transform [OPTIONS] <from> <to> [<infile> [<outfile>]] [-- <script-args>]
 ocr-transform [OPTIONS] <from> <to> --help-args Show script-args, and exit
@@ -147,6 +147,9 @@ ocr-transform [OPTIONS] -L|--list               List available from/to, and exit
     Transformations:
         abbyy hocr
         abbyy page
+        alto hocr
+        alto page
+        alto text
         alto2.0 alto3.0
         alto2.0 alto3.1
         alto2.0 hocr
@@ -154,23 +157,26 @@ ocr-transform [OPTIONS] -L|--list               List available from/to, and exit
         alto2.1 alto3.1
         alto2.1 hocr
         alto4.2 alto2.1
-        alto page
-        alto text
         gcv alto
         gcv hocr
         gcv page
+        hocr alto
         hocr alto2.0
         hocr alto2.1
+        hocr alto3.0
+        hocr alto4.0
         hocr page
         hocr tei
         hocr text
+        mybib alto3.0
         page alto
+        page alto_legacy
         page hocr
         page page2019
         page text
         tei hocr
         textract page
-</pre>
+```
 
 <!-- END-EVAL -->
 
@@ -200,8 +206,8 @@ capable stylesheet transformer.
 ## Validation
 
 
-<!-- BEGIN-EVAL echo '<pre>';./bin/ocr-validate.sh -h 2>&1;echo '</pre>'  -->
-<pre>
+<!-- BEGIN-EVAL echo '```';./bin/ocr-validate.sh -h 2>&1;echo '```'  -->
+```
 Usage:
 ocr-validate [OPTIONS] <schema> <file> [<resultsFile>]
 ocr-validate [OPTIONS] -h|--help       Show this help, and exit
@@ -216,7 +222,7 @@ ocr-validate [OPTIONS] -L|--list       List available schemas, and exit
         alto-1-0 alto-1-1 alto-1-2 alto-1-3 alto-1-4 alto-2-0 alto-2-1 alto-2-2-draft alto-3-0 alto-3-1 alto-3-2-draft alto-4-0 alto-4-1 alto-4-2 alto-4-3
         abbyy-6-schema-v1 abbyy-8-schema-v2 abbyy-9-schema-v1 abbyy-10-schema-v1
         page-2009-03-16 page-2010-01-12 page-2010-03-19 page-2013-07-15 page-2016-07-15 page-2017-07-15 page-2018-07-15 page-2019-07-15
-</pre>
+```
 
 <!-- END-EVAL -->
 
@@ -248,6 +254,7 @@ The XSD files are installed under `$PREFIX/share/ocr-fileformat/xsd`
 This is free software. You may use it under the terms of the [MIT License](LICENSE).
 
 During the installation process several projects are included (in [`./vendor`](./vendor)). These projects have different licenses:
+
 * [Saxon HE 9.7](http://saxon.sourceforge.net/#F9.7HE), [`MPL`](https://www.mozilla.org/MPL/).
 * [ALTOXML schema](https://github.com/altoxml/schema), ["Open Source"](https://github.com/altoxml/schema/issues/37#issuecomment-218730230) for ALTO <= 3.1, [`CC BY SA 4.0`](https://creativecommons.org/licenses/by-sa/4.0/legalcode) since ALTO 4.0
 * [PAGE schemas](http://www.primaresearch.org/schema/PAGE/gts/pagecontent/), `?`
