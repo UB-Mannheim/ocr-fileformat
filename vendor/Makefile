@@ -36,7 +36,7 @@ ALTO2PAGE_DIR = JPageConverter
 #     wget -O '$@' '$(SAXON_BROWSER_URL)'
 #}}}
 
-.PHONY: all check $(PAGE_SCHEMA_REPO) $(ABBYY_SCHEMA_REPO) gcv2hocr page-to-alto textract2page
+.PHONY: all check $(PAGE_SCHEMA_REPO) $(ABBYY_SCHEMA_REPO) gcv2hocr page-to-alto textract2page format-converters
 
 all:\
 	$(PAGE_SCHEMA_REPO)\
@@ -45,7 +45,8 @@ all:\
 	saxon.jar \
 	$(ALTO2PAGE_DIR) \
 	page-to-alto \
-	textract2page
+	textract2page \
+	format-converters
 
 clean:
 	$(RM) $(SAXON_HE_JAR) saxon.jar
@@ -98,4 +99,7 @@ page-to-alto:
 	cd "$@"; $(PIP) install .
 
 textract2page:
+	cd "$@"; $(PIP) install .
+
+format-converters:
 	cd "$@"; $(PIP) install .
